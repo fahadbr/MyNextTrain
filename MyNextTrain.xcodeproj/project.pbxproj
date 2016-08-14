@@ -21,6 +21,14 @@
 		0B5C961C1D6010CF00F66B8F /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5C961B1D6010CF00F66B8F /* NotificationController.swift */; };
 		0B5C961E1D6010CF00F66B8F /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5C961D1D6010CF00F66B8F /* ComplicationController.swift */; };
 		0B5C96201D6010CF00F66B8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C961F1D6010CF00F66B8F /* Assets.xcassets */; };
+		0B5C96391D60DC1800F66B8F /* agency.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C96311D60DC1800F66B8F /* agency.txt */; };
+		0B5C963A1D60DC1800F66B8F /* calendar_dates.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C96321D60DC1800F66B8F /* calendar_dates.txt */; };
+		0B5C963B1D60DC1800F66B8F /* feed_info.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C96331D60DC1800F66B8F /* feed_info.txt */; };
+		0B5C963C1D60DC1800F66B8F /* routes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C96341D60DC1800F66B8F /* routes.txt */; };
+		0B5C963D1D60DC1800F66B8F /* shapes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C96351D60DC1800F66B8F /* shapes.txt */; };
+		0B5C963E1D60DC1800F66B8F /* stop_times.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C96361D60DC1800F66B8F /* stop_times.txt */; };
+		0B5C963F1D60DC1800F66B8F /* stops.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C96371D60DC1800F66B8F /* stops.txt */; };
+		0B5C96401D60DC1800F66B8F /* trips.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C96381D60DC1800F66B8F /* trips.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +93,14 @@
 		0B5C961D1D6010CF00F66B8F /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
 		0B5C961F1D6010CF00F66B8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0B5C96211D6010CF00F66B8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0B5C96311D60DC1800F66B8F /* agency.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = agency.txt; sourceTree = "<group>"; };
+		0B5C96321D60DC1800F66B8F /* calendar_dates.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = calendar_dates.txt; sourceTree = "<group>"; };
+		0B5C96331D60DC1800F66B8F /* feed_info.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = feed_info.txt; sourceTree = "<group>"; };
+		0B5C96341D60DC1800F66B8F /* routes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = routes.txt; sourceTree = "<group>"; };
+		0B5C96351D60DC1800F66B8F /* shapes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shapes.txt; sourceTree = "<group>"; };
+		0B5C96361D60DC1800F66B8F /* stop_times.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stop_times.txt; sourceTree = "<group>"; };
+		0B5C96371D60DC1800F66B8F /* stops.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stops.txt; sourceTree = "<group>"; };
+		0B5C96381D60DC1800F66B8F /* trips.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trips.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +148,7 @@
 				0B5C95F41D6010CF00F66B8F /* ViewController.swift */,
 				0B5C95F61D6010CF00F66B8F /* Main.storyboard */,
 				0B5C95F91D6010CF00F66B8F /* Assets.xcassets */,
+				0B5C962F1D60D14A00F66B8F /* Supporting Files */,
 				0B5C95FB1D6010CF00F66B8F /* LaunchScreen.storyboard */,
 				0B5C95FE1D6010CF00F66B8F /* Info.plist */,
 			);
@@ -168,6 +185,29 @@
 				0B5C96161D6010CF00F66B8F /* PushNotificationPayload.apns */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0B5C962F1D60D14A00F66B8F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0B5C96301D60DC1800F66B8F /* LIRR_transit */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0B5C96301D60DC1800F66B8F /* LIRR_transit */ = {
+			isa = PBXGroup;
+			children = (
+				0B5C96311D60DC1800F66B8F /* agency.txt */,
+				0B5C96321D60DC1800F66B8F /* calendar_dates.txt */,
+				0B5C96331D60DC1800F66B8F /* feed_info.txt */,
+				0B5C96341D60DC1800F66B8F /* routes.txt */,
+				0B5C96351D60DC1800F66B8F /* shapes.txt */,
+				0B5C96361D60DC1800F66B8F /* stop_times.txt */,
+				0B5C96371D60DC1800F66B8F /* stops.txt */,
+				0B5C96381D60DC1800F66B8F /* trips.txt */,
+			);
+			path = LIRR_transit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,8 +319,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B5C95FD1D6010CF00F66B8F /* LaunchScreen.storyboard in Resources */,
+				0B5C963A1D60DC1800F66B8F /* calendar_dates.txt in Resources */,
+				0B5C963C1D60DC1800F66B8F /* routes.txt in Resources */,
 				0B5C95FA1D6010CF00F66B8F /* Assets.xcassets in Resources */,
+				0B5C96401D60DC1800F66B8F /* trips.txt in Resources */,
+				0B5C963D1D60DC1800F66B8F /* shapes.txt in Resources */,
 				0B5C95F81D6010CF00F66B8F /* Main.storyboard in Resources */,
+				0B5C963F1D60DC1800F66B8F /* stops.txt in Resources */,
+				0B5C963B1D60DC1800F66B8F /* feed_info.txt in Resources */,
+				0B5C96391D60DC1800F66B8F /* agency.txt in Resources */,
+				0B5C963E1D60DC1800F66B8F /* stop_times.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,7 +519,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Debug;
 		};
@@ -488,7 +536,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Release;
 		};
@@ -506,7 +554,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Debug;
 		};
@@ -524,7 +572,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Release;
 		};
@@ -534,6 +582,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = RBL3RYPXUS;
 				INFOPLIST_FILE = MyNextTrain/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.riaz.fahad.MyNextTrain;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -547,6 +596,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = RBL3RYPXUS;
 				INFOPLIST_FILE = MyNextTrain/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.riaz.fahad.MyNextTrain;
 				PRODUCT_NAME = "$(TARGET_NAME)";
