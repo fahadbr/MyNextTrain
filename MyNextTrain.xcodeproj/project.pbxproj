@@ -29,6 +29,13 @@
 		0B5C963E1D60DC1800F66B8F /* stop_times.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C96361D60DC1800F66B8F /* stop_times.txt */; };
 		0B5C963F1D60DC1800F66B8F /* stops.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C96371D60DC1800F66B8F /* stops.txt */; };
 		0B5C96401D60DC1800F66B8F /* trips.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C96381D60DC1800F66B8F /* trips.txt */; };
+		105EF7BA1D627F09003356DC /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105EF7B91D627F09003356DC /* Route.swift */; };
+		105EF7BE1D62806B003356DC /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105EF7BD1D62806B003356DC /* Stop.swift */; };
+		105EF7C01D6280C9003356DC /* StopTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105EF7BF1D6280C9003356DC /* StopTime.swift */; };
+		105EF7C21D652F3E003356DC /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105EF7C11D652F3E003356DC /* Trip.swift */; };
+		105EF7C41D67BD0D003356DC /* CalendarDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105EF7C31D67BD0D003356DC /* CalendarDate.swift */; };
+		105EF7C71D67C02E003356DC /* GTFSFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105EF7C61D67C02E003356DC /* GTFSFileParser.swift */; };
+		105EF7C91D67C2BB003356DC /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105EF7C81D67C2BB003356DC /* Logger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +108,13 @@
 		0B5C96361D60DC1800F66B8F /* stop_times.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stop_times.txt; sourceTree = "<group>"; };
 		0B5C96371D60DC1800F66B8F /* stops.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stops.txt; sourceTree = "<group>"; };
 		0B5C96381D60DC1800F66B8F /* trips.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trips.txt; sourceTree = "<group>"; };
+		105EF7B91D627F09003356DC /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		105EF7BD1D62806B003356DC /* Stop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
+		105EF7BF1D6280C9003356DC /* StopTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopTime.swift; sourceTree = "<group>"; };
+		105EF7C11D652F3E003356DC /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		105EF7C31D67BD0D003356DC /* CalendarDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDate.swift; sourceTree = "<group>"; };
+		105EF7C61D67C02E003356DC /* GTFSFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTFSFileParser.swift; sourceTree = "<group>"; };
+		105EF7C81D67C2BB003356DC /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +158,8 @@
 		0B5C95F11D6010CE00F66B8F /* MyNextTrain */ = {
 			isa = PBXGroup;
 			children = (
+				105EF7C51D67C00F003356DC /* Controller */,
+				105EF7B81D627EFD003356DC /* Model */,
 				0B5C95F21D6010CF00F66B8F /* AppDelegate.swift */,
 				0B5C95F41D6010CF00F66B8F /* ViewController.swift */,
 				0B5C95F61D6010CF00F66B8F /* Main.storyboard */,
@@ -208,6 +224,27 @@
 				0B5C96381D60DC1800F66B8F /* trips.txt */,
 			);
 			path = LIRR_transit;
+			sourceTree = "<group>";
+		};
+		105EF7B81D627EFD003356DC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				105EF7B91D627F09003356DC /* Route.swift */,
+				105EF7BD1D62806B003356DC /* Stop.swift */,
+				105EF7BF1D6280C9003356DC /* StopTime.swift */,
+				105EF7C11D652F3E003356DC /* Trip.swift */,
+				105EF7C31D67BD0D003356DC /* CalendarDate.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		105EF7C51D67C00F003356DC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				105EF7C61D67C02E003356DC /* GTFSFileParser.swift */,
+				105EF7C81D67C2BB003356DC /* Logger.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,7 +393,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				105EF7C71D67C02E003356DC /* GTFSFileParser.swift in Sources */,
+				105EF7C41D67BD0D003356DC /* CalendarDate.swift in Sources */,
+				105EF7C01D6280C9003356DC /* StopTime.swift in Sources */,
+				105EF7BA1D627F09003356DC /* Route.swift in Sources */,
+				105EF7C91D67C2BB003356DC /* Logger.swift in Sources */,
+				105EF7BE1D62806B003356DC /* Stop.swift in Sources */,
 				0B5C95F51D6010CF00F66B8F /* ViewController.swift in Sources */,
+				105EF7C21D652F3E003356DC /* Trip.swift in Sources */,
 				0B5C95F31D6010CF00F66B8F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -623,6 +667,7 @@
 				0B5C96261D6010CF00F66B8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0B5C96281D6010CF00F66B8F /* Build configuration list for PBXNativeTarget "MyNextTrain WatchKit App" */ = {
 			isa = XCConfigurationList;
@@ -631,6 +676,7 @@
 				0B5C962A1D6010CF00F66B8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0B5C962C1D6010CF00F66B8F /* Build configuration list for PBXNativeTarget "MyNextTrain" */ = {
 			isa = XCConfigurationList;
@@ -639,6 +685,7 @@
 				0B5C962E1D6010CF00F66B8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
