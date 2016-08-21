@@ -10,11 +10,7 @@ import Foundation
 
 protocol Route {
 	
-	var shortName: String { get }
+    var id: Int { get }
 	var longName: String { get }
-	var type: String { get }
-	var color: String { get }
-	var textColor: String { get }
-	var trips: [Trip] { get }
 	
 }

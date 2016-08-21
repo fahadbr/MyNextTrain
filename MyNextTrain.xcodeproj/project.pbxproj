@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B04355F1D6A06FC00D46715 /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B04355E1D6A06FC00D46715 /* QueryService.swift */; };
+		0B0435621D6A081100D46715 /* GTFSFileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0435611D6A081100D46715 /* GTFSFileLoader.swift */; };
 		0B5C95F31D6010CF00F66B8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5C95F21D6010CF00F66B8F /* AppDelegate.swift */; };
 		0B5C95F51D6010CF00F66B8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5C95F41D6010CF00F66B8F /* ViewController.swift */; };
 		0B5C95F81D6010CF00F66B8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C95F61D6010CF00F66B8F /* Main.storyboard */; };
@@ -29,12 +31,38 @@
 		0B5C963E1D60DC1800F66B8F /* stop_times.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C96361D60DC1800F66B8F /* stop_times.txt */; };
 		0B5C963F1D60DC1800F66B8F /* stops.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C96371D60DC1800F66B8F /* stops.txt */; };
 		0B5C96401D60DC1800F66B8F /* trips.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C96381D60DC1800F66B8F /* trips.txt */; };
+		0B87BC201D6A117A006E220B /* GTFSFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC1F1D6A117A006E220B /* GTFSFile.swift */; };
+		0B87BC2B1D6A222F006E220B /* CalendarDateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC2A1D6A222F006E220B /* CalendarDateDTO.swift */; };
+		0B87BC2D1D6A2237006E220B /* TripDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC2C1D6A2237006E220B /* TripDTO.swift */; };
+		0B87BC2F1D6A223E006E220B /* StopTimeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC2E1D6A223E006E220B /* StopTimeDTO.swift */; };
+		0B87BC311D6A2245006E220B /* StopDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC301D6A2245006E220B /* StopDTO.swift */; };
+		0B87BC331D6A224B006E220B /* RouteDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC321D6A224B006E220B /* RouteDTO.swift */; };
+		0B87BC351D6A2B8B006E220B /* InMemoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC341D6A2B8B006E220B /* InMemoryDataSource.swift */; };
+		0B87BC371D6A46D2006E220B /* GTFSFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC361D6A46D2006E220B /* GTFSFileEntry.swift */; };
+		0B99DD291D6A64AC00366A12 /* Blob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B99DD111D6A64AC00366A12 /* Blob.swift */; };
+		0B99DD2A1D6A64AC00366A12 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B99DD121D6A64AC00366A12 /* Connection.swift */; };
+		0B99DD2B1D6A64AC00366A12 /* SQLite-Bridging.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B99DD151D6A64AC00366A12 /* SQLite-Bridging.m */; };
+		0B99DD2C1D6A64AC00366A12 /* Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B99DD161D6A64AC00366A12 /* Statement.swift */; };
+		0B99DD2D1D6A64AC00366A12 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B99DD171D6A64AC00366A12 /* Value.swift */; };
+		0B99DD2E1D6A64AC00366A12 /* FTS4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B99DD191D6A64AC00366A12 /* FTS4.swift */; };
+		0B99DD2F1D6A64AC00366A12 /* FTS5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B99DD1A1D6A64AC00366A12 /* FTS5.swift */; };
+		0B99DD301D6A64AC00366A12 /* RTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B99DD1B1D6A64AC00366A12 /* RTree.swift */; };
+		0B99DD311D6A64AC00366A12 /* Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B99DD1C1D6A64AC00366A12 /* Foundation.swift */; };
+		0B99DD321D6A64AC00366A12 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B99DD1D1D6A64AC00366A12 /* Helpers.swift */; };
+		0B99DD331D6A64AC00366A12 /* AggregateFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B99DD201D6A64AC00366A12 /* AggregateFunctions.swift */; };
+		0B99DD341D6A64AC00366A12 /* Collation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B99DD211D6A64AC00366A12 /* Collation.swift */; };
+		0B99DD351D6A64AC00366A12 /* CoreFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B99DD221D6A64AC00366A12 /* CoreFunctions.swift */; };
+		0B99DD361D6A64AC00366A12 /* CustomFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B99DD231D6A64AC00366A12 /* CustomFunctions.swift */; };
+		0B99DD371D6A64AC00366A12 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B99DD241D6A64AC00366A12 /* Expression.swift */; };
+		0B99DD381D6A64AC00366A12 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B99DD251D6A64AC00366A12 /* Operators.swift */; };
+		0B99DD391D6A64AC00366A12 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B99DD261D6A64AC00366A12 /* Query.swift */; };
+		0B99DD3A1D6A64AC00366A12 /* Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B99DD271D6A64AC00366A12 /* Schema.swift */; };
+		0B99DD3B1D6A64AC00366A12 /* Setter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B99DD281D6A64AC00366A12 /* Setter.swift */; };
 		105EF7BA1D627F09003356DC /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105EF7B91D627F09003356DC /* Route.swift */; };
 		105EF7BE1D62806B003356DC /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105EF7BD1D62806B003356DC /* Stop.swift */; };
 		105EF7C01D6280C9003356DC /* StopTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105EF7BF1D6280C9003356DC /* StopTime.swift */; };
 		105EF7C21D652F3E003356DC /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105EF7C11D652F3E003356DC /* Trip.swift */; };
 		105EF7C41D67BD0D003356DC /* CalendarDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105EF7C31D67BD0D003356DC /* CalendarDate.swift */; };
-		105EF7C71D67C02E003356DC /* GTFSFileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105EF7C61D67C02E003356DC /* GTFSFileParser.swift */; };
 		105EF7C91D67C2BB003356DC /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105EF7C81D67C2BB003356DC /* Logger.swift */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +109,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0B04355E1D6A06FC00D46715 /* QueryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryService.swift; sourceTree = "<group>"; };
+		0B0435611D6A081100D46715 /* GTFSFileLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTFSFileLoader.swift; sourceTree = "<group>"; };
 		0B5C95EF1D6010CE00F66B8F /* MyNextTrain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyNextTrain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B5C95F21D6010CF00F66B8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0B5C95F41D6010CF00F66B8F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -108,12 +138,41 @@
 		0B5C96361D60DC1800F66B8F /* stop_times.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stop_times.txt; sourceTree = "<group>"; };
 		0B5C96371D60DC1800F66B8F /* stops.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stops.txt; sourceTree = "<group>"; };
 		0B5C96381D60DC1800F66B8F /* trips.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trips.txt; sourceTree = "<group>"; };
+		0B87BC1F1D6A117A006E220B /* GTFSFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTFSFile.swift; sourceTree = "<group>"; };
+		0B87BC2A1D6A222F006E220B /* CalendarDateDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDateDTO.swift; sourceTree = "<group>"; };
+		0B87BC2C1D6A2237006E220B /* TripDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripDTO.swift; sourceTree = "<group>"; };
+		0B87BC2E1D6A223E006E220B /* StopTimeDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopTimeDTO.swift; sourceTree = "<group>"; };
+		0B87BC301D6A2245006E220B /* StopDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopDTO.swift; sourceTree = "<group>"; };
+		0B87BC321D6A224B006E220B /* RouteDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDTO.swift; sourceTree = "<group>"; };
+		0B87BC341D6A2B8B006E220B /* InMemoryDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMemoryDataSource.swift; sourceTree = "<group>"; };
+		0B87BC361D6A46D2006E220B /* GTFSFileEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTFSFileEntry.swift; sourceTree = "<group>"; };
+		0B99DD111D6A64AC00366A12 /* Blob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Blob.swift; sourceTree = "<group>"; };
+		0B99DD121D6A64AC00366A12 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
+		0B99DD131D6A64AC00366A12 /* fts3_tokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fts3_tokenizer.h; sourceTree = "<group>"; };
+		0B99DD141D6A64AC00366A12 /* SQLite-Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SQLite-Bridging.h"; sourceTree = "<group>"; };
+		0B99DD151D6A64AC00366A12 /* SQLite-Bridging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SQLite-Bridging.m"; sourceTree = "<group>"; };
+		0B99DD161D6A64AC00366A12 /* Statement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Statement.swift; sourceTree = "<group>"; };
+		0B99DD171D6A64AC00366A12 /* Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
+		0B99DD191D6A64AC00366A12 /* FTS4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTS4.swift; sourceTree = "<group>"; };
+		0B99DD1A1D6A64AC00366A12 /* FTS5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTS5.swift; sourceTree = "<group>"; };
+		0B99DD1B1D6A64AC00366A12 /* RTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RTree.swift; sourceTree = "<group>"; };
+		0B99DD1C1D6A64AC00366A12 /* Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Foundation.swift; sourceTree = "<group>"; };
+		0B99DD1D1D6A64AC00366A12 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		0B99DD1E1D6A64AC00366A12 /* SQLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLite.h; sourceTree = "<group>"; };
+		0B99DD201D6A64AC00366A12 /* AggregateFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AggregateFunctions.swift; sourceTree = "<group>"; };
+		0B99DD211D6A64AC00366A12 /* Collation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collation.swift; sourceTree = "<group>"; };
+		0B99DD221D6A64AC00366A12 /* CoreFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreFunctions.swift; sourceTree = "<group>"; };
+		0B99DD231D6A64AC00366A12 /* CustomFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFunctions.swift; sourceTree = "<group>"; };
+		0B99DD241D6A64AC00366A12 /* Expression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
+		0B99DD251D6A64AC00366A12 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		0B99DD261D6A64AC00366A12 /* Query.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
+		0B99DD271D6A64AC00366A12 /* Schema.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schema.swift; sourceTree = "<group>"; };
+		0B99DD281D6A64AC00366A12 /* Setter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setter.swift; sourceTree = "<group>"; };
 		105EF7B91D627F09003356DC /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		105EF7BD1D62806B003356DC /* Stop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
 		105EF7BF1D6280C9003356DC /* StopTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopTime.swift; sourceTree = "<group>"; };
 		105EF7C11D652F3E003356DC /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		105EF7C31D67BD0D003356DC /* CalendarDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDate.swift; sourceTree = "<group>"; };
-		105EF7C61D67C02E003356DC /* GTFSFileParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTFSFileParser.swift; sourceTree = "<group>"; };
 		105EF7C81D67C2BB003356DC /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -135,6 +194,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B04355C1D6A06D600D46715 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				105EF7C81D67C2BB003356DC /* Logger.swift */,
+			);
+			name = Logging;
+			sourceTree = "<group>";
+		};
+		0B04355D1D6A06E600D46715 /* QueryService */ = {
+			isa = PBXGroup;
+			children = (
+				0B04355E1D6A06FC00D46715 /* QueryService.swift */,
+				0B87BC341D6A2B8B006E220B /* InMemoryDataSource.swift */,
+			);
+			name = QueryService;
+			sourceTree = "<group>";
+		};
+		0B0435601D6A07C000D46715 /* Loader */ = {
+			isa = PBXGroup;
+			children = (
+				0B0435611D6A081100D46715 /* GTFSFileLoader.swift */,
+			);
+			name = Loader;
+			sourceTree = "<group>";
+		};
 		0B5C95E61D6010CE00F66B8F = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +242,7 @@
 		0B5C95F11D6010CE00F66B8F /* MyNextTrain */ = {
 			isa = PBXGroup;
 			children = (
+				0B99DD0F1D6A64AC00366A12 /* SQLite */,
 				105EF7C51D67C00F003356DC /* Controller */,
 				105EF7B81D627EFD003356DC /* Model */,
 				0B5C95F21D6010CF00F66B8F /* AppDelegate.swift */,
@@ -226,6 +311,80 @@
 			path = LIRR_transit;
 			sourceTree = "<group>";
 		};
+		0B87BC271D6A16AB006E220B /* GTFSFile */ = {
+			isa = PBXGroup;
+			children = (
+				0B87BC1F1D6A117A006E220B /* GTFSFile.swift */,
+				0B87BC361D6A46D2006E220B /* GTFSFileEntry.swift */,
+			);
+			name = GTFSFile;
+			sourceTree = "<group>";
+		};
+		0B87BC291D6A21F4006E220B /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				0B87BC321D6A224B006E220B /* RouteDTO.swift */,
+				0B87BC301D6A2245006E220B /* StopDTO.swift */,
+				0B87BC2E1D6A223E006E220B /* StopTimeDTO.swift */,
+				0B87BC2C1D6A2237006E220B /* TripDTO.swift */,
+				0B87BC2A1D6A222F006E220B /* CalendarDateDTO.swift */,
+			);
+			name = DTO;
+			sourceTree = "<group>";
+		};
+		0B99DD0F1D6A64AC00366A12 /* SQLite */ = {
+			isa = PBXGroup;
+			children = (
+				0B99DD101D6A64AC00366A12 /* Core */,
+				0B99DD181D6A64AC00366A12 /* Extensions */,
+				0B99DD1C1D6A64AC00366A12 /* Foundation.swift */,
+				0B99DD1D1D6A64AC00366A12 /* Helpers.swift */,
+				0B99DD1E1D6A64AC00366A12 /* SQLite.h */,
+				0B99DD1F1D6A64AC00366A12 /* Typed */,
+			);
+			path = SQLite;
+			sourceTree = "<group>";
+		};
+		0B99DD101D6A64AC00366A12 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				0B99DD111D6A64AC00366A12 /* Blob.swift */,
+				0B99DD121D6A64AC00366A12 /* Connection.swift */,
+				0B99DD131D6A64AC00366A12 /* fts3_tokenizer.h */,
+				0B99DD141D6A64AC00366A12 /* SQLite-Bridging.h */,
+				0B99DD151D6A64AC00366A12 /* SQLite-Bridging.m */,
+				0B99DD161D6A64AC00366A12 /* Statement.swift */,
+				0B99DD171D6A64AC00366A12 /* Value.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		0B99DD181D6A64AC00366A12 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0B99DD191D6A64AC00366A12 /* FTS4.swift */,
+				0B99DD1A1D6A64AC00366A12 /* FTS5.swift */,
+				0B99DD1B1D6A64AC00366A12 /* RTree.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0B99DD1F1D6A64AC00366A12 /* Typed */ = {
+			isa = PBXGroup;
+			children = (
+				0B99DD201D6A64AC00366A12 /* AggregateFunctions.swift */,
+				0B99DD211D6A64AC00366A12 /* Collation.swift */,
+				0B99DD221D6A64AC00366A12 /* CoreFunctions.swift */,
+				0B99DD231D6A64AC00366A12 /* CustomFunctions.swift */,
+				0B99DD241D6A64AC00366A12 /* Expression.swift */,
+				0B99DD251D6A64AC00366A12 /* Operators.swift */,
+				0B99DD261D6A64AC00366A12 /* Query.swift */,
+				0B99DD271D6A64AC00366A12 /* Schema.swift */,
+				0B99DD281D6A64AC00366A12 /* Setter.swift */,
+			);
+			path = Typed;
+			sourceTree = "<group>";
+		};
 		105EF7B81D627EFD003356DC /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +393,8 @@
 				105EF7BF1D6280C9003356DC /* StopTime.swift */,
 				105EF7C11D652F3E003356DC /* Trip.swift */,
 				105EF7C31D67BD0D003356DC /* CalendarDate.swift */,
+				0B87BC291D6A21F4006E220B /* DTO */,
+				0B87BC271D6A16AB006E220B /* GTFSFile */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -241,8 +402,9 @@
 		105EF7C51D67C00F003356DC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				105EF7C61D67C02E003356DC /* GTFSFileParser.swift */,
-				105EF7C81D67C2BB003356DC /* Logger.swift */,
+				0B04355D1D6A06E600D46715 /* QueryService */,
+				0B04355C1D6A06D600D46715 /* Logging */,
+				0B0435601D6A07C000D46715 /* Loader */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -393,15 +555,43 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				105EF7C71D67C02E003356DC /* GTFSFileParser.swift in Sources */,
+				0B99DD3A1D6A64AC00366A12 /* Schema.swift in Sources */,
 				105EF7C41D67BD0D003356DC /* CalendarDate.swift in Sources */,
 				105EF7C01D6280C9003356DC /* StopTime.swift in Sources */,
+				0B99DD331D6A64AC00366A12 /* AggregateFunctions.swift in Sources */,
+				0B99DD351D6A64AC00366A12 /* CoreFunctions.swift in Sources */,
+				0B99DD361D6A64AC00366A12 /* CustomFunctions.swift in Sources */,
+				0B99DD371D6A64AC00366A12 /* Expression.swift in Sources */,
 				105EF7BA1D627F09003356DC /* Route.swift in Sources */,
+				0B0435621D6A081100D46715 /* GTFSFileLoader.swift in Sources */,
 				105EF7C91D67C2BB003356DC /* Logger.swift in Sources */,
+				0B04355F1D6A06FC00D46715 /* QueryService.swift in Sources */,
+				0B87BC371D6A46D2006E220B /* GTFSFileEntry.swift in Sources */,
+				0B99DD2A1D6A64AC00366A12 /* Connection.swift in Sources */,
+				0B99DD3B1D6A64AC00366A12 /* Setter.swift in Sources */,
+				0B99DD301D6A64AC00366A12 /* RTree.swift in Sources */,
+				0B99DD311D6A64AC00366A12 /* Foundation.swift in Sources */,
+				0B87BC2F1D6A223E006E220B /* StopTimeDTO.swift in Sources */,
+				0B99DD391D6A64AC00366A12 /* Query.swift in Sources */,
+				0B99DD291D6A64AC00366A12 /* Blob.swift in Sources */,
+				0B87BC2D1D6A2237006E220B /* TripDTO.swift in Sources */,
+				0B99DD2F1D6A64AC00366A12 /* FTS5.swift in Sources */,
 				105EF7BE1D62806B003356DC /* Stop.swift in Sources */,
+				0B99DD321D6A64AC00366A12 /* Helpers.swift in Sources */,
+				0B87BC331D6A224B006E220B /* RouteDTO.swift in Sources */,
 				0B5C95F51D6010CF00F66B8F /* ViewController.swift in Sources */,
+				0B99DD341D6A64AC00366A12 /* Collation.swift in Sources */,
+				0B99DD2E1D6A64AC00366A12 /* FTS4.swift in Sources */,
+				0B99DD2B1D6A64AC00366A12 /* SQLite-Bridging.m in Sources */,
+				0B87BC201D6A117A006E220B /* GTFSFile.swift in Sources */,
+				0B87BC2B1D6A222F006E220B /* CalendarDateDTO.swift in Sources */,
+				0B87BC311D6A2245006E220B /* StopDTO.swift in Sources */,
 				105EF7C21D652F3E003356DC /* Trip.swift in Sources */,
+				0B99DD381D6A64AC00366A12 /* Operators.swift in Sources */,
 				0B5C95F31D6010CF00F66B8F /* AppDelegate.swift in Sources */,
+				0B99DD2D1D6A64AC00366A12 /* Value.swift in Sources */,
+				0B87BC351D6A2B8B006E220B /* InMemoryDataSource.swift in Sources */,
+				0B99DD2C1D6A64AC00366A12 /* Statement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

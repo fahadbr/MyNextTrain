@@ -11,11 +11,13 @@ import ClockKit
 
 class ComplicationController: NSObject, CLKComplicationDataSource {
     
+    public func getSupportedTimeTravelDirections(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimeTravelDirections) -> Void) {
+        
+    }
+
+    
     // MARK: - Timeline Configuration
     
-    func getSupportedTimeTravelDirections(for complication: CLKComplication, withHandler handler: (CLKComplicationTimeTravelDirections) -> Void) {
-        handler([.forward, .backward])
-    }
 
     func getTimelineStartDate(for complication: CLKComplication, withHandler handler: (Date?) -> Void) {
         handler(nil)

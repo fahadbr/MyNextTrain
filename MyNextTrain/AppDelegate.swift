@@ -12,20 +12,11 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var allResults: [[[String]]] = []
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-		
-		
-		for fileName in ["routes", "stops", "trips", "calendar_dates", "stop_times"] {
-			DispatchQueue.global(qos: .default).async {
-				let results = GTFSFileParser(fileName: fileName).parse { (strings) -> [String] in
-					return strings
-				}
-				Logger.debug("\(fileName) total = \(results.count)")
-			}
-		}
-		
+		GTFSFileLoader.instance.loadAllFiles()
         return true
     }
 

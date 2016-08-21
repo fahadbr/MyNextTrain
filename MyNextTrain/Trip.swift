@@ -10,8 +10,9 @@ import Foundation
 
 protocol Trip {
 	
-	var stopTimes: [StopTime] { get }
+    var id: String { get }
+    var routeId: Int { get }
+    var serviceId: String { get }
 	var headSign: String { get }
-	var shortName: String { get }
 	var directionId: Int { get }
 }

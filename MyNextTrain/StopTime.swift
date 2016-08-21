@@ -10,8 +10,10 @@ import Foundation
 
 protocol StopTime {
 	
+    var tripId: String { get }
 	var arrivalTime: Date { get }
 	var departureTime: Date { get }
-	var stop: Stop { get }
+    var stopId: Int { get }
+    var stopSequence: Int { get }
 	
 }

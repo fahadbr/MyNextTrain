@@ -11,6 +11,6 @@ import Foundation
 protocol CalendarDate {
 	
 	var date: Date { get }
-	var routes: [Route] { get }
+    var serviceId: String { get }
 	
 }

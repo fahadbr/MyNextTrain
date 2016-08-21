@@ -10,8 +10,9 @@ import Foundation
 
 protocol Stop {
 	
+    var id: Int { get }
 	var name: String { get }
 	var latitude: Double { get }
 	var longitude: Double { get }
-	var stopTime: StopTime { get }
+    
 }
