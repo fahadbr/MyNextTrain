@@ -16,12 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		
-		let results = GTFSFileParser(fileName: "routes").parse { (strings) -> [String] in
-			print(strings)
-			return strings
-		}
 		
-		Logger.debug("total = \(results.count)")
+		for fileName in ["routes", "stops", "trips", "calendar_dates", "stop_times"] {
+			DispatchQueue.global(qos: .default).async {
+				let results = GTFSFileParser(fileName: fileName).parse { (strings) -> [String] in
+					return strings
+				}
+				Logger.debug("\(fileName) total = \(results.count)")
+			}
+		}
 		
         return true
     }
