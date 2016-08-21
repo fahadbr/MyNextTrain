@@ -59,6 +59,7 @@ class GTFSFileLoader {
         DispatchQueue.global(qos: .default).async {
             let results: [AnyHashable : [T]] = file.readFile()
             DispatchQueue.main.async {
+                Logger.debug("done mapping file \(file)")
                 completion(results)
             }
         }

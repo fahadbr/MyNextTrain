@@ -30,10 +30,13 @@ enum GTFSFile: String {
         
         var results = [AnyHashable : [T]]()
         for line in lines {
+            guard !line.isEmpty else { continue }
+            
             var columnMap = [String : String]()
             lineComponents(from: line).enumerated().forEach {
                 columnMap[columns[$0.offset]] = $0.element
             }
+            
             
             let result = T(columnMap: columnMap)
             let key = result.lookupKey
