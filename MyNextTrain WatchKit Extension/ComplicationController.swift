@@ -15,19 +15,15 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         
     }
 
-    
-    // MARK: - Timeline Configuration
-    
-
-    func getTimelineStartDate(for complication: CLKComplication, withHandler handler: (Date?) -> Void) {
+    private func getTimelineStartDate(for complication: CLKComplication, withHandler handler: (Date?) -> Void) {
         handler(nil)
     }
     
-    func getTimelineEndDate(for complication: CLKComplication, withHandler handler: (Date?) -> Void) {
+    private func getTimelineEndDate(for complication: CLKComplication, withHandler handler: (Date?) -> Void) {
         handler(nil)
     }
     
-    func getPrivacyBehavior(for complication: CLKComplication, withHandler handler: (CLKComplicationPrivacyBehavior) -> Void) {
+    private func getPrivacyBehavior(for complication: CLKComplication, withHandler handler: (CLKComplicationPrivacyBehavior) -> Void) {
         handler(.showOnLockScreen)
     }
     
@@ -50,7 +46,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     // MARK: - Placeholder Templates
     
-    func getLocalizableSampleTemplate(for complication: CLKComplication, withHandler handler: (CLKComplicationTemplate?) -> Void) {
+    private func getLocalizableSampleTemplate(for complication: CLKComplication, withHandler handler: (CLKComplicationTemplate?) -> Void) {
         // This method will be called once per supported complication, and the results will be cached
         handler(nil)
     }
