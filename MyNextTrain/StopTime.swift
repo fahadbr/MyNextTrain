@@ -11,8 +11,8 @@ import Foundation
 protocol StopTime {
 	
     var tripId: String { get }
-	var arrivalTime: Date { get }
-	var departureTime: Date { get }
+	var arrivalTime: TimeInterval { get }
+	var departureTime: TimeInterval { get }
     var stopId: Int { get }
     var stopSequence: Int { get }
 	

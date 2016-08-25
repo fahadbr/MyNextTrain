@@ -12,7 +12,7 @@ enum GTFSFile: String {
     
     case routes, trips, stops, stop_times, calendar_dates
     
-    func readFile<T: GTFSFileEntry>() -> [AnyHashable : [T]] {
+    func readFile<T: GTFSFileEntry>() -> [T] {
         let quotationCharacterSet = CharacterSet(charactersIn: "\"")
         
         func lineComponents(from line: String) -> [String] {
@@ -28,7 +28,8 @@ enum GTFSFile: String {
         
         let columns = lineComponents(from: lines.removeFirst())
         
-        var results = [AnyHashable : [T]]()
+        var results = [T]()
+		results.reserveCapacity(lines.count)
         for line in lines {
             guard !line.isEmpty else { continue }
             
@@ -37,12 +38,9 @@ enum GTFSFile: String {
                 columnMap[columns[$0.offset]] = $0.element
             }
             
-            
-            let result = T(columnMap: columnMap)
-            let key = result.lookupKey
-            if results[key]?.append(result) == nil {
-                results[key] = [result]
-            }
+            let result = T()
+			result.apply(columnMap: columnMap)
+			results.append(result)
         }
         return results
         

@@ -15,4 +15,6 @@ protocol Trip {
     var serviceId: String { get }
 	var headSign: String { get }
 	var directionId: Int { get }
+	var shortName: String { get }
+	var shapeId: String { get }
 }

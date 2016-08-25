@@ -8,22 +8,13 @@
 
 import Foundation
 
-struct RouteDTO {
+struct RouteDTO: Route {
 	
     let id: Int
+	let shortName: String
 	let longName: String
+	let type: Int
+	let color: String?
+	let textColor: String?
 	
-}
-
-extension RouteDTO: GTFSFileEntry {
-    
-    init(columnMap: [String : String]) {
-        self.id = Int(columnMap["route_id"]!)!
-        self.longName = columnMap["route_long_name"]!
-    }
-    
-    var lookupKey: AnyHashable {
-        return AnyHashable(id)
-    }
-    
 }

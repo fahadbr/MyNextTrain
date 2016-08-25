@@ -9,9 +9,9 @@
 import Foundation
 
 protocol GTFSFileEntry {
+	
+	init()
     
-    init(columnMap: [String : String])
-    
-    var lookupKey: AnyHashable { get }
-    
+    func apply(row: GTFSFileRow)
+	
 }

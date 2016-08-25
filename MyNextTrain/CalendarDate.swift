@@ -12,5 +12,6 @@ protocol CalendarDate {
 	
 	var date: Date { get }
     var serviceId: String { get }
+	var exceptionType: Int { get }
 	
 }

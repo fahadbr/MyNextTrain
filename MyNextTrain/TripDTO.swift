@@ -17,7 +17,7 @@ struct TripDTO {
 	let directionId: Int 
 }
 
-extension TripDTO: GTFSFileEntry {
+extension TripDTO {
     
     init(columnMap: [String : String]) {
         self.id = columnMap["trip_id"]!
