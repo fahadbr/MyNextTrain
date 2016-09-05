@@ -19,7 +19,7 @@ struct StopTimeDTO {
 	
 }
 
-extension StopTimeDTO: GTFSFileEntry {
+extension StopTimeDTO {
     
     init(columnMap: [String : String]) {
         self.tripId = columnMap["trip_id"]!

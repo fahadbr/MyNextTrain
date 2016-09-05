@@ -37,16 +37,16 @@ final class Logger {
         let message = messageBlock()
         loggerQueue.async {
             let dateString = dateFormatter.string(from: date)
-            print("\(dateString) DEBUG [\(threadId)]:  \(message)")
+            print("\(dateString) DEBUG [\(threadId)]: \(message)")
         }
     }
     
-    static func error(_ message:String) {
+	static func error(_ message:String, error: Error? = nil) {
         let date = Date()
         let threadId = threadName
         loggerQueue.async {
             let dateString = dateFormatter.string(from: date)
-            let message = "\(dateString) ERROR [\(threadId)]:  \(message)"
+            let message = "\(dateString) ERROR [\(threadId)]: [\(error?.description ?? "") \(message)]"
             print(message)
         }
     }

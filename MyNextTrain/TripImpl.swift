@@ -23,7 +23,14 @@ class TripImpl: Object, Trip, GTFSFileEntry {
 		row.bind(column: "trip_id", to: &id)
 		row.bind(column: "route_id", to: &routeId)
 		row.bind(column: "service_id", to: &serviceId)
-		
+		row.bind(column: "trip_headsign", to: &headSign)
+		row.bind(column: "trip_short_name", to: &shortName)
+		row.bind(column: "direction_id", to: &directionId)
+		row.bind(column: "shape_id", to: &shapeId)
+	}
+	
+	override class func primaryKey() -> String? {
+		return "id"
 	}
 	
 }

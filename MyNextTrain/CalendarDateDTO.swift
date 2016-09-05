@@ -20,7 +20,7 @@ struct CalendarDateDTO {
 	
 }
 
-extension CalendarDateDTO: GTFSFileEntry{
+extension CalendarDateDTO {
     
     init(columnMap: [String : String]) {
         self.date = dateFormatter.date(from: columnMap["date"]!)!

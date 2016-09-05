@@ -10,6 +10,6 @@ import Foundation
 
 protocol QueryService {
     
-    func tripsByRoute(forDate date: Date) -> [Route]
-    
+	func trips(from startingStop: Stop, to destinationStop: Stop) -> [Trip]
+	
 }

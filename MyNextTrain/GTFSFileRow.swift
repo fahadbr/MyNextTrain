@@ -10,7 +10,15 @@ import Foundation
 
 struct GTFSFileRow {
 	
-	private let columnMap: [String : String]
+	let columnMap: [String : String]
+	
+	init(names: [String], values: [String]) {
+		var map = [String : String]()
+		values.enumerated().forEach {
+			map[names[$0.offset]] = $0.element
+		}
+		columnMap = map
+	}
 	
 	func bind<T: GTFSMappable>(column: String, to field: inout T)  {
 		guard let value = columnMap[column] else {
@@ -18,7 +26,7 @@ struct GTFSFileRow {
 			return
 		}
 		
-		field = T(value) ?? T.defaultValue
+		field = T.valueOf(value) ?? T.defaultValue
 	}
 	
 	func bind<T: GTFSMappable>(column: String, to field: inout T?)  {
@@ -27,7 +35,7 @@ struct GTFSFileRow {
 			return
 		}
 		
-		field = T(value)
+		field = T.valueOf(value)
 	}
 	
 	
@@ -35,15 +43,15 @@ struct GTFSFileRow {
 
 protocol GTFSMappable {
 	
-	init?(_ string: String)
+	static func valueOf(_ string: String) -> Self?
 	
 	static var defaultValue: Self { get }
 	
 }
 
 extension Int: GTFSMappable {
-	init?(_ string: String) {
-		self.init(string)
+	static func valueOf(_ string: String) -> Int? {
+		return Int(string)
 	}
 	
 	static var defaultValue: Int {
@@ -54,8 +62,8 @@ extension Int: GTFSMappable {
 
 extension Double: GTFSMappable {
 	
-	init?(_ string: String) {
-		self.init(string)
+	static func valueOf(_ string: String) -> Double? {
+		return Double(string)
 	}
 	
 	static var defaultValue: Double {
@@ -66,8 +74,8 @@ extension Double: GTFSMappable {
 
 extension String: GTFSMappable {
 	
-	init?(_ string: String) {
-		self.init(string)
+	static func valueOf(_ string: String) -> String? {
+		return string
 	}
 	
 	static var defaultValue: String {
@@ -87,11 +95,8 @@ extension Date: GTFSMappable {
 		}(DateFormatter())
 	}
 	
-	init?(_ string: String) {
-		guard let date = Static.formatter.date(from: string) else {
-			return nil
-		}
-		self = date
+	static func valueOf(_ string: String) -> Date? {
+		return Static.formatter.date(from: string)
 	}
 	
 	static var defaultValue: Date {

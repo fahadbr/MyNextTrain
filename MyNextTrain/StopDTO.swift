@@ -17,7 +17,7 @@ struct StopDTO {
     
 }
 
-extension StopDTO: GTFSFileEntry {
+extension StopDTO {
     
     init(columnMap: [String : String]) {
         self.id = Int(columnMap["stop_id"]!)!

@@ -37,7 +37,6 @@
 		0B87BC2F1D6A223E006E220B /* StopTimeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC2E1D6A223E006E220B /* StopTimeDTO.swift */; };
 		0B87BC311D6A2245006E220B /* StopDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC301D6A2245006E220B /* StopDTO.swift */; };
 		0B87BC331D6A224B006E220B /* RouteDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC321D6A224B006E220B /* RouteDTO.swift */; };
-		0B87BC351D6A2B8B006E220B /* InMemoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC341D6A2B8B006E220B /* InMemoryDataSource.swift */; };
 		0B87BC371D6A46D2006E220B /* GTFSFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC361D6A46D2006E220B /* GTFSFileEntry.swift */; };
 		105EF7BA1D627F09003356DC /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105EF7B91D627F09003356DC /* Route.swift */; };
 		105EF7BE1D62806B003356DC /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105EF7BD1D62806B003356DC /* Stop.swift */; };
@@ -51,6 +50,9 @@
 		10EC9C381D6D092A00D29CE0 /* GTFSFileRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EC9C371D6D092A00D29CE0 /* GTFSFileRow.swift */; };
 		10EC9C3A1D6D11A900D29CE0 /* StopTimeImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EC9C391D6D11A900D29CE0 /* StopTimeImpl.swift */; };
 		10EC9C3C1D6D148C00D29CE0 /* TripImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EC9C3B1D6D148C00D29CE0 /* TripImpl.swift */; };
+		10EC9C3E1D76320900D29CE0 /* CalendarDateImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EC9C3D1D76320900D29CE0 /* CalendarDateImpl.swift */; };
+		10EC9C401D76358300D29CE0 /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EC9C3F1D76358300D29CE0 /* ErrorExtension.swift */; };
+		10EC9C421D7CFFF300D29CE0 /* RealmQueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EC9C411D7CFFF300D29CE0 /* RealmQueryService.swift */; };
 		6762FD6E34A74920BD9CBA78 /* Pods_MyNextTrain_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF643DF0EA51BD717F65699B /* Pods_MyNextTrain_WatchKit_App.framework */; };
 		98E3A03078DC0A0AEF538D03 /* Pods_MyNextTrain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACEEC8261895F5D59DDE2E45 /* Pods_MyNextTrain.framework */; };
 		FCF0A0D713709B204CE6D104 /* Pods_MyNextTrain_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CAFBA16A266A232EAEF4CC /* Pods_MyNextTrain_WatchKit_Extension.framework */; };
@@ -134,7 +136,6 @@
 		0B87BC2E1D6A223E006E220B /* StopTimeDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopTimeDTO.swift; sourceTree = "<group>"; };
 		0B87BC301D6A2245006E220B /* StopDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopDTO.swift; sourceTree = "<group>"; };
 		0B87BC321D6A224B006E220B /* RouteDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDTO.swift; sourceTree = "<group>"; };
-		0B87BC341D6A2B8B006E220B /* InMemoryDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMemoryDataSource.swift; sourceTree = "<group>"; };
 		0B87BC361D6A46D2006E220B /* GTFSFileEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTFSFileEntry.swift; sourceTree = "<group>"; };
 		105EF7B91D627F09003356DC /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		105EF7BD1D62806B003356DC /* Stop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
@@ -148,6 +149,9 @@
 		10EC9C371D6D092A00D29CE0 /* GTFSFileRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTFSFileRow.swift; sourceTree = "<group>"; };
 		10EC9C391D6D11A900D29CE0 /* StopTimeImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopTimeImpl.swift; sourceTree = "<group>"; };
 		10EC9C3B1D6D148C00D29CE0 /* TripImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripImpl.swift; sourceTree = "<group>"; };
+		10EC9C3D1D76320900D29CE0 /* CalendarDateImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDateImpl.swift; sourceTree = "<group>"; };
+		10EC9C3F1D76358300D29CE0 /* ErrorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorExtension.swift; sourceTree = "<group>"; };
+		10EC9C411D7CFFF300D29CE0 /* RealmQueryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmQueryService.swift; sourceTree = "<group>"; };
 		34CAFBA16A266A232EAEF4CC /* Pods_MyNextTrain_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyNextTrain_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		493339C1A9DA0070A91A5A43 /* Pods-MyNextTrain WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyNextTrain WatchKit Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyNextTrain WatchKit Extension/Pods-MyNextTrain WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
 		4F25467F66B028A7125D878E /* Pods-MyNextTrain WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyNextTrain WatchKit Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyNextTrain WatchKit Extension/Pods-MyNextTrain WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -199,7 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				0B04355E1D6A06FC00D46715 /* QueryService.swift */,
-				0B87BC341D6A2B8B006E220B /* InMemoryDataSource.swift */,
+				10EC9C411D7CFFF300D29CE0 /* RealmQueryService.swift */,
 			);
 			name = QueryService;
 			sourceTree = "<group>";
@@ -367,6 +371,7 @@
 			isa = PBXGroup;
 			children = (
 				10EC9C301D6BBCE900D29CE0 /* StringExtension.swift */,
+				10EC9C3F1D76358300D29CE0 /* ErrorExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -378,6 +383,7 @@
 				10EC9C351D6D071C00D29CE0 /* StopImpl.swift */,
 				10EC9C391D6D11A900D29CE0 /* StopTimeImpl.swift */,
 				10EC9C3B1D6D148C00D29CE0 /* TripImpl.swift */,
+				10EC9C3D1D76320900D29CE0 /* CalendarDateImpl.swift */,
 			);
 			name = Realm;
 			sourceTree = "<group>";
@@ -676,6 +682,7 @@
 			files = (
 				105EF7C41D67BD0D003356DC /* CalendarDate.swift in Sources */,
 				105EF7C01D6280C9003356DC /* StopTime.swift in Sources */,
+				10EC9C401D76358300D29CE0 /* ErrorExtension.swift in Sources */,
 				105EF7BA1D627F09003356DC /* Route.swift in Sources */,
 				10EC9C341D6D009E00D29CE0 /* RouteImpl.swift in Sources */,
 				0B0435621D6A081100D46715 /* GTFSFileLoader.swift in Sources */,
@@ -690,14 +697,15 @@
 				0B5C95F51D6010CF00F66B8F /* ViewController.swift in Sources */,
 				10EC9C381D6D092A00D29CE0 /* GTFSFileRow.swift in Sources */,
 				0B87BC201D6A117A006E220B /* GTFSFile.swift in Sources */,
+				10EC9C3E1D76320900D29CE0 /* CalendarDateImpl.swift in Sources */,
 				0B87BC2B1D6A222F006E220B /* CalendarDateDTO.swift in Sources */,
 				0B87BC311D6A2245006E220B /* StopDTO.swift in Sources */,
 				10EC9C3C1D6D148C00D29CE0 /* TripImpl.swift in Sources */,
 				10EC9C3A1D6D11A900D29CE0 /* StopTimeImpl.swift in Sources */,
 				105EF7C21D652F3E003356DC /* Trip.swift in Sources */,
 				10EC9C311D6BBCE900D29CE0 /* StringExtension.swift in Sources */,
+				10EC9C421D7CFFF300D29CE0 /* RealmQueryService.swift in Sources */,
 				0B5C95F31D6010CF00F66B8F /* AppDelegate.swift in Sources */,
-				0B87BC351D6A2B8B006E220B /* InMemoryDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         GTFSFileLoader.instance.loadAllFiles()
+		let deerPark = StopImpl()
+		deerPark.name = "Deer Park"
+		deerPark.id = 72
+		
+		let atlanticTerm = StopImpl()
+		atlanticTerm.name = "Atlantic Terminal"
+		atlanticTerm.id = 12
+		
+		let trips = RealmQueryService().trips(from: deerPark, to: atlanticTerm)
         return true
     }
 
