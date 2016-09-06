@@ -12,15 +12,16 @@ import RealmSwift
 class GTFSFileLoader {
     
     static let instance = GTFSFileLoader()
+    static let doneLoadingFiles = Notification.Name("doneLoadingFiles")
     
+    private typealias This = GTFSFileLoader
     private static let files: [GTFSFile] = [.routes, .stops, .trips, .calendar_dates, .stop_times]
-	
+    
     
     func loadAllFiles() {
 		let loadingGroup = DispatchGroup()
-		
-		
-        for file in GTFSFileLoader.files {
+        
+        for file in This.files {
 			
             switch file {
             case .routes:
@@ -38,6 +39,8 @@ class GTFSFileLoader {
 		
 		loadingGroup.notify(queue: DispatchQueue.main) {
 			Logger.debug("done loading all files")
+            let notification = Notification(name: This.doneLoadingFiles, object: self, userInfo: nil)
+            NotificationCenter.default.post(notification)
 		}
         
     }
@@ -62,8 +65,8 @@ class GTFSFileLoader {
 		do {
 			let realm = try Realm()
 			
-			guard realm.allObjects(ofType: type).isEmpty else {
-				Logger.debug("files have already been loaded")
+			guard realm.allObjects(ofType: type).isEmpty || AppDelegate.overrideReload else {
+				Logger.debug("file \(file) has already been loaded")
 				return
 			}
 		

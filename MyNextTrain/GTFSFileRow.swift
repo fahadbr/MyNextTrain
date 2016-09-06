@@ -63,7 +63,29 @@ extension Int: GTFSMappable {
 extension Double: GTFSMappable {
 	
 	static func valueOf(_ string: String) -> Double? {
-		return Double(string)
+        if let d = Double(string) {
+            return d
+        }
+        let components = string.components(separatedBy: ":")
+        var seconds: Double = 0
+        
+        for (i, value) in components.enumerated() {
+            guard let number = Double(value) else { continue }
+            
+            var multiplier: Double = 1
+            switch i {
+            case 0:
+                multiplier = 3600
+            case 1:
+                multiplier = 60
+            default:
+                multiplier = 1
+            }
+            
+            seconds += (number * multiplier)
+        }
+        
+        return seconds
 	}
 	
 	static var defaultValue: Double {

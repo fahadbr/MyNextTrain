@@ -7,23 +7,28 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    static let queryService: QueryService = RealmQueryService.instance
+    static let overrideReload = false
+    
     var window: UIWindow?
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        if AppDelegate.overrideReload, let realm = try? Realm(), !realm.isEmpty{
+            try? realm.write {
+                realm.deleteAllObjects()
+            }
+        }
+        
         GTFSFileLoader.instance.loadAllFiles()
-		let deerPark = StopImpl()
-		deerPark.name = "Deer Park"
-		deerPark.id = 72
-		
-		let atlanticTerm = StopImpl()
-		atlanticTerm.name = "Atlantic Terminal"
-		atlanticTerm.id = 12
-		
-		let trips = RealmQueryService().trips(from: deerPark, to: atlanticTerm)
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = RootViewController.instance
+        window?.makeKeyAndVisible()
         return true
     }
 

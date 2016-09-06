@@ -10,8 +10,7 @@
 		0B04355F1D6A06FC00D46715 /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B04355E1D6A06FC00D46715 /* QueryService.swift */; };
 		0B0435621D6A081100D46715 /* GTFSFileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0435611D6A081100D46715 /* GTFSFileLoader.swift */; };
 		0B5C95F31D6010CF00F66B8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5C95F21D6010CF00F66B8F /* AppDelegate.swift */; };
-		0B5C95F51D6010CF00F66B8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5C95F41D6010CF00F66B8F /* ViewController.swift */; };
-		0B5C95F81D6010CF00F66B8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C95F61D6010CF00F66B8F /* Main.storyboard */; };
+		0B5C95F51D6010CF00F66B8F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5C95F41D6010CF00F66B8F /* RootViewController.swift */; };
 		0B5C95FA1D6010CF00F66B8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C95F91D6010CF00F66B8F /* Assets.xcassets */; };
 		0B5C95FD1D6010CF00F66B8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C95FB1D6010CF00F66B8F /* LaunchScreen.storyboard */; };
 		0B5C96021D6010CF00F66B8F /* MyNextTrain WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 0B5C96011D6010CF00F66B8F /* MyNextTrain WatchKit App.app */; };
@@ -31,6 +30,14 @@
 		0B5C963E1D60DC1800F66B8F /* stop_times.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C96361D60DC1800F66B8F /* stop_times.txt */; };
 		0B5C963F1D60DC1800F66B8F /* stops.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C96371D60DC1800F66B8F /* stops.txt */; };
 		0B5C96401D60DC1800F66B8F /* trips.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C96381D60DC1800F66B8F /* trips.txt */; };
+		0B7C6EDC1D7E37250022D794 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7C6EDB1D7E37250022D794 /* DoubleExtension.swift */; };
+		0B8084AF1D7DDD9300CAF56D /* TripSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8084AE1D7DDD9300CAF56D /* TripSummary.swift */; };
+		0B8084B11D7DE0E900CAF56D /* TripSummaryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8084B01D7DE0E900CAF56D /* TripSummaryImpl.swift */; };
+		0B8084B31D7DE48D00CAF56D /* CollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8084B21D7DE48D00CAF56D /* CollectionExtensions.swift */; };
+		0B8084B61D7E0A8A00CAF56D /* UpcomingTripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8084B51D7E0A8A00CAF56D /* UpcomingTripsViewController.swift */; };
+		0B8084B81D7E118C00CAF56D /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8084B71D7E118C00CAF56D /* UIViewExtension.swift */; };
+		0B8084BA1D7E14DA00CAF56D /* TripSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8084B91D7E14D900CAF56D /* TripSummaryCell.swift */; };
+		0B8084BC1D7E16B200CAF56D /* InitializingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8084BB1D7E16B200CAF56D /* InitializingTableViewCell.swift */; };
 		0B87BC201D6A117A006E220B /* GTFSFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC1F1D6A117A006E220B /* GTFSFile.swift */; };
 		0B87BC2B1D6A222F006E220B /* CalendarDateDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC2A1D6A222F006E220B /* CalendarDateDTO.swift */; };
 		0B87BC2D1D6A2237006E220B /* TripDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC2C1D6A2237006E220B /* TripDTO.swift */; };
@@ -105,8 +112,7 @@
 		0B0435611D6A081100D46715 /* GTFSFileLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTFSFileLoader.swift; sourceTree = "<group>"; };
 		0B5C95EF1D6010CE00F66B8F /* MyNextTrain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyNextTrain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B5C95F21D6010CF00F66B8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0B5C95F41D6010CF00F66B8F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		0B5C95F71D6010CF00F66B8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0B5C95F41D6010CF00F66B8F /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		0B5C95F91D6010CF00F66B8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0B5C95FC1D6010CF00F66B8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0B5C95FE1D6010CF00F66B8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -130,6 +136,14 @@
 		0B5C96361D60DC1800F66B8F /* stop_times.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stop_times.txt; sourceTree = "<group>"; };
 		0B5C96371D60DC1800F66B8F /* stops.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stops.txt; sourceTree = "<group>"; };
 		0B5C96381D60DC1800F66B8F /* trips.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trips.txt; sourceTree = "<group>"; };
+		0B7C6EDB1D7E37250022D794 /* DoubleExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
+		0B8084AE1D7DDD9300CAF56D /* TripSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripSummary.swift; sourceTree = "<group>"; };
+		0B8084B01D7DE0E900CAF56D /* TripSummaryImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripSummaryImpl.swift; sourceTree = "<group>"; };
+		0B8084B21D7DE48D00CAF56D /* CollectionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtensions.swift; sourceTree = "<group>"; };
+		0B8084B51D7E0A8A00CAF56D /* UpcomingTripsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingTripsViewController.swift; sourceTree = "<group>"; };
+		0B8084B71D7E118C00CAF56D /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		0B8084B91D7E14D900CAF56D /* TripSummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripSummaryCell.swift; sourceTree = "<group>"; };
+		0B8084BB1D7E16B200CAF56D /* InitializingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitializingTableViewCell.swift; sourceTree = "<group>"; };
 		0B87BC1F1D6A117A006E220B /* GTFSFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTFSFile.swift; sourceTree = "<group>"; };
 		0B87BC2A1D6A222F006E220B /* CalendarDateDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDateDTO.swift; sourceTree = "<group>"; };
 		0B87BC2C1D6A2237006E220B /* TripDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripDTO.swift; sourceTree = "<group>"; };
@@ -244,8 +258,7 @@
 				105EF7C51D67C00F003356DC /* Controller */,
 				105EF7B81D627EFD003356DC /* Model */,
 				0B5C95F21D6010CF00F66B8F /* AppDelegate.swift */,
-				0B5C95F41D6010CF00F66B8F /* ViewController.swift */,
-				0B5C95F61D6010CF00F66B8F /* Main.storyboard */,
+				0B8084B41D7E049800CAF56D /* View */,
 				0B5C95F91D6010CF00F66B8F /* Assets.xcassets */,
 				0B5C962F1D60D14A00F66B8F /* Supporting Files */,
 				0B5C95FB1D6010CF00F66B8F /* LaunchScreen.storyboard */,
@@ -309,6 +322,17 @@
 			path = LIRR_transit;
 			sourceTree = "<group>";
 		};
+		0B8084B41D7E049800CAF56D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0B5C95F41D6010CF00F66B8F /* RootViewController.swift */,
+				0B8084B51D7E0A8A00CAF56D /* UpcomingTripsViewController.swift */,
+				0B8084B91D7E14D900CAF56D /* TripSummaryCell.swift */,
+				0B8084BB1D7E16B200CAF56D /* InitializingTableViewCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		0B87BC271D6A16AB006E220B /* GTFSFile */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,6 +372,7 @@
 				105EF7BD1D62806B003356DC /* Stop.swift */,
 				105EF7BF1D6280C9003356DC /* StopTime.swift */,
 				105EF7C11D652F3E003356DC /* Trip.swift */,
+				0B8084AE1D7DDD9300CAF56D /* TripSummary.swift */,
 				105EF7C31D67BD0D003356DC /* CalendarDate.swift */,
 				10EC9C321D6D006200D29CE0 /* Realm */,
 				10EC9C2F1D6BBCDB00D29CE0 /* Extensions */,
@@ -372,6 +397,9 @@
 			children = (
 				10EC9C301D6BBCE900D29CE0 /* StringExtension.swift */,
 				10EC9C3F1D76358300D29CE0 /* ErrorExtension.swift */,
+				0B8084B21D7DE48D00CAF56D /* CollectionExtensions.swift */,
+				0B8084B71D7E118C00CAF56D /* UIViewExtension.swift */,
+				0B7C6EDB1D7E37250022D794 /* DoubleExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -384,6 +412,7 @@
 				10EC9C391D6D11A900D29CE0 /* StopTimeImpl.swift */,
 				10EC9C3B1D6D148C00D29CE0 /* TripImpl.swift */,
 				10EC9C3D1D76320900D29CE0 /* CalendarDateImpl.swift */,
+				0B8084B01D7DE0E900CAF56D /* TripSummaryImpl.swift */,
 			);
 			name = Realm;
 			sourceTree = "<group>";
@@ -525,7 +554,6 @@
 				0B5C95FA1D6010CF00F66B8F /* Assets.xcassets in Resources */,
 				0B5C96401D60DC1800F66B8F /* trips.txt in Resources */,
 				0B5C963D1D60DC1800F66B8F /* shapes.txt in Resources */,
-				0B5C95F81D6010CF00F66B8F /* Main.storyboard in Resources */,
 				0B5C963F1D60DC1800F66B8F /* stops.txt in Resources */,
 				0B5C963B1D60DC1800F66B8F /* feed_info.txt in Resources */,
 				0B5C96391D60DC1800F66B8F /* agency.txt in Resources */,
@@ -680,6 +708,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B8084AF1D7DDD9300CAF56D /* TripSummary.swift in Sources */,
+				0B8084BC1D7E16B200CAF56D /* InitializingTableViewCell.swift in Sources */,
 				105EF7C41D67BD0D003356DC /* CalendarDate.swift in Sources */,
 				105EF7C01D6280C9003356DC /* StopTime.swift in Sources */,
 				10EC9C401D76358300D29CE0 /* ErrorExtension.swift in Sources */,
@@ -688,13 +718,17 @@
 				0B0435621D6A081100D46715 /* GTFSFileLoader.swift in Sources */,
 				105EF7C91D67C2BB003356DC /* Logger.swift in Sources */,
 				0B04355F1D6A06FC00D46715 /* QueryService.swift in Sources */,
+				0B8084B61D7E0A8A00CAF56D /* UpcomingTripsViewController.swift in Sources */,
 				0B87BC371D6A46D2006E220B /* GTFSFileEntry.swift in Sources */,
 				0B87BC2F1D6A223E006E220B /* StopTimeDTO.swift in Sources */,
+				0B8084B81D7E118C00CAF56D /* UIViewExtension.swift in Sources */,
+				0B8084B11D7DE0E900CAF56D /* TripSummaryImpl.swift in Sources */,
 				0B87BC2D1D6A2237006E220B /* TripDTO.swift in Sources */,
 				10EC9C361D6D071C00D29CE0 /* StopImpl.swift in Sources */,
 				105EF7BE1D62806B003356DC /* Stop.swift in Sources */,
+				0B7C6EDC1D7E37250022D794 /* DoubleExtension.swift in Sources */,
 				0B87BC331D6A224B006E220B /* RouteDTO.swift in Sources */,
-				0B5C95F51D6010CF00F66B8F /* ViewController.swift in Sources */,
+				0B5C95F51D6010CF00F66B8F /* RootViewController.swift in Sources */,
 				10EC9C381D6D092A00D29CE0 /* GTFSFileRow.swift in Sources */,
 				0B87BC201D6A117A006E220B /* GTFSFile.swift in Sources */,
 				10EC9C3E1D76320900D29CE0 /* CalendarDateImpl.swift in Sources */,
@@ -705,6 +739,8 @@
 				105EF7C21D652F3E003356DC /* Trip.swift in Sources */,
 				10EC9C311D6BBCE900D29CE0 /* StringExtension.swift in Sources */,
 				10EC9C421D7CFFF300D29CE0 /* RealmQueryService.swift in Sources */,
+				0B8084BA1D7E14DA00CAF56D /* TripSummaryCell.swift in Sources */,
+				0B8084B31D7DE48D00CAF56D /* CollectionExtensions.swift in Sources */,
 				0B5C95F31D6010CF00F66B8F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -736,14 +772,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0B5C95F61D6010CF00F66B8F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0B5C95F71D6010CF00F66B8F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		0B5C95FB1D6010CF00F66B8F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
