@@ -31,7 +31,12 @@ class AddPairingViewController: UIViewController {
 		tableView.dataSource = self
 		tableView.delegate = self
 		
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
 	}
+    
+    func cancel() {
+        dismiss(animated: true, completion: nil)
+    }
 	
 	fileprivate func createNewPairing() {
 		assert(startingStop != nil, "startingStop was nil")
@@ -73,11 +78,13 @@ extension AddPairingViewController: UITableViewDataSource {
 extension AddPairingViewController: UITableViewDelegate {
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		
+		tableView.deselectRow(at: indexPath, animated: true)
+        
 		let selectedStop = stops[indexPath.row]
 		
 		if startingStop == nil {
 			startingStop = selectedStop
+            title = "Select To Station (From \(selectedStop.name))"
 		} else if destinationStop == nil {
 			destinationStop = selectedStop
 			createNewPairing()

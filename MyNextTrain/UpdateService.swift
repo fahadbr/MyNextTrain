@@ -11,5 +11,7 @@ import Foundation
 protocol UpdateService {
 	
 	func addFavoritePairing(from startingStop: Stop, to destinationStop: Stop) throws
+    
+    func remove(pairing: StopPairing) throws
 	
 }

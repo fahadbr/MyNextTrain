@@ -13,6 +13,7 @@ fileprivate let reuseIdentifier = "FavoritePairsViewController"
 class FavoritePairsViewController: UIViewController {
 	
 	lazy var queryService = AppDelegate.queryService
+    lazy var updateService = AppDelegate.updateService
 	
 	private let tableView = UITableView()
 	private let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
@@ -24,6 +25,7 @@ class FavoritePairsViewController: UIViewController {
         super.viewDidLoad()
 		addButton.target = self
 		addButton.action = #selector(showAddFavoriteVC)
+        title = "Favorite Pairs"
 		
 		navigationItem.rightBarButtonItem = addButton
 		
@@ -50,7 +52,7 @@ class FavoritePairsViewController: UIViewController {
 	}
 	
 	func showAddFavoriteVC() {
-		present(AddPairingViewController(), animated: true, completion: nil)
+        present(UINavigationController(rootViewController: AddPairingViewController()), animated: true, completion: nil)
 	}
 	
 
@@ -76,6 +78,23 @@ extension FavoritePairsViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return favoritePairings.count
 	}
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            do {
+                try updateService.remove(pairing: favoritePairings[indexPath.row])
+                reloadSourceData()
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            } catch let err {
+                Logger.error("could not add favorite pairing", error: err)
+            }
+        }
+    }
+    
 
 }
 
@@ -83,6 +102,7 @@ extension FavoritePairsViewController: UITableViewDataSource {
 extension FavoritePairsViewController: UITableViewDelegate {
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
 		let pairing = favoritePairings[indexPath.row]
 		let vc = UpcomingTripsViewController(pairing: pairing)
 		navigationController!.pushViewController(vc, animated: true)

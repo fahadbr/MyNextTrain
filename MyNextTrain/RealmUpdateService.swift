@@ -28,4 +28,17 @@ class RealmUpdateService: UpdateService {
 		
 		Logger.debug("added pairing [\(realmObj.description)]")
 	}
+    
+    func remove(pairing: StopPairing) throws {
+        guard let realmObj = pairing as? StopPairingImpl else {
+            throw ErrorDTO(description: "require type StopPairingImpl in order to delete")
+        }
+        
+        let realm = try Realm()
+        try realm.write {
+            realm.delete(realmObj)
+        }
+        
+        Logger.debug("deleted pairing [\(realmObj.description)]")
+    }
 }
