@@ -15,17 +15,29 @@ fileprivate let formatter: DateFormatter = {
 }(DateFormatter())
 
 class UpcomingTripsViewController: UIViewController {
+	
     
     lazy var queryService = AppDelegate.queryService
-    
+	
+	private let pairing: StopPairing
     fileprivate let tableView = UITableView()
-    fileprivate lazy var currentDate: Date = self.queryService.currentDate
+	fileprivate var currentDate: Date!
     fileprivate var tripSummaries: [TripSummary]!
+	
+	init(pairing:StopPairing) {
+		self.pairing = pairing
+		super.init(nibName: nil, bundle: nil)
+	}
+	
+	
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
     
     override func viewDidLoad() {
-        
-
+		
         reloadSourceData()
+		
         view.add(subView: tableView, with: Anchor.standardAnchors)
         tableView.dataSource = self
         
@@ -37,19 +49,19 @@ class UpcomingTripsViewController: UIViewController {
     }
     
     func reloadSourceData() {
-        let deerPark = StopImpl()
-        deerPark.name = "Deer Park"
-        deerPark.id = 72
-        
+//        let deerPark = StopImpl()
+//        deerPark.name = "Deer Park"
+//        deerPark.id = 72
+//        
+////        let destination = StopImpl()
+////        destination.name = "Atlantic Terminal"
+////        destination.id = 12
+//        
 //        let destination = StopImpl()
-//        destination.name = "Atlantic Terminal"
-//        destination.id = 12
-        
-        let destination = StopImpl()
-        destination.name = "Penn Station"
-        destination.id = 8
+//        destination.name = "Penn Station"
+//        destination.id = 8
         currentDate = queryService.currentDate
-        tripSummaries = queryService.tripSummaries(from: deerPark, to: destination, forDate: currentDate)
+        tripSummaries = queryService.tripSummaries(for: pairing, on: currentDate)
     }
     
     func reloadTableView() {

@@ -79,7 +79,7 @@ class GTFSFileLoader {
 			
 			let columns = lineComponents(from: lines[0])
 			
-			let realmObject = lines[1..<lines.count].lazy
+			let realmObjects = lines[1..<lines.count].lazy
 				.filter { !$0.isEmpty }
 				.map { line -> T in
 					let result = T()
@@ -89,7 +89,7 @@ class GTFSFileLoader {
 			
 			
 			try realm.write {
-				realmObject.forEach { realm.add($0) }
+				realm.add(realmObjects)
 			}
 			
 		} catch let error {

@@ -14,8 +14,11 @@ fileprivate let formatter: DateFormatter = {
 }(DateFormatter())
 
 protocol QueryService {
-    
-    func tripSummaries(from startingStop: Stop, to destinationStop: Stop, forDate date: Date) -> [TripSummary]
+	
+	var favoritePairings: [StopPairing] { get }
+	var allStops: [Stop] { get }
+	
+	func tripSummaries(for pairing: StopPairing, on date: Date) -> [TripSummary]
 	
 }
 
@@ -23,7 +26,8 @@ extension QueryService {
     
     //returns the date with no time component
     var currentDate: Date {
-        guard let dateNoTime = formatter.date(from: formatter.string(from: Date())) else {
+//        guard let dateNoTime = formatter.date(from: formatter.string(from: Date())) else {
+		guard let dateNoTime = formatter.date(from: "020916") else {
             Logger.error("couldn't truncate time from current date object")
             return Date()
         }

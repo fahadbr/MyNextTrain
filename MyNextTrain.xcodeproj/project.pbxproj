@@ -60,6 +60,12 @@
 		10EC9C3E1D76320900D29CE0 /* CalendarDateImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EC9C3D1D76320900D29CE0 /* CalendarDateImpl.swift */; };
 		10EC9C401D76358300D29CE0 /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EC9C3F1D76358300D29CE0 /* ErrorExtension.swift */; };
 		10EC9C421D7CFFF300D29CE0 /* RealmQueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EC9C411D7CFFF300D29CE0 /* RealmQueryService.swift */; };
+		10FE08181D7F754300894D5C /* FavoritePairsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FE08171D7F754300894D5C /* FavoritePairsViewController.swift */; };
+		10FE081A1D7F768100894D5C /* StopPairing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FE08191D7F768100894D5C /* StopPairing.swift */; };
+		10FE081C1D7F770C00894D5C /* StopPairingImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FE081B1D7F770C00894D5C /* StopPairingImpl.swift */; };
+		10FE081F1D7F822C00894D5C /* UpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FE081E1D7F822C00894D5C /* UpdateService.swift */; };
+		10FE08211D7F88DE00894D5C /* RealmUpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FE08201D7F88DE00894D5C /* RealmUpdateService.swift */; };
+		10FE08231D7F8CD500894D5C /* AddPairingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FE08221D7F8CD500894D5C /* AddPairingViewController.swift */; };
 		6762FD6E34A74920BD9CBA78 /* Pods_MyNextTrain_WatchKit_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF643DF0EA51BD717F65699B /* Pods_MyNextTrain_WatchKit_App.framework */; };
 		98E3A03078DC0A0AEF538D03 /* Pods_MyNextTrain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACEEC8261895F5D59DDE2E45 /* Pods_MyNextTrain.framework */; };
 		FCF0A0D713709B204CE6D104 /* Pods_MyNextTrain_WatchKit_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CAFBA16A266A232EAEF4CC /* Pods_MyNextTrain_WatchKit_Extension.framework */; };
@@ -166,6 +172,12 @@
 		10EC9C3D1D76320900D29CE0 /* CalendarDateImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDateImpl.swift; sourceTree = "<group>"; };
 		10EC9C3F1D76358300D29CE0 /* ErrorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorExtension.swift; sourceTree = "<group>"; };
 		10EC9C411D7CFFF300D29CE0 /* RealmQueryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmQueryService.swift; sourceTree = "<group>"; };
+		10FE08171D7F754300894D5C /* FavoritePairsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritePairsViewController.swift; sourceTree = "<group>"; };
+		10FE08191D7F768100894D5C /* StopPairing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopPairing.swift; sourceTree = "<group>"; };
+		10FE081B1D7F770C00894D5C /* StopPairingImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopPairingImpl.swift; sourceTree = "<group>"; };
+		10FE081E1D7F822C00894D5C /* UpdateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateService.swift; sourceTree = "<group>"; };
+		10FE08201D7F88DE00894D5C /* RealmUpdateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmUpdateService.swift; sourceTree = "<group>"; };
+		10FE08221D7F8CD500894D5C /* AddPairingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPairingViewController.swift; sourceTree = "<group>"; };
 		34CAFBA16A266A232EAEF4CC /* Pods_MyNextTrain_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyNextTrain_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		493339C1A9DA0070A91A5A43 /* Pods-MyNextTrain WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyNextTrain WatchKit Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyNextTrain WatchKit Extension/Pods-MyNextTrain WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
 		4F25467F66B028A7125D878E /* Pods-MyNextTrain WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyNextTrain WatchKit Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyNextTrain WatchKit Extension/Pods-MyNextTrain WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
@@ -213,13 +225,15 @@
 			name = Logging;
 			sourceTree = "<group>";
 		};
-		0B04355D1D6A06E600D46715 /* QueryService */ = {
+		0B04355D1D6A06E600D46715 /* DataAccess */ = {
 			isa = PBXGroup;
 			children = (
 				0B04355E1D6A06FC00D46715 /* QueryService.swift */,
 				10EC9C411D7CFFF300D29CE0 /* RealmQueryService.swift */,
+				10FE081E1D7F822C00894D5C /* UpdateService.swift */,
+				10FE08201D7F88DE00894D5C /* RealmUpdateService.swift */,
 			);
-			name = QueryService;
+			name = DataAccess;
 			sourceTree = "<group>";
 		};
 		0B0435601D6A07C000D46715 /* Loader */ = {
@@ -325,10 +339,11 @@
 		0B8084B41D7E049800CAF56D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				10FE081D1D7F789400894D5C /* TableViewCells */,
 				0B5C95F41D6010CF00F66B8F /* RootViewController.swift */,
+				10FE08171D7F754300894D5C /* FavoritePairsViewController.swift */,
 				0B8084B51D7E0A8A00CAF56D /* UpcomingTripsViewController.swift */,
-				0B8084B91D7E14D900CAF56D /* TripSummaryCell.swift */,
-				0B8084BB1D7E16B200CAF56D /* InitializingTableViewCell.swift */,
+				10FE08221D7F8CD500894D5C /* AddPairingViewController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -370,6 +385,7 @@
 			children = (
 				105EF7B91D627F09003356DC /* Route.swift */,
 				105EF7BD1D62806B003356DC /* Stop.swift */,
+				10FE08191D7F768100894D5C /* StopPairing.swift */,
 				105EF7BF1D6280C9003356DC /* StopTime.swift */,
 				105EF7C11D652F3E003356DC /* Trip.swift */,
 				0B8084AE1D7DDD9300CAF56D /* TripSummary.swift */,
@@ -385,7 +401,7 @@
 		105EF7C51D67C00F003356DC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				0B04355D1D6A06E600D46715 /* QueryService */,
+				0B04355D1D6A06E600D46715 /* DataAccess */,
 				0B04355C1D6A06D600D46715 /* Logging */,
 				0B0435601D6A07C000D46715 /* Loader */,
 			);
@@ -413,8 +429,18 @@
 				10EC9C3B1D6D148C00D29CE0 /* TripImpl.swift */,
 				10EC9C3D1D76320900D29CE0 /* CalendarDateImpl.swift */,
 				0B8084B01D7DE0E900CAF56D /* TripSummaryImpl.swift */,
+				10FE081B1D7F770C00894D5C /* StopPairingImpl.swift */,
 			);
 			name = Realm;
+			sourceTree = "<group>";
+		};
+		10FE081D1D7F789400894D5C /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				0B8084B91D7E14D900CAF56D /* TripSummaryCell.swift */,
+				0B8084BB1D7E16B200CAF56D /* InitializingTableViewCell.swift */,
+			);
+			name = TableViewCells;
 			sourceTree = "<group>";
 		};
 		D9BFE584C7B076435FA631AC /* Pods */ = {
@@ -712,24 +738,30 @@
 				0B8084BC1D7E16B200CAF56D /* InitializingTableViewCell.swift in Sources */,
 				105EF7C41D67BD0D003356DC /* CalendarDate.swift in Sources */,
 				105EF7C01D6280C9003356DC /* StopTime.swift in Sources */,
+				10FE081F1D7F822C00894D5C /* UpdateService.swift in Sources */,
+				10FE081A1D7F768100894D5C /* StopPairing.swift in Sources */,
 				10EC9C401D76358300D29CE0 /* ErrorExtension.swift in Sources */,
 				105EF7BA1D627F09003356DC /* Route.swift in Sources */,
 				10EC9C341D6D009E00D29CE0 /* RouteImpl.swift in Sources */,
 				0B0435621D6A081100D46715 /* GTFSFileLoader.swift in Sources */,
 				105EF7C91D67C2BB003356DC /* Logger.swift in Sources */,
+				10FE08181D7F754300894D5C /* FavoritePairsViewController.swift in Sources */,
 				0B04355F1D6A06FC00D46715 /* QueryService.swift in Sources */,
+				10FE081C1D7F770C00894D5C /* StopPairingImpl.swift in Sources */,
 				0B8084B61D7E0A8A00CAF56D /* UpcomingTripsViewController.swift in Sources */,
 				0B87BC371D6A46D2006E220B /* GTFSFileEntry.swift in Sources */,
 				0B87BC2F1D6A223E006E220B /* StopTimeDTO.swift in Sources */,
 				0B8084B81D7E118C00CAF56D /* UIViewExtension.swift in Sources */,
 				0B8084B11D7DE0E900CAF56D /* TripSummaryImpl.swift in Sources */,
 				0B87BC2D1D6A2237006E220B /* TripDTO.swift in Sources */,
+				10FE08211D7F88DE00894D5C /* RealmUpdateService.swift in Sources */,
 				10EC9C361D6D071C00D29CE0 /* StopImpl.swift in Sources */,
 				105EF7BE1D62806B003356DC /* Stop.swift in Sources */,
 				0B7C6EDC1D7E37250022D794 /* DoubleExtension.swift in Sources */,
 				0B87BC331D6A224B006E220B /* RouteDTO.swift in Sources */,
 				0B5C95F51D6010CF00F66B8F /* RootViewController.swift in Sources */,
 				10EC9C381D6D092A00D29CE0 /* GTFSFileRow.swift in Sources */,
+				10FE08231D7F8CD500894D5C /* AddPairingViewController.swift in Sources */,
 				0B87BC201D6A117A006E220B /* GTFSFile.swift in Sources */,
 				10EC9C3E1D76320900D29CE0 /* CalendarDateImpl.swift in Sources */,
 				0B87BC2B1D6A222F006E220B /* CalendarDateDTO.swift in Sources */,

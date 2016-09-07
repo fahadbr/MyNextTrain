@@ -13,15 +13,15 @@ class RootViewController: UIViewController {
     static let instance = RootViewController()
     
     
-    lazy var upcomingTripsVc:UpcomingTripsViewController = UpcomingTripsViewController()
-    lazy var tripsNavController:UINavigationController = UINavigationController(rootViewController: self.upcomingTripsVc)
+    lazy var favoritePairsVc:FavoritePairsViewController = FavoritePairsViewController()
+    lazy var navController:UINavigationController = UINavigationController(rootViewController: self.favoritePairsVc)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-        view.add(subView: tripsNavController.view, with: Anchor.standardAnchors)
-        addChildViewController(tripsNavController)
-        tripsNavController.didMove(toParentViewController: self)
+        view.add(subView: navController.view, with: Anchor.standardAnchors)
+        addChildViewController(navController)
+        navController.didMove(toParentViewController: self)
         
         
     }

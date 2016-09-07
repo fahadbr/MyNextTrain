@@ -10,11 +10,41 @@ import Foundation
 import RealmSwift
 
 class RealmQueryService: QueryService {
-    
-    static let instance = RealmQueryService()
-    
-    func tripSummaries(from startingStop: Stop, to destinationStop: Stop, forDate date: Date) -> [TripSummary] {
-        
+	
+	var favoritePairings: [StopPairing] {
+		do {
+			let realm = try Realm()
+			let stopPairings: [StopPairing] = realm.allObjects(ofType: StopPairingImpl.self)
+				.map( {$0 as StopPairing })
+			
+			return stopPairings
+		} catch let e {
+			Logger.error("error with fetching all stopPairings", error: e)
+		}
+		return []
+	}
+	
+	var allStops: [Stop] {
+		do {
+			let realm = try Realm()
+			let stops: [Stop] = realm.allObjects(ofType: StopImpl.self)
+				.sorted(onProperty: "name")
+				.map( {$0 as Stop })
+			
+			return stops
+		} catch let e {
+			Logger.error("error with fetching all stops", error: e)
+		}
+		return []
+	}
+	
+	
+	func tripSummaries(for pairing: StopPairing, on date: Date) -> [TripSummary] {
+		guard let startingStop = pairing.startingStop, let destinationStop = pairing.destinationStop else {
+				Logger.error("one of startingStop or destinationStop was nil in pairing")
+				return []
+		}
+		
 		do {
 			let realm = try Realm()
 			Logger.debug("searching using stops from \(startingStop.name) to \(destinationStop.name) for date \(date)")

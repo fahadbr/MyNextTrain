@@ -10,13 +10,13 @@ import Foundation
 
 class TripSummaryImpl: TripSummary {
 
-    dynamic var _startingStop: StopTimeImpl = StopTimeImpl()
-    dynamic var _destinationStop: StopTimeImpl = StopTimeImpl()
-    dynamic var _trip: TripImpl = TripImpl()
+    dynamic var _startingStop: StopTimeImpl?
+    dynamic var _destinationStop: StopTimeImpl?
+    dynamic var _trip: TripImpl?
     
-    var startingStop: StopTime { return _startingStop }
-    var destinationStop: StopTime { return _destinationStop }
-    var trip: Trip { return _trip }
+    var startingStop: StopTime { return _startingStop! }
+    var destinationStop: StopTime { return _destinationStop! }
+    var trip: Trip { return _trip! }
 
     
 }
