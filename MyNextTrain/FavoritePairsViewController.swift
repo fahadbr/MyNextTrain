@@ -18,8 +18,9 @@ class FavoritePairsViewController: UIViewController {
 	private let tableView = UITableView()
 	private let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
 	
-	fileprivate var favoritePairings = [StopPairing]()
+	fileprivate var favoritePairings = [FavoritePairModel]()
 	fileprivate var currentDate: Date!
+	private var reloadSource: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,7 @@ class FavoritePairsViewController: UIViewController {
 		view.add(subView: tableView, with: Anchor.standardAnchors)
 		tableView.dataSource = self
 		tableView.delegate = self
+		tableView.rowHeight = 60
 
         // Do any additional setup after loading the view.
     }
@@ -42,8 +44,11 @@ class FavoritePairsViewController: UIViewController {
 	}
 	
 	func reloadSourceData() {
-		currentDate = queryService.currentDate
-		favoritePairings = queryService.favoritePairings
+		if reloadSource {
+			currentDate = queryService.currentDate
+			favoritePairings = queryService.favoritePairings.map { FavoritePairModel(stopPairing: $0) }
+			reloadSource = false
+		}
 	}
 	
 	func reloadData() {
@@ -53,6 +58,7 @@ class FavoritePairsViewController: UIViewController {
 	
 	func showAddFavoriteVC() {
         present(UINavigationController(rootViewController: AddPairingViewController()), animated: true, completion: nil)
+		reloadSource = true
 	}
 	
 
@@ -69,8 +75,13 @@ extension FavoritePairsViewController: UITableViewDataSource {
 		let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)
 			?? UITableViewCell(style: .subtitle, reuseIdentifier: reuseIdentifier)
 		
-		let pairing = favoritePairings[indexPath.row]
+		let favoritePairing = favoritePairings[indexPath.row]
+		let pairing = favoritePairing.stopPairing
 		cell.textLabel?.text = "\(pairing.startingStop.name) -> \(pairing.destinationStop.name)"
+		
+		if let nextTripSummary = favoritePairing.tripSummary ?? queryService.nextTripSummary(forPairing: pairing) {
+			cell.detailTextLabel?.text = nextTripSummary.scheduleDescription(for: currentDate)
+		}
 		
 		return cell
 	}
@@ -86,7 +97,7 @@ extension FavoritePairsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             do {
-                try updateService.remove(pairing: favoritePairings[indexPath.row])
+                try updateService.remove(pairing: favoritePairings[indexPath.row].stopPairing)
                 reloadSourceData()
                 tableView.deleteRows(at: [indexPath], with: .automatic)
             } catch let err {
@@ -104,8 +115,20 @@ extension FavoritePairsViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 		let pairing = favoritePairings[indexPath.row]
-		let vc = UpcomingTripsViewController(pairing: pairing)
+		let vc = UpcomingTripsViewController(pairing: pairing.stopPairing)
 		navigationController!.pushViewController(vc, animated: true)
+	}
+	
+}
+
+
+class FavoritePairModel {
+	
+	var stopPairing: StopPairing
+	var tripSummary: TripSummary?
+	
+	init(stopPairing: StopPairing) {
+		self.stopPairing = stopPairing
 	}
 	
 }

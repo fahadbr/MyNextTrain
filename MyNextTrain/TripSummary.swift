@@ -15,3 +15,15 @@ protocol TripSummary {
     var trip: Trip { get }
 
 }
+
+extension TripSummary {
+	
+	func scheduleDescription(for date: Date) -> String {
+		let departing = startingStop.departureTime
+		let arriving = destinationStop.arrivalTime
+		
+		let timeDiff = arriving - departing
+		return "\(departing.timeRepresenation(from: date)) - \(arriving.timeRepresenation(from: date)) \(timeDiff.timeRepresentation)"
+	}
+	
+}

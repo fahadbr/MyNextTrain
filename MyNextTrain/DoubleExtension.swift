@@ -8,6 +8,11 @@
 
 import Foundation
 
+let timeFormatter: DateFormatter = {
+	$0.dateFormat = "hh:mm:ss a"
+	return $0
+}(DateFormatter())
+
 extension Double {
     
     //assuming the value represents seconds
@@ -27,5 +32,9 @@ extension Double {
         
         return "\(h)\(m)\(s)"
     }
+	
+	func timeRepresenation(from date: Date) -> String {
+		return timeFormatter.string(from: date.addingTimeInterval(self))
+	}
     
 }

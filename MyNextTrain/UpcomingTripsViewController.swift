@@ -9,10 +9,6 @@
 import UIKit
 
 fileprivate let reuseIdentifier = "upcomingTripsId"
-fileprivate let formatter: DateFormatter = {
-    $0.dateFormat = "hh:mm:ss a"
-    return $0
-}(DateFormatter())
 
 class UpcomingTripsViewController: UIViewController {
 	
@@ -82,11 +78,8 @@ extension UpcomingTripsViewController: UITableViewDataSource {
             ?? UITableViewCell(style: .subtitle, reuseIdentifier: reuseIdentifier)
         
         let summary = tripSummaries[indexPath.row]
-        let departing = currentDate.addingTimeInterval(summary.startingStop.departureTime)
-        let arriving = currentDate.addingTimeInterval(summary.destinationStop.arrivalTime)
-        
-        let timeDiff = summary.destinationStop.arrivalTime - summary.startingStop.departureTime
-        cell.textLabel?.text = "\(formatter.string(from: departing)) - \(formatter.string(from: arriving)) \(timeDiff.timeRepresentation)"
+
+        cell.textLabel?.text = summary.scheduleDescription(for: currentDate)
         
         let currentTime = Date().timeIntervalSince(currentDate)
         let subTitle:String
