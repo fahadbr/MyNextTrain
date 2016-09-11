@@ -25,5 +25,9 @@ class StopTimeImpl: Object, StopTime, GTFSFileEntry {
 		row.bind(column: "stop_id", to: &stopId)
 		row.bind(column: "stop_sequence", to: &stopSequence)
 	}
+    
+    override class func indexedProperties() -> [String] {
+        return ["stop_id"]
+    }
 	
 }

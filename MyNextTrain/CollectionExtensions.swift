@@ -21,5 +21,17 @@ extension Collection {
         return dict
     }
     
+    func groupBy<Key: Hashable>(keyExtractor: (Element) -> Key) -> [Key : [Element]] {
+        var dict = [Key : [Element]]()
+        
+        for element in self {
+            let k = keyExtractor(element)
+            if dict[k]?.append(element) == nil {
+                dict[k] = [element]
+            }
+        }
+        return dict
+    }
+    
     
 }

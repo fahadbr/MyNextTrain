@@ -15,14 +15,22 @@ class UpcomingTripsViewController: UIViewController {
     
     lazy var queryService = AppDelegate.queryService
 	
-	private let pairing: StopPairing
+    private let pairingVC: PairingViewController
     fileprivate let tableView = UITableView()
-	fileprivate var currentDate: Date!
+    
     fileprivate var tripSummaries: [TripSummary]!
+    
+	fileprivate var currentDate: Date!
+    fileprivate var currentTime: TimeInterval!
+    fileprivate var indexOfNextTrip: Int?
+    
+    private var timer: Timer?
 	
 	init(pairing:StopPairing) {
-		self.pairing = pairing
+		self.pairingVC = PairingViewController(pairing: pairing)
 		super.init(nibName: nil, bundle: nil)
+        
+        self.pairingVC.delegate = self
 	}
 	
 	
@@ -30,43 +38,142 @@ class UpcomingTripsViewController: UIViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
     
+    //MARK: View life cycle
+    
     override func viewDidLoad() {
 		
         reloadSourceData()
-		
-        view.add(subView: tableView, with: Anchor.standardAnchors)
+        
+		view.backgroundColor = UIColor.white
+        view.add(subView: pairingVC.view, with: .left, .right)
+        pairingVC.view.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
+        pairingVC.view.heightAnchor.constraint(equalToConstant: 90).isActive = true
+        addChildViewController(pairingVC)
+        pairingVC.didMove(toParentViewController: self)
+        
+        view.add(subView: tableView, with: .left, .right, .bottom)
+        tableView.topAnchor.constraint(equalTo: pairingVC.view.bottomAnchor).isActive = true
+        
         tableView.dataSource = self
+        tableView.delegate = self
+        tableView.rowHeight = 60
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(reloadTableView),
-                                               name: GTFSFileLoader.doneLoadingFiles,
-                                               object: GTFSFileLoader.instance)
+        DispatchQueue.main.async {
+            self.scrollToNextTrip(animated: false)
+        }
+        
+
         
     }
     
-    func reloadSourceData() {
-//        let deerPark = StopImpl()
-//        deerPark.name = "Deer Park"
-//        deerPark.id = 72
-//        
-////        let destination = StopImpl()
-////        destination.name = "Atlantic Terminal"
-////        destination.id = 12
-//        
-//        let destination = StopImpl()
-//        destination.name = "Penn Station"
-//        destination.id = 8
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        registerForNotifications()
+        setUpTimer()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        deregisterForNotifications()
+        invalidateTimer()
+    }
+    
+    fileprivate func scrollToNextTrip(animated: Bool) {
+        if let indexOfNextTrip = self.indexOfNextTrip {
+            tableView.scrollToRow(at: IndexPath(row: indexOfNextTrip, section: 0), at: .top, animated: animated)
+        }
+    }
+    
+    //MARK: Data refreshing
+    
+    private func reloadSourceData() {
         currentDate = queryService.currentDate
-        tripSummaries = queryService.tripSummaries(for: pairing, on: currentDate)
+        tripSummaries = queryService.tripSummaries(for: pairingVC.pairing, on: currentDate)
+        refreshTimeDetails()
     }
     
-    func reloadTableView() {
+    @objc fileprivate func reloadData() {
         reloadSourceData()
         tableView.reloadData()
     }
     
-}
+    private func refreshTimeDetails() {
+        currentTime = Date().timeIntervalSince(currentDate)
+        indexOfNextTrip = tripSummaries?.index(where: { $0.startingStop.departureTime >= currentTime})
+    }
+    
+    func refreshTripDetails() {
+        guard let visibleIndexPaths = tableView.indexPathsForVisibleRows else { return }
+        
+        refreshTimeDetails()
+        
+        for indexPath in visibleIndexPaths {
+            let summary = tripSummaries[indexPath.row]
+            
+            if summary.startingStop.departureTime > currentTime
+                || summary.destinationStop.arrivalTime > currentTime {
+                
+                guard let cell = tableView.cellForRow(at: indexPath) else { continue }
+                updateDetails(of: cell, at: indexPath, with: summary)
+                
+            }
+        }
+    }
+    
+    
+    //MARK: Notification Handling
+    
+    func enterBackgroundMode() {
+        invalidateTimer()
+    }
+    
+    func enterForegroundMode() {
+        reloadData()
+        setUpTimer()
+    }
+    
+    private func registerForNotifications() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self,
+                                       selector: #selector(reloadData),
+                                       name: GTFSFileLoader.doneLoadingFiles,
+                                       object: GTFSFileLoader.instance)
+        
+        notificationCenter.addObserver(self,
+                                       selector: #selector(enterBackgroundMode),
+                                       name: NSNotification.Name.UIApplicationWillResignActive,
+                                       object: UIApplication.shared)
+        
+        notificationCenter.addObserver(self,
+                                       selector: #selector(enterForegroundMode),
+                                       name: NSNotification.Name.UIApplicationDidBecomeActive,
+                                       object: UIApplication.shared)
+    }
+    
+    private func deregisterForNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    //MARK: Timer
+    
+    private func setUpTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 1,
+                                     target: self,
+                                     selector: #selector(refreshTripDetails),
+                                     userInfo: nil,
+                                     repeats: true)
+    }
+    
+    private func invalidateTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
 
+    
+
+}
+//MARK: - UITableViewDataSource
 extension UpcomingTripsViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -79,26 +186,37 @@ extension UpcomingTripsViewController: UITableViewDataSource {
         
         let summary = tripSummaries[indexPath.row]
 
-        cell.textLabel?.text = summary.scheduleDescription(for: currentDate)
+        cell.textLabel?.attributedText = summary.scheduleDescription(for: currentDate)
+        updateDetails(of: cell, at: indexPath, with: summary)
         
-        let currentTime = Date().timeIntervalSince(currentDate)
-        let subTitle:String
-        switch currentTime {
-        case 0..<summary.startingStop.departureTime:
-            subTitle = "Departing in " + (summary.startingStop.departureTime - currentTime).timeRepresentation
-        case summary.startingStop.departureTime..<summary.destinationStop.arrivalTime:
-            subTitle = "Arriving in " + (summary.destinationStop.arrivalTime - currentTime).timeRepresentation
-        default:
-            subTitle = "Arrived"
-        }
-        
-        cell.detailTextLabel?.text = subTitle
         return cell
         
     }
     
+    func updateDetails(of cell: UITableViewCell, at indexPath: IndexPath, with summary: TripSummary) {
+        cell.detailTextLabel?.text = summary.upcomingEventDescription(for: currentTime)
+        cell.detailTextLabel?.textColor = (indexOfNextTrip ?? -1) == indexPath.row ? UIColor.blue : UIColor.black
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tripSummaries.count
+    }
+    
+}
+
+//MARK: - UITableViewDelegate
+extension UpcomingTripsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+//MARK: - PairingViewControllerDelegate
+extension UpcomingTripsViewController: PairingViewControllerDelegate {
+    
+    func pairingDidChange() {
+        reloadData()
+        scrollToNextTrip(animated: false)
     }
     
 }

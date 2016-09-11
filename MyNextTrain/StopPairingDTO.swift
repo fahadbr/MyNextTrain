@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+struct StopPairingDTO: StopPairing {
+    let startingStop: Stop!
+    let destinationStop: Stop!
+}

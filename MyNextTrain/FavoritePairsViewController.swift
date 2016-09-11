@@ -20,7 +20,7 @@ class FavoritePairsViewController: UIViewController {
 	
 	fileprivate var favoritePairings = [FavoritePairModel]()
 	fileprivate var currentDate: Date!
-	private var reloadSource: Bool = true
+	fileprivate var reloadSource: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,9 +79,21 @@ extension FavoritePairsViewController: UITableViewDataSource {
 		let pairing = favoritePairing.stopPairing
 		cell.textLabel?.text = "\(pairing.startingStop.name) -> \(pairing.destinationStop.name)"
 		
-		if let nextTripSummary = favoritePairing.tripSummary ?? queryService.nextTripSummary(forPairing: pairing) {
-			cell.detailTextLabel?.text = nextTripSummary.scheduleDescription(for: currentDate)
-		}
+        func updateDetails(isForTomorrow: Bool, details: NSAttributedString) {
+            cell.detailTextLabel?.attributedText = AttributedStringBuilder()
+                .append(text: isForTomorrow ? "Tomorrow at " : "")
+                .append(details).build
+        }
+        
+        if let nextTripSummary = favoritePairing.tripSummary  {
+            updateDetails(isForTomorrow: favoritePairing.isForTomorrow, details: nextTripSummary.scheduleDescription(for: currentDate))
+        } else if let nextTripTuple = queryService.nextTripSummary(forPairing: pairing) {
+            updateDetails(isForTomorrow: nextTripTuple.isForTomorrow, details: nextTripTuple.summary.scheduleDescription(for: currentDate))
+            favoritePairing.tripSummary = nextTripTuple.summary
+            favoritePairing.isForTomorrow = nextTripTuple.isForTomorrow
+        } else {
+            cell.detailTextLabel?.attributedText = AttributedStringBuilder().append(text: "No Upcoming Trips Found", color: UIColor.altText).build
+        }
 		
 		return cell
 	}
@@ -98,6 +110,7 @@ extension FavoritePairsViewController: UITableViewDataSource {
         if editingStyle == .delete {
             do {
                 try updateService.remove(pairing: favoritePairings[indexPath.row].stopPairing)
+                reloadSource = true
                 reloadSourceData()
                 tableView.deleteRows(at: [indexPath], with: .automatic)
             } catch let err {
@@ -126,6 +139,7 @@ class FavoritePairModel {
 	
 	var stopPairing: StopPairing
 	var tripSummary: TripSummary?
+    var isForTomorrow: Bool = false
 	
 	init(stopPairing: StopPairing) {
 		self.stopPairing = stopPairing

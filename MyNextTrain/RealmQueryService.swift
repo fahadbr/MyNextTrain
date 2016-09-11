@@ -73,22 +73,18 @@ class RealmQueryService: QueryService {
 			let destinationStopTimes = stopTimes(forStop: destinationStop)
             
             let commonTripIds = Set<String>(startingStopTimes.keys).intersection(destinationStopTimes.keys)
+            
+			let trips = findTrips(with: commonTripIds, on: date, directionId: pairing.directionId, realm: realm)
 			
-			let trips = findTrips(with: commonTripIds, on: date, realm: realm)
-			
-            var summaries = [TripSummary]()
-            for trip in trips {
-                let startingStopTime = startingStopTimes[trip.id]!
-                let destinationStopTime = destinationStopTimes[trip.id]!
-                if startingStopTime.stopSequence <= destinationStopTime.stopSequence {
-                    let summary = TripSummaryImpl()
-                    summary._startingStop = startingStopTime
-                    summary._destinationStop = destinationStopTime
-                    summary._trip = trip
-                    summary._route = routesById[trip.routeId]
-                    summaries.append(summary)
-                }
+            let summaries = trips.map { trip -> TripSummary in
+                let summary = TripSummaryImpl()
+                summary._startingStop = startingStopTimes[trip.id]
+                summary._destinationStop = destinationStopTimes[trip.id]
+                summary._trip = trip
+                summary._route = self.routesById[trip.routeId]
+                return summary
             }
+            
             Logger.debug("found \(summaries.count) summaries")
             return summaries.sorted { $0.0.startingStop.departureTime < $0.1.startingStop.departureTime }
 			
@@ -99,16 +95,16 @@ class RealmQueryService: QueryService {
 		return []
 	}
 	
-	func nextTripSummary(forPairing pairing: StopPairing) -> TripSummary? {
+	func nextTripSummary(forPairing pairing: StopPairing) -> (isForTomorrow: Bool, summary:TripSummary)? {
         let date = currentDate
         let currentTimeInterval = Date().timeIntervalSince(date)
         if let summary = nextTripSummary(forPairing: pairing, date: date, timeInterval: currentTimeInterval) {
-            return summary
+            return (false, summary)
         }
         
         let nextDate = date + (3600 * 24)
         if let nextDayTripSummary = nextTripSummary(forPairing: pairing, date: nextDate, timeInterval: 0) {
-            return nextDayTripSummary
+            return (true, nextDayTripSummary)
         }
         
         return nil
@@ -131,11 +127,10 @@ class RealmQueryService: QueryService {
                 .filter(using: "stopId == %@ AND arrivalTime >= %@", destinationStop.id, timeInterval)
                 .sorted(onProperty: "arrivalTime")
             
-            
             let commonTripIds = Set<String>(startingStopTimes.map { $0.tripId })
                 .intersection(Set<String>(destinationStopTimes.map { $0.tripId } ))
             
-            let trips = findTrips(with: commonTripIds, on: date, realm: realm)
+            let trips = findTrips(with: commonTripIds, on: date, directionId: pairing.directionId, realm: realm)
             
             let resultTripIds: [String] = trips.map { $0.id }
             
@@ -144,8 +139,8 @@ class RealmQueryService: QueryService {
                 return nil
             }
             
-            guard let destinationStopTime = destinationStopTimes.filter(using: "stopId == %@ AND tripId == %@ AND stopSequence > %@",
-                                                                        destinationStop.id, startingStopTime.tripId, startingStopTime.stopSequence).first else {
+            guard let destinationStopTime = destinationStopTimes.filter(using: "tripId == %@ AND stopSequence > %@",
+                                                                        startingStopTime.tripId, startingStopTime.stopSequence).first else {
                 Logger.debug("no destination stop time found for pairing \(pairing.description)")
                 return nil
             }
@@ -170,17 +165,16 @@ class RealmQueryService: QueryService {
         return nil
     }
 	
-	private func findTrips(with tripIds: Set<String>, on date: Date, realm: Realm) -> Results<TripImpl> {
+    private func findTrips(with tripIds: Set<String>, on date: Date, directionId: Int, realm: Realm) -> Results<TripImpl> {
 		Logger.debug("\(tripIds.count) tripIds to query")
 		
 		let calendarDates = realm.allObjects(ofType: CalendarDateImpl.self).filter(using: "date == %@", date)
 		let serviceIds: [String] = calendarDates.map { $0.serviceId }
 		
-		let trips = realm.allObjects(ofType: TripImpl.self).filter(using: "id IN %@ AND serviceId IN %@", tripIds, serviceIds)
+		let trips = realm.allObjects(ofType: TripImpl.self).filter(using: "_directionId == %@ AND id IN %@ AND serviceId IN %@", directionId, tripIds, serviceIds)
 		
 		Logger.debug("found \(trips.count) trips")
 		return trips
 	}
-	
-	
+		
 }

@@ -14,10 +14,19 @@ class TripImpl: Object, Trip, GTFSFileEntry {
 	dynamic var id: String = ""
 	dynamic var routeId: Int = 0
 	dynamic var serviceId: String = ""
-	dynamic var headSign: String = ""
-	dynamic var directionId: Int = 0
-	dynamic var shortName: String = ""
-	dynamic var shapeId: String = ""
+	dynamic var headSign: String?
+	
+    let _directionId = RealmOptional<Int>()
+    var directionId: Int? {
+        get {
+            return _directionId.value
+        } set {
+            _directionId.value = newValue
+        }
+    }
+    
+	dynamic var shortName: String?
+	dynamic var shapeId: String?
 	
 	func apply(row: GTFSFileRow) {
 		row.bind(column: "trip_id", to: &id)
@@ -32,5 +41,9 @@ class TripImpl: Object, Trip, GTFSFileEntry {
 	override class func primaryKey() -> String? {
 		return "id"
 	}
+    
+    override class func indexedProperties() -> [String] {
+        return ["_directionId", "serviceId"]
+    }
 	
 }

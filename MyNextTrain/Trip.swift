@@ -13,8 +13,8 @@ protocol Trip {
     var id: String { get }
     var routeId: Int { get }
     var serviceId: String { get }
-	var headSign: String { get }
-	var directionId: Int { get }
-	var shortName: String { get }
-	var shapeId: String { get }
+	var headSign: String? { get }
+	var directionId: Int? { get }
+	var shortName: String? { get }
+	var shapeId: String? { get }
 }

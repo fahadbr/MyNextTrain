@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		0B04355F1D6A06FC00D46715 /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B04355E1D6A06FC00D46715 /* QueryService.swift */; };
 		0B0435621D6A081100D46715 /* GTFSFileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0435611D6A081100D46715 /* GTFSFileLoader.swift */; };
+		0B1D35FE1D84AB07003CF04A /* PairingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1D35FD1D84AB07003CF04A /* PairingViewController.swift */; };
+		0B1D36001D84B3FF003CF04A /* StopPairingDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1D35FF1D84B3FF003CF04A /* StopPairingDTO.swift */; };
+		0B1D36021D84B6DD003CF04A /* AppThemeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1D36011D84B6DD003CF04A /* AppThemeController.swift */; };
+		0B1D36041D84CAE6003CF04A /* AttributedStringBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1D36031D84CAE6003CF04A /* AttributedStringBuilder.swift */; };
 		0B5C95F31D6010CF00F66B8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5C95F21D6010CF00F66B8F /* AppDelegate.swift */; };
 		0B5C95F51D6010CF00F66B8F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5C95F41D6010CF00F66B8F /* RootViewController.swift */; };
 		0B5C95FA1D6010CF00F66B8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C95F91D6010CF00F66B8F /* Assets.xcassets */; };
@@ -116,6 +120,10 @@
 /* Begin PBXFileReference section */
 		0B04355E1D6A06FC00D46715 /* QueryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryService.swift; sourceTree = "<group>"; };
 		0B0435611D6A081100D46715 /* GTFSFileLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTFSFileLoader.swift; sourceTree = "<group>"; };
+		0B1D35FD1D84AB07003CF04A /* PairingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PairingViewController.swift; sourceTree = "<group>"; };
+		0B1D35FF1D84B3FF003CF04A /* StopPairingDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopPairingDTO.swift; sourceTree = "<group>"; };
+		0B1D36011D84B6DD003CF04A /* AppThemeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppThemeController.swift; sourceTree = "<group>"; };
+		0B1D36031D84CAE6003CF04A /* AttributedStringBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedStringBuilder.swift; sourceTree = "<group>"; };
 		0B5C95EF1D6010CE00F66B8F /* MyNextTrain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyNextTrain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B5C95F21D6010CF00F66B8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0B5C95F41D6010CF00F66B8F /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +252,14 @@
 			name = Loader;
 			sourceTree = "<group>";
 		};
+		0B1D36051D84CAEE003CF04A /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				0B1D36031D84CAE6003CF04A /* AttributedStringBuilder.swift */,
+			);
+			name = Builder;
+			sourceTree = "<group>";
+		};
 		0B5C95E61D6010CE00F66B8F = {
 			isa = PBXGroup;
 			children = (
@@ -344,6 +360,7 @@
 				10FE08171D7F754300894D5C /* FavoritePairsViewController.swift */,
 				0B8084B51D7E0A8A00CAF56D /* UpcomingTripsViewController.swift */,
 				10FE08221D7F8CD500894D5C /* AddPairingViewController.swift */,
+				0B1D35FD1D84AB07003CF04A /* PairingViewController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -366,6 +383,7 @@
 				0B87BC2E1D6A223E006E220B /* StopTimeDTO.swift */,
 				0B87BC2C1D6A2237006E220B /* TripDTO.swift */,
 				0B87BC2A1D6A222F006E220B /* CalendarDateDTO.swift */,
+				0B1D35FF1D84B3FF003CF04A /* StopPairingDTO.swift */,
 			);
 			name = DTO;
 			sourceTree = "<group>";
@@ -394,6 +412,7 @@
 				10EC9C2F1D6BBCDB00D29CE0 /* Extensions */,
 				0B87BC291D6A21F4006E220B /* DTO */,
 				0B87BC271D6A16AB006E220B /* GTFSFile */,
+				0B1D36051D84CAEE003CF04A /* Builder */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -404,6 +423,7 @@
 				0B04355D1D6A06E600D46715 /* DataAccess */,
 				0B04355C1D6A06D600D46715 /* Logging */,
 				0B0435601D6A07C000D46715 /* Loader */,
+				0B1D36011D84B6DD003CF04A /* AppThemeController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -740,6 +760,7 @@
 				105EF7C01D6280C9003356DC /* StopTime.swift in Sources */,
 				10FE081F1D7F822C00894D5C /* UpdateService.swift in Sources */,
 				10FE081A1D7F768100894D5C /* StopPairing.swift in Sources */,
+				0B1D36001D84B3FF003CF04A /* StopPairingDTO.swift in Sources */,
 				10EC9C401D76358300D29CE0 /* ErrorExtension.swift in Sources */,
 				105EF7BA1D627F09003356DC /* Route.swift in Sources */,
 				10EC9C341D6D009E00D29CE0 /* RouteImpl.swift in Sources */,
@@ -752,11 +773,14 @@
 				0B87BC371D6A46D2006E220B /* GTFSFileEntry.swift in Sources */,
 				0B87BC2F1D6A223E006E220B /* StopTimeDTO.swift in Sources */,
 				0B8084B81D7E118C00CAF56D /* UIViewExtension.swift in Sources */,
+				0B1D36021D84B6DD003CF04A /* AppThemeController.swift in Sources */,
 				0B8084B11D7DE0E900CAF56D /* TripSummaryImpl.swift in Sources */,
 				0B87BC2D1D6A2237006E220B /* TripDTO.swift in Sources */,
 				10FE08211D7F88DE00894D5C /* RealmUpdateService.swift in Sources */,
 				10EC9C361D6D071C00D29CE0 /* StopImpl.swift in Sources */,
+				0B1D35FE1D84AB07003CF04A /* PairingViewController.swift in Sources */,
 				105EF7BE1D62806B003356DC /* Stop.swift in Sources */,
+				0B1D36041D84CAE6003CF04A /* AttributedStringBuilder.swift in Sources */,
 				0B7C6EDC1D7E37250022D794 /* DoubleExtension.swift in Sources */,
 				0B87BC331D6A224B006E220B /* RouteDTO.swift in Sources */,
 				0B5C95F51D6010CF00F66B8F /* RootViewController.swift in Sources */,
@@ -930,7 +954,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
@@ -948,7 +972,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};
@@ -967,7 +991,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
@@ -986,7 +1010,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};

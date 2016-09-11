@@ -34,11 +34,26 @@ class RealmUpdateService: UpdateService {
             throw ErrorDTO(description: "require type StopPairingImpl in order to delete")
         }
         
+        //need this before deleting because otherwise it will print "invalid object" if we get description after deleting
+        let debugMessage = "deleted pairing [\(pairing.description)]"
+        
         let realm = try Realm()
         try realm.write {
             realm.delete(realmObj)
         }
         
-        Logger.debug("deleted pairing [\(realmObj.description)]")
+        Logger.debug(debugMessage)
     }
+    
+    func performMigrationIfNeeded() {
+        let newSchemaVersion: UInt64 = 1
+        let config = Realm.Configuration(schemaVersion: newSchemaVersion, migrationBlock: { migration, oldSchemaVersion in
+            if (oldSchemaVersion < newSchemaVersion) {
+                Logger.debug("migrating to new realm schema")
+            }
+        })
+        
+        Realm.Configuration.defaultConfiguration = config
+    }
+
 }

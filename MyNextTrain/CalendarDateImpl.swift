@@ -25,5 +25,9 @@ class CalendarDateImpl: Object, CalendarDate, GTFSFileEntry {
 		row.bind(column: "date", to: &date)
 		row.bind(column: "exception_type", to: &exceptionType)
 	}
+    
+    override class func indexedProperties() -> [String] {
+        return ["date"]
+    }
 	
 }

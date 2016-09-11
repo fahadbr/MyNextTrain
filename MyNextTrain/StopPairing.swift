@@ -20,5 +20,9 @@ extension StopPairing {
 	var description: String {
 		return "\(startingStop.name) -> \(destinationStop.name)"
 	}
+    
+    var directionId: Int {
+        return startingStop.longitude > destinationStop.longitude ? 1 : 0
+    }
 	
 }

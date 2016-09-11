@@ -19,7 +19,8 @@ protocol QueryService {
 	var allStops: [Stop] { get }
 	
 	func tripSummaries(for pairing: StopPairing, on date: Date) -> [TripSummary]
-	func nextTripSummary(forPairing pairing: StopPairing) -> TripSummary?
+    func nextTripSummary(forPairing pairing: StopPairing) -> (isForTomorrow: Bool, summary:TripSummary)?
+
 }
 
 extension QueryService {

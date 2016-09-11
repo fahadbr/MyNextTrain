@@ -9,7 +9,7 @@
 import Foundation
 
 let timeFormatter: DateFormatter = {
-	$0.dateFormat = "hh:mm:ss a"
+	$0.dateFormat = "hh:mma"
 	return $0
 }(DateFormatter())
 
@@ -22,19 +22,51 @@ extension Double {
         }
         
         let i = Int(self)
-        let hours = i / 3600
-        let minutes = i % 3600 / 60
-        let seconds = i % 60
+        let hours = i.hours
+        let minutes = i.minutesOnTheHour
+        let seconds = i.secondsOnTheMinute
         
-        let h = hours > 0 ? "\(hours)h " : ""
-        let m = minutes > 0  || !h.isEmpty ? "\(minutes)m " : ""
-        let s = hours == 0 && minutes < 30 ? "\(seconds)s" : ""
+        var components = [String]()
         
-        return "\(h)\(m)\(s)"
+        if hours > 0 {
+            components.append("\(hours)h")
+        }
+        if minutes > 0 {
+            components.append("\(minutes)m")
+        }
+        if hours == 0 && minutes < 15 {
+            components.append("\(seconds)s")
+        }
+        
+        return components.joined(separator: " ")
     }
 	
 	func timeRepresenation(from date: Date) -> String {
-		return timeFormatter.string(from: date.addingTimeInterval(self))
+		var s = timeFormatter.string(from: date.addingTimeInterval(self))
+        if s[s.startIndex] == "0" {
+            s.remove(at: s.startIndex)
+        }
+        return s
 	}
+    
+}
+
+extension Int {
+    
+    var hours: Int {
+        return self / 3600
+    }
+    
+    var minutesOnTheHour: Int {
+        return self % 3600 / 60
+    }
+    
+    var minutes: Int {
+        return self / 60
+    }
+    
+    var secondsOnTheMinute: Int {
+        return self % 60
+    }
     
 }
