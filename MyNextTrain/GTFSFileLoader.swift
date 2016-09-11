@@ -16,7 +16,7 @@ class GTFSFileLoader {
     
     private typealias This = GTFSFileLoader
     private static let files: [GTFSFile] = [.routes, .stops, .trips, .calendar_dates, .stop_times]
-    
+    lazy var updateService = AppDelegate.updateService
     
     func loadAllFiles() {
 		let loadingGroup = DispatchGroup()
@@ -37,10 +37,15 @@ class GTFSFileLoader {
             }
         }
 		
-		loadingGroup.notify(queue: DispatchQueue.main) {
+		loadingGroup.notify(queue: DispatchQueue.global(qos: .default)) {
 			Logger.debug("done loading all files")
-            let notification = Notification(name: This.doneLoadingFiles, object: self, userInfo: nil)
-            NotificationCenter.default.post(notification)
+            self.updateService.setUpObjectLinks()
+            Logger.debug("done setting up object links")
+            DispatchQueue.main.async {
+                let notification = Notification(name: This.doneLoadingFiles, object: self, userInfo: nil)
+                NotificationCenter.default.post(notification)
+            }
+            
 		}
         
     }

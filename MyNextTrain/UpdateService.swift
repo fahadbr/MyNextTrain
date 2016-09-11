@@ -15,4 +15,6 @@ protocol UpdateService {
     func remove(pairing: StopPairing) throws
 
     func performMigrationIfNeeded()
+    
+    func setUpObjectLinks()
 }

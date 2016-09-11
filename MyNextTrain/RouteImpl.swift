@@ -17,6 +17,8 @@ class RouteImpl: Object, Route, GTFSFileEntry {
 	dynamic var type: Int = 0
 	dynamic var color: String?
 	dynamic var textColor: String?
+    
+    let stops = List<StopImpl>()
 	
 	func apply(row: GTFSFileRow) {
 		row.bind(column: "route_id", to: &id)

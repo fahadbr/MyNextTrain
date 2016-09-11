@@ -9,6 +9,8 @@
 import RealmSwift
 
 class RealmUpdateService: UpdateService {
+    
+    lazy var queryService = AppDelegate.queryService
 	
 	func addFavoritePairing(from startingStop: Stop, to destinationStop: Stop) throws {
 		
@@ -46,7 +48,7 @@ class RealmUpdateService: UpdateService {
     }
     
     func performMigrationIfNeeded() {
-        let newSchemaVersion: UInt64 = 1
+        let newSchemaVersion: UInt64 = 2
         let config = Realm.Configuration(schemaVersion: newSchemaVersion, migrationBlock: { migration, oldSchemaVersion in
             if (oldSchemaVersion < newSchemaVersion) {
                 Logger.debug("migrating to new realm schema")
@@ -54,6 +56,34 @@ class RealmUpdateService: UpdateService {
         })
         
         Realm.Configuration.defaultConfiguration = config
+    }
+    
+    func setUpObjectLinks() {
+        do {
+            let realm = try Realm()
+            for route in realm.allObjects(ofType: RouteImpl.self) {
+                do {
+                    Logger.debug("linking stops for route \(route.longName)")
+                    let trips = realm.allObjects(ofType: TripImpl.self).filter(using: "routeId == %@", route.id)
+                
+                    let tripIds: [String] = trips.map { $0.id }
+                    let stopTimes = realm.allObjects(ofType: StopTimeImpl.self).filter(using: "tripId IN %@", tripIds)
+                    let stopIds = Set<Int>(stopTimes.map { $0.stopId })
+                    let stops = realm.allObjects(ofType: StopImpl.self).filter(using: "id IN %@", stopIds)
+                    
+                    try realm.write {
+                        route.stops.append(objectsIn: stops)
+                    }
+                    
+                } catch let e {
+                    Logger.error("error with deriving transfer data for route \(route.longName)", error: e)
+                }
+                
+            }
+        } catch let err {
+            Logger.error("error with deriving transfer data", error: err)
+        }
+        
     }
 
 }

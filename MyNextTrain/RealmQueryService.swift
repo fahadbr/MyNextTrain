@@ -13,6 +13,9 @@ class RealmQueryService: QueryService {
 	
 	private typealias This = RealmQueryService
 	
+    private lazy var routesById: [Int : RouteImpl] = self.loadRoutesById()
+    private var serviceIdCache = [Date : [String]]()
+    
 	var favoritePairings: [StopPairing] {
 		do {
 			let realm = try Realm()
@@ -40,7 +43,7 @@ class RealmQueryService: QueryService {
 		return []
 	}
     
-    private lazy var routesById: [Int : RouteImpl] = self.loadRoutesById()
+    
 	
     private func loadRoutesById() -> [Int : RouteImpl] {
         do {
@@ -72,9 +75,17 @@ class RealmQueryService: QueryService {
 			let startingStopTimes = stopTimes(forStop: startingStop)
 			let destinationStopTimes = stopTimes(forStop: destinationStop)
             
-            let commonTripIds = Set<String>(startingStopTimes.keys).intersection(destinationStopTimes.keys)
+            let fromTripIds = Set<String>(startingStopTimes.keys)
+            let toTripIds = Set<String>(destinationStopTimes.keys)
+            
+            let commonTripIds = fromTripIds.intersection(toTripIds)
             
 			let trips = findTrips(with: commonTripIds, on: date, directionId: pairing.directionId, realm: realm)
+//            
+//            let i = findTransfers(fromTripIds: fromTripIds.subtracting(toTripIds),
+//                                  toTripIds: toTripIds.subtracting(fromTripIds),
+//                                  on: date,
+//                                  realm: realm)
 			
             let summaries = trips.map { trip -> TripSummary in
                 let summary = TripSummaryImpl()
@@ -165,16 +176,40 @@ class RealmQueryService: QueryService {
         return nil
     }
 	
-    private func findTrips(with tripIds: Set<String>, on date: Date, directionId: Int, realm: Realm) -> Results<TripImpl> {
+    private func findTrips(with tripIds: Set<String>, on date: Date, directionId: Int? = nil, realm: Realm) -> Results<TripImpl> {
 		Logger.debug("\(tripIds.count) tripIds to query")
 		
-		let calendarDates = realm.allObjects(ofType: CalendarDateImpl.self).filter(using: "date == %@", date)
-		let serviceIds: [String] = calendarDates.map { $0.serviceId }
+        var serviceIds = serviceIdCache[date]
+        if serviceIds == nil {
+            serviceIds = realm.allObjects(ofType: CalendarDateImpl.self).filter(using: "date == %@", date).map { $0.serviceId }
+            serviceIdCache[date] = serviceIds
+        }
 		
-		let trips = realm.allObjects(ofType: TripImpl.self).filter(using: "_directionId == %@ AND id IN %@ AND serviceId IN %@", directionId, tripIds, serviceIds)
-		
+        let trips: Results<TripImpl>
+        if let direction = directionId {
+            trips = realm.allObjects(ofType: TripImpl.self)
+                .filter(using: "_directionId == %@ AND id IN %@ AND serviceId IN %@", direction, tripIds, serviceIds)
+        } else {
+            trips = realm.allObjects(ofType: TripImpl.self)
+                .filter(using: "id IN %@ AND serviceId IN %@", tripIds, serviceIds)
+        }
+        
 		Logger.debug("found \(trips.count) trips")
 		return trips
 	}
+    
+    private func findTransfers(fromTripIds: Set<String>, toTripIds:Set<String>, on date: Date, realm: Realm) -> [TripSummary] {
+        
+        let fromTrips = findTrips(with: fromTripIds, on: date, realm: realm)
+        let toTrips = findTrips(with: toTripIds, on: date, realm: realm)
+        
+        
+        
+        
+        
+        
+        
+        return []
+    }
 		
 }
