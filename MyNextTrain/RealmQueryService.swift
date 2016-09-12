@@ -179,7 +179,7 @@ class RealmQueryService: QueryService {
     private func findTrips(with tripIds: Set<String>, on date: Date, directionId: Int? = nil, realm: Realm) -> Results<TripImpl> {
 		Logger.debug("\(tripIds.count) tripIds to query")
 		
-        var serviceIds = serviceIdCache[date]
+		var serviceIds = serviceIdCache[date]
         if serviceIds == nil {
             serviceIds = realm.allObjects(ofType: CalendarDateImpl.self).filter(using: "date == %@", date).map { $0.serviceId }
             serviceIdCache[date] = serviceIds
@@ -188,10 +188,10 @@ class RealmQueryService: QueryService {
         let trips: Results<TripImpl>
         if let direction = directionId {
             trips = realm.allObjects(ofType: TripImpl.self)
-                .filter(using: "_directionId == %@ AND id IN %@ AND serviceId IN %@", direction, tripIds, serviceIds)
+                .filter(using: "_directionId == %@ AND id IN %@ AND serviceId IN %@", direction, tripIds, serviceIds!)
         } else {
             trips = realm.allObjects(ofType: TripImpl.self)
-                .filter(using: "id IN %@ AND serviceId IN %@", tripIds, serviceIds)
+                .filter(using: "id IN %@ AND serviceId IN %@", tripIds, serviceIds!)
         }
         
 		Logger.debug("found \(trips.count) trips")

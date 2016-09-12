@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     static let queryService: QueryService = RealmQueryService()
 	static let updateService: UpdateService = RealmUpdateService()
-    static let overrideReload = false
+    static let overrideReload = true
     
     var window: UIWindow?
     
