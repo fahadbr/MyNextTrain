@@ -21,6 +21,12 @@ class GTFSFileLoader {
     func loadAllFiles() {
 		let loadingGroup = DispatchGroup()
         
+        if AppDelegate.overrideReload, let realm = try? Realm(), !realm.isEmpty{
+            try? realm.write {
+                realm.deleteAllObjects()
+            }
+        }
+        
         for file in This.files {
 			
             switch file {
@@ -42,6 +48,9 @@ class GTFSFileLoader {
             self.updateService.setUpObjectLinks()
             Logger.debug("done setting up object links")
             DispatchQueue.main.async {
+                let ref = AppDelegate.overrideReloadReference
+                UserDefaults.standard.set(ref.value, forKey: ref.name)
+                
                 let notification = Notification(name: This.doneLoadingFiles, object: self, userInfo: nil)
                 NotificationCenter.default.post(notification)
             }
@@ -88,7 +97,9 @@ class GTFSFileLoader {
 				.filter { !$0.isEmpty }
 				.map { line -> T in
 					let result = T()
-					(result as? GTFSFileEntry)?.apply(row: GTFSFileRow(names: columns, values: lineComponents(from: line)))
+                    let values = lineComponents(from: line)
+                    let row = GTFSFileRow(names: columns, values: values)
+					(result as? GTFSFileEntry)?.apply(row: row)
 					return result
 			}
 			

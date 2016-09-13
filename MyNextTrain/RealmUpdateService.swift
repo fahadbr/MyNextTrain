@@ -59,6 +59,8 @@ class RealmUpdateService: UpdateService {
     }
     
     func setUpObjectLinks() {
+        guard AppDelegate.overrideReload else { return }
+        
         do {
             let realm = try Realm()
             for route in realm.allObjects(ofType: RouteImpl.self) {

@@ -81,11 +81,12 @@ class RealmQueryService: QueryService {
             let commonTripIds = fromTripIds.intersection(toTripIds)
             
 			let trips = findTrips(with: commonTripIds, on: date, directionId: pairing.directionId, realm: realm)
-//            
-//            let i = findTransfers(fromTripIds: fromTripIds.subtracting(toTripIds),
-//                                  toTripIds: toTripIds.subtracting(fromTripIds),
-//                                  on: date,
-//                                  realm: realm)
+            
+            let i = findTransfers(fromTripIds: fromTripIds.subtracting(toTripIds),
+                                  toTripIds: toTripIds.subtracting(fromTripIds),
+                                  on: date,
+                                  realm: realm)
+            Logger.debug("FOUND \(i.count) TRANSFERS")
 			
             let summaries = trips.map { trip -> TripSummary in
                 let summary = TripSummaryImpl()
@@ -203,8 +204,9 @@ class RealmQueryService: QueryService {
         let fromTrips = findTrips(with: fromTripIds, on: date, realm: realm)
         let toTrips = findTrips(with: toTripIds, on: date, realm: realm)
         
-        
-        
+        let stops = realm.allObjects(ofType: StopImpl.self).filter(using: "routes.@count > 1")
+        let stopIds: [Int] = stops.map { $0.id }
+        let stopTimes = realm.allObjects(ofType: StopTimeImpl.self).filter(using: "stopId IN %@", stopIds).groupBy { $0.stopId }
         
         
         
