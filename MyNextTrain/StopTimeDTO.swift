@@ -9,29 +9,12 @@
 import Foundation
 
 
-struct StopTimeDTO {
+struct StopTimeDTO: StopTime {
 	
     let tripId: String 
-	let arrivalTimeRaw: String
-	let departureTimeRaw: String
+	let arrivalTime: TimeInterval
+	let departureTime: TimeInterval
     let stopId: Int 
     let stopSequence: Int 
 	
-}
-
-extension StopTimeDTO {
-    
-    init(columnMap: [String : String]) {
-        self.tripId = columnMap["trip_id"]!
-        self.arrivalTimeRaw = columnMap["arrival_time"]!
-        self.departureTimeRaw = columnMap["departure_time"]!
-        self.stopId = Int(columnMap["stop_id"]!)!
-        self.stopSequence = Int(columnMap["stop_sequence"]!)!
-        
-    }
-    
-    var lookupKey: AnyHashable {
-        return AnyHashable(tripId)
-    }
-    
 }

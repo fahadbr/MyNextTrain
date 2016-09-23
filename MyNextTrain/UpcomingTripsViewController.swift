@@ -99,7 +99,7 @@ class UpcomingTripsViewController: UIViewController {
     
     private func refreshTimeDetails() {
         currentTime = Date().timeIntervalSince(currentDate)
-        indexOfNextTrip = tripSummaries?.index(where: { $0.startingStop.departureTime >= currentTime})
+        indexOfNextTrip = tripSummaries?.index(where: { $0.departureTime >= currentTime})
     }
     
     func refreshTripDetails() {
@@ -110,8 +110,8 @@ class UpcomingTripsViewController: UIViewController {
         for indexPath in visibleIndexPaths {
             let summary = tripSummaries[indexPath.row]
             
-            if summary.startingStop.departureTime > currentTime
-                || summary.destinationStop.arrivalTime > currentTime {
+            if summary.departureTime > currentTime
+                || summary.arrivalTime > currentTime {
                 
                 guard let cell = tableView.cellForRow(at: indexPath) else { continue }
                 updateDetails(of: cell, at: indexPath, with: summary)

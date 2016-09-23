@@ -82,23 +82,25 @@ class RealmQueryService: QueryService {
             
 			let trips = findTrips(with: commonTripIds, on: date, directionId: pairing.directionId, realm: realm)
             
-            let i = findTransfers(fromTripIds: fromTripIds.subtracting(toTripIds),
-                                  toTripIds: toTripIds.subtracting(fromTripIds),
+			let transfers = findTransfers(fromStop: startingStop,
+			                      fromTripIds: fromTripIds.subtracting(toTripIds),
+			                      toStop: destinationStop,
+			                      toTripIds: toTripIds.subtracting(fromTripIds),
                                   on: date,
                                   realm: realm)
-            Logger.debug("FOUND \(i.count) TRANSFERS")
+            Logger.debug("FOUND \(transfers.count) TRANSFERS")
 			
-            let summaries = trips.map { trip -> TripSummary in
-                let summary = TripSummaryImpl()
-                summary._startingStop = startingStopTimes[trip.id]
-                summary._destinationStop = destinationStopTimes[trip.id]
-                summary._trip = trip
-                summary._route = self.routesById[trip.routeId]
-                return summary
+			var summaries: [TripSummary] = trips.map { trip -> DirectTripSummaryDTO in
+				let stopTimes = FromToPair<StopTime>(from: startingStopTimes[trip.id]!, to: destinationStopTimes[trip.id]!)
+				return DirectTripSummaryDTO(stopTimes: stopTimes,
+				                            trip: trip,
+				                            route: self.routesById[trip.routeId]!)
             }
+			
+			summaries.append(contentsOf: transfers)
             
             Logger.debug("found \(summaries.count) summaries")
-            return summaries.sorted { $0.0.startingStop.departureTime < $0.1.startingStop.departureTime }
+            return summaries.sorted { $0.0.departureTime < $0.1.departureTime }
 			
 		} catch let error {
 			Logger.error("error with finding trips", error: error)
@@ -110,12 +112,12 @@ class RealmQueryService: QueryService {
 	func nextTripSummary(forPairing pairing: StopPairing) -> (isForTomorrow: Bool, summary:TripSummary)? {
         let date = currentDate
         let currentTimeInterval = Date().timeIntervalSince(date)
-        if let summary = nextTripSummary(forPairing: pairing, date: date, timeInterval: currentTimeInterval) {
+		if let summary = tripSummaries(for: pairing, on: date).first(where: { $0.departureTime > currentTimeInterval }) {
             return (false, summary)
         }
         
         let nextDate = date + (3600 * 24)
-        if let nextDayTripSummary = nextTripSummary(forPairing: pairing, date: nextDate, timeInterval: 0) {
+        if let nextDayTripSummary =  tripSummaries(for: pairing, on: nextDate).first(where: { $0.departureTime > currentTimeInterval }){
             return (true, nextDayTripSummary)
         }
         
@@ -161,12 +163,9 @@ class RealmQueryService: QueryService {
                 Logger.error("why cant i find a trip what \(pairing.description)")
                 return nil
             }
-            
-            let summary = TripSummaryImpl()
-            summary._startingStop = startingStopTime
-            summary._destinationStop = destinationStopTime
-            summary._trip = trip
-            summary._route = routesById[trip.routeId]
+			
+			let stopTimes = FromToPair<StopTime>(from: startingStopTime, to: destinationStopTime)
+			let summary = DirectTripSummaryDTO(stopTimes: stopTimes, trip: trip, route: routesById[trip.routeId]!)
             
             return summary
             
@@ -186,32 +185,103 @@ class RealmQueryService: QueryService {
             serviceIdCache[date] = serviceIds
         }
 		
-        let trips: Results<TripImpl>
-        if let direction = directionId {
-            trips = realm.allObjects(ofType: TripImpl.self)
-                .filter(using: "_directionId == %@ AND id IN %@ AND serviceId IN %@", direction, tripIds, serviceIds!)
-        } else {
-            trips = realm.allObjects(ofType: TripImpl.self)
-                .filter(using: "id IN %@ AND serviceId IN %@", tripIds, serviceIds!)
+		var trips = realm.allObjects(ofType: TripImpl.self).filter(using: "id IN %@ AND serviceId IN %@", tripIds, serviceIds!)
+		
+		if let direction = directionId {
+			trips = trips.filter(using: "_directionId == %@", direction)
         }
         
 		Logger.debug("found \(trips.count) trips")
 		return trips
 	}
     
-    private func findTransfers(fromTripIds: Set<String>, toTripIds:Set<String>, on date: Date, realm: Realm) -> [TripSummary] {
+	private func findTransfers(fromStop: Stop,
+	                           fromTripIds: Set<String>,
+	                           toStop: Stop,
+	                           toTripIds:Set<String>,
+	                           on date: Date,
+	                           realm: Realm) -> [TripSummary] {
+		
+		class TransferDTO {
+			var sourceStopTime: StopTimeImpl!
+			var trip: Trip!
+			var tripStopTimes = [StopTimeImpl]()
+		}
+		
+		func findTripStops(with trips: Results<TripImpl>, sourceStop: Stop, realm: Realm) -> [String : TransferDTO] {
+			let tripsById = trips.dictionary { $0.id }
+			var tripStops = [String : TransferDTO]()
+			
+			let defaultCompute = { TransferDTO() }
+			for stopTime in realm.allObjects(ofType: StopTimeImpl.self).filter(using: "tripId IN %@", Array(tripsById.keys)) {
+				let transferDTO = tripStops.get(key: stopTime.tripId, or: defaultCompute)
+					
+				if stopTime.stopId == sourceStop.id {
+					transferDTO.sourceStopTime = stopTime
+				}
+				if transferDTO.trip == nil {
+					transferDTO.trip = tripsById[stopTime.tripId]
+				}
+				transferDTO.tripStopTimes.append(stopTime)
+			}
+			
+			tripStops.forEach {
+				$0.value.tripStopTimes.sort(by: { $0.0.stopId < $0.1.stopId })
+			}
+			
+			
+			
+			return tripStops
+		}
         
         let fromTrips = findTrips(with: fromTripIds, on: date, realm: realm)
         let toTrips = findTrips(with: toTripIds, on: date, realm: realm)
+		let stopsById = self.allStops.dictionary { $0.id }
+		
+		func findConnection(from fromDTO: TransferDTO, in toDTOs: [TransferDTO]) -> TransferTripSummaryDTO? {
+			for toDTO in toDTOs {
+				guard fromDTO.sourceStopTime.departureTime < toDTO.sourceStopTime.arrivalTime else { continue }
+				
+				for fromStopTime in fromDTO.tripStopTimes {
+					guard fromStopTime.stopSequence > fromDTO.sourceStopTime.stopSequence,
+						let matchingStopTime = toDTO.tripStopTimes.first(where: { $0.stopId == fromStopTime.stopId && fromStopTime.arrivalTime < $0.departureTime} ),
+						matchingStopTime.stopSequence < toDTO.sourceStopTime.stopSequence else {
+						continue
+					}
+					let transfer = TransferTripSummaryDTO()
+					transfer.stopTimes = FromToPair(from: fromDTO.sourceStopTime, to: toDTO.sourceStopTime)
+					transfer.trips = FromToPair(from: fromDTO.trip, to: toDTO.trip)
+					transfer.routes = FromToPair(from: routesById[fromDTO.trip.routeId]!, to: routesById[toDTO.trip.routeId]!)
+					transfer.transferStopTime = StopTimeDTO(tripId: "\(fromDTO.trip.id),\(toDTO.trip.id)",
+						arrivalTime: fromStopTime.arrivalTime,
+						departureTime: matchingStopTime.departureTime,
+						stopId: matchingStopTime.stopId,
+						stopSequence: fromStopTime.stopSequence)
+					transfer.transferStop = stopsById[matchingStopTime.stopId]
+					return transfer
+				}
+			}
+			
+			
+			return nil
+		}
+
+		let fromTripStops = findTripStops(with: fromTrips, sourceStop: fromStop, realm: realm)
+		let toTripStops = findTripStops(with: toTrips, sourceStop: toStop, realm: realm).lazy
+			.map { $0.value }
+			.sorted { $0.0.sourceStopTime.departureTime < $0.1.sourceStopTime.departureTime }
+		
+		var transfers = [TransferTripSummaryDTO]()
+		
+		for tripStop in fromTripStops {
+			if let transfer = findConnection(from: tripStop.value, in: toTripStops) {
+				transfers.append(transfer)
+			}
+		}
         
-        let stops = realm.allObjects(ofType: StopImpl.self).filter(using: "routes.@count > 1")
-        let stopIds: [Int] = stops.map { $0.id }
-        let stopTimes = realm.allObjects(ofType: StopTimeImpl.self).filter(using: "stopId IN %@", stopIds).groupBy { $0.stopId }
         
         
-        
-        
-        return []
+        return transfers
     }
 		
 }

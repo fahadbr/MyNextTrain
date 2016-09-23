@@ -21,6 +21,10 @@ class FavoritePairsViewController: UIViewController {
 	fileprivate var favoritePairings = [FavoritePairModel]()
 	fileprivate var currentDate: Date!
 	fileprivate var reloadSource: Bool = true
+	
+	deinit {
+		deregisterForNotifications()
+	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +40,7 @@ class FavoritePairsViewController: UIViewController {
 		tableView.rowHeight = 60
 
         // Do any additional setup after loading the view.
+		registerForNotifications()
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +66,23 @@ class FavoritePairsViewController: UIViewController {
 		reloadSource = true
 	}
 	
+	private func registerForNotifications() {
+		let notificationCenter = NotificationCenter.default
+		notificationCenter.addObserver(self,
+		                               selector: #selector(reloadData),
+		                               name: GTFSFileLoader.doneLoadingFiles,
+		                               object: GTFSFileLoader.instance)
+		
+		
+		notificationCenter.addObserver(self,
+		                               selector: #selector(reloadData),
+		                               name: NSNotification.Name.UIApplicationDidBecomeActive,
+		                               object: UIApplication.shared)
+	}
+	
+	private func deregisterForNotifications() {
+		NotificationCenter.default.removeObserver(self)
+	}
 
 }
 

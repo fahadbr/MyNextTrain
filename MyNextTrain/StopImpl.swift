@@ -15,8 +15,6 @@ class StopImpl: Object, Stop, GTFSFileEntry {
 	dynamic var name: String = ""
 	dynamic var latitude: Double = 0
 	dynamic var longitude: Double = 0
-    
-    let routes = LinkingObjects(fromType: RouteImpl.self, property: "stops")
 	
 	func apply(row: GTFSFileRow) {
 		row.bind(column: "stop_id", to: &id)
