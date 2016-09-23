@@ -19,7 +19,7 @@ class RealmQueryService: QueryService {
 	var favoritePairings: [StopPairing] {
 		do {
 			let realm = try Realm()
-			let stopPairings: [StopPairing] = realm.allObjects(ofType: StopPairingImpl.self)
+			let stopPairings: [StopPairing] = realm.objects(StopPairingImpl.self)
 				.map( {$0 as StopPairing })
 			
 			return stopPairings
@@ -32,8 +32,8 @@ class RealmQueryService: QueryService {
 	var allStops: [Stop] {
 		do {
 			let realm = try Realm()
-			let stops: [Stop] = realm.allObjects(ofType: StopImpl.self)
-				.sorted(onProperty: "name")
+			let stops: [Stop] = realm.objects(StopImpl.self)
+				.sorted(byProperty: "name")
 				.map( {$0 as Stop })
 			
 			return stops
@@ -48,7 +48,7 @@ class RealmQueryService: QueryService {
     private func loadRoutesById() -> [Int : RouteImpl] {
         do {
             let realm = try Realm()
-            let routes = realm.allObjects(ofType: RouteImpl.self)
+            let routes = realm.objects( RouteImpl.self)
             Logger.debug("loaded \(routes.count) routes")
             return routes.dictionary(keyExtractor: { $0.id })
         
@@ -69,7 +69,7 @@ class RealmQueryService: QueryService {
 			Logger.debug("searching using stops from \(startingStop.name) to \(destinationStop.name) for date \(date)")
 			
             func stopTimes(forStop stop: Stop) -> [String : StopTimeImpl] {
-                return realm.allObjects(ofType: StopTimeImpl.self).filter(using: "stopId == \(stop.id)").dictionary { $0.tripId }
+                return realm.objects( StopTimeImpl.self).filter("stopId == \(stop.id)").dictionary { $0.tripId }
             }
             
 			let startingStopTimes = stopTimes(forStop: startingStop)
@@ -133,13 +133,13 @@ class RealmQueryService: QueryService {
             let realm = try Realm()
             Logger.debug("searching for next trip from \(startingStop.name) to \(destinationStop.name) on \(date)")
             
-            let startingStopTimes = realm.allObjects(ofType: StopTimeImpl.self)
-                .filter(using: "stopId == %@ AND departureTime >= %@", startingStop.id, timeInterval)
-                .sorted(onProperty: "departureTime")
+            let startingStopTimes = realm.objects( StopTimeImpl.self)
+                .filter("stopId == %@ AND departureTime >= %@", startingStop.id, timeInterval)
+                .sorted(byProperty: "departureTime")
             
-            let destinationStopTimes = realm.allObjects(ofType: StopTimeImpl.self)
-                .filter(using: "stopId == %@ AND arrivalTime >= %@", destinationStop.id, timeInterval)
-                .sorted(onProperty: "arrivalTime")
+            let destinationStopTimes = realm.objects( StopTimeImpl.self)
+                .filter("stopId == %@ AND arrivalTime >= %@", destinationStop.id, timeInterval)
+                .sorted(byProperty: "arrivalTime")
             
             let commonTripIds = Set<String>(startingStopTimes.map { $0.tripId })
                 .intersection(Set<String>(destinationStopTimes.map { $0.tripId } ))
@@ -148,18 +148,18 @@ class RealmQueryService: QueryService {
             
             let resultTripIds: [String] = trips.map { $0.id }
             
-            guard let startingStopTime =  startingStopTimes.filter(using: "tripId IN %@", resultTripIds).first else {
+            guard let startingStopTime =  startingStopTimes.filter("tripId IN %@", resultTripIds).first else {
                 Logger.debug("no starting stop time for pairing \(pairing.description)")
                 return nil
             }
             
-            guard let destinationStopTime = destinationStopTimes.filter(using: "tripId == %@ AND stopSequence > %@",
+            guard let destinationStopTime = destinationStopTimes.filter("tripId == %@ AND stopSequence > %@",
                                                                         startingStopTime.tripId, startingStopTime.stopSequence).first else {
                 Logger.debug("no destination stop time found for pairing \(pairing.description)")
                 return nil
             }
             
-            guard let trip = trips.filter(using: "id == %@", startingStopTime.tripId).first else {
+            guard let trip = trips.filter("id == %@", startingStopTime.tripId).first else {
                 Logger.error("why cant i find a trip what \(pairing.description)")
                 return nil
             }
@@ -181,14 +181,14 @@ class RealmQueryService: QueryService {
 		
 		var serviceIds = serviceIdCache[date]
         if serviceIds == nil {
-            serviceIds = realm.allObjects(ofType: CalendarDateImpl.self).filter(using: "date == %@", date).map { $0.serviceId }
+            serviceIds = realm.objects( CalendarDateImpl.self).filter("date == %@", date).map { $0.serviceId }
             serviceIdCache[date] = serviceIds
         }
 		
-		var trips = realm.allObjects(ofType: TripImpl.self).filter(using: "id IN %@ AND serviceId IN %@", tripIds, serviceIds!)
+		var trips = realm.objects( TripImpl.self).filter("id IN %@ AND serviceId IN %@", tripIds, serviceIds!)
 		
 		if let direction = directionId {
-			trips = trips.filter(using: "_directionId == %@", direction)
+			trips = trips.filter("_directionId == %@", direction)
         }
         
 		Logger.debug("found \(trips.count) trips")
@@ -213,7 +213,7 @@ class RealmQueryService: QueryService {
 			var tripStops = [String : TransferDTO]()
 			
 			let defaultCompute = { TransferDTO() }
-			for stopTime in realm.allObjects(ofType: StopTimeImpl.self).filter(using: "tripId IN %@", Array(tripsById.keys)) {
+			for stopTime in realm.objects( StopTimeImpl.self).filter("tripId IN %@", Array(tripsById.keys)) {
 				let transferDTO = tripStops.get(key: stopTime.tripId, or: defaultCompute)
 					
 				if stopTime.stopId == sourceStop.id {

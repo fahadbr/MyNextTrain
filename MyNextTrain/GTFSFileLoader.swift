@@ -23,7 +23,7 @@ class GTFSFileLoader {
         
         if AppDelegate.overrideReload, let realm = try? Realm(), !realm.isEmpty{
             try? realm.write {
-                realm.deleteAllObjects()
+                realm.deleteAll()
             }
         }
         
@@ -79,7 +79,7 @@ class GTFSFileLoader {
 		do {
 			let realm = try Realm()
 			
-			guard realm.allObjects(ofType: type).isEmpty || AppDelegate.overrideReload else {
+			guard realm.objects(type).isEmpty || AppDelegate.overrideReload else {
 				Logger.debug("file \(file) has already been loaded")
 				return
 			}
