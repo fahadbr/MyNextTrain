@@ -66,6 +66,10 @@ class FavoritePairsViewController: UIViewController {
 		reloadSource = true
 	}
 	
+	func enterBackgroundMode() {
+		reloadSource = true
+	}
+	
 	private func registerForNotifications() {
 		let notificationCenter = NotificationCenter.default
 		notificationCenter.addObserver(self,
@@ -78,6 +82,12 @@ class FavoritePairsViewController: UIViewController {
 		                               selector: #selector(reloadData),
 		                               name: NSNotification.Name.UIApplicationDidBecomeActive,
 		                               object: UIApplication.shared)
+		
+		notificationCenter.addObserver(self,
+		                               selector: #selector(enterBackgroundMode),
+		                               name: NSNotification.Name.UIApplicationWillResignActive,
+		                               object: UIApplication.shared)
+		
 	}
 	
 	private func deregisterForNotifications() {

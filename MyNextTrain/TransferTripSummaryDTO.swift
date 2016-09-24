@@ -21,7 +21,7 @@ class TransferTripSummaryDTO: TripSummary {
 	var stopTimes: FromToPair<StopTime>!
 	var trips: FromToPair<Trip>!
 	var routes: FromToPair<Route>!
-	var transferTime: Double = 0
+//	var transferTime: Double = 0
 	var transferStop: Stop!
 	var transferStopTime: StopTime!
 	

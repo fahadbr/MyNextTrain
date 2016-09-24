@@ -13,8 +13,18 @@ protocol TripSummary {
 	var departureTime: TimeInterval { get }
 	var arrivalTime: TimeInterval { get }
 	
+	var tripTime: TimeInterval { get }
+	
 	func scheduleDescription(for date: Date) -> NSAttributedString
 	func upcomingEventDescription(for currentTime: TimeInterval) -> String
+	
+}
+
+extension TripSummary {
+	
+	var tripTime: TimeInterval {
+		return arrivalTime - departureTime
+	}
 	
 }
 

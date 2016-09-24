@@ -271,17 +271,27 @@ class RealmQueryService: QueryService {
 			.map { $0.value }
 			.sorted { $0.0.sourceStopTime.departureTime < $0.1.sourceStopTime.departureTime }
 		
-		var transfers = [TransferTripSummaryDTO]()
+		var transfers = [String : TransferTripSummaryDTO]()
 		
 		for tripStop in fromTripStops {
-			if let transfer = findConnection(from: tripStop.value, in: toTripStops) {
-				transfers.append(transfer)
+			guard let transfer = findConnection(from: tripStop.value, in: toTripStops) else {
+				continue
 			}
+			
+			
+			let toTripId = transfer.trips.to.id
+			
+			//filter out trips which transfer to the same train another transfer but have a longer trip time
+			if let existingTransfer = transfers[toTripId], existingTransfer.tripTime < transfer.tripTime {
+				continue
+			}
+			
+			transfers[toTripId] = transfer
 		}
         
         
         
-        return transfers
+        return Array(transfers.values)
     }
 		
 }
