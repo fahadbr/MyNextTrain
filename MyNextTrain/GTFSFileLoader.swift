@@ -27,19 +27,30 @@ class GTFSFileLoader {
             }
         }
         
+        func loadAsync<T: Object>(file: GTFSFile,
+                               type: T.Type,
+                               generator: @escaping () -> T) {
+            
+            DispatchQueue.global(qos: .default).async(group: loadingGroup) {
+                self.load(file: file, type: type, generator: generator)
+                Logger.debug("done mapping file \(file)")
+            }
+            
+        }
+        
         for file in This.files {
 			
             switch file {
             case .routes:
-                loadAsync(file: file, type: RouteImpl.self, dispatchGroup: loadingGroup)
+                loadAsync(file: file, type: RouteImpl.self, generator: { RouteImpl() } )
             case .stops:
-                loadAsync(file: file, type: StopImpl.self, dispatchGroup: loadingGroup)
+                loadAsync(file: file, type: StopImpl.self, generator: { StopImpl() } )
             case .trips:
-                loadAsync(file: file, type: TripImpl.self, dispatchGroup: loadingGroup)
+                loadAsync(file: file, type: TripImpl.self, generator: { TripImpl() } )
             case .calendar_dates:
-                loadAsync(file: file, type: CalendarDateImpl.self, dispatchGroup: loadingGroup)
+                loadAsync(file: file, type: CalendarDateImpl.self, generator: { CalendarDateImpl() } )
             case .stop_times:
-                loadAsync(file: file, type: StopTimeImpl.self, dispatchGroup: loadingGroup)
+                loadAsync(file: file, type: StopTimeImpl.self, generator: { StopTimeImpl() } )
             }
         }
 		
@@ -59,23 +70,24 @@ class GTFSFileLoader {
         
     }
     
-	private func loadAsync<T: Object>(file: GTFSFile,
-	                       type: T.Type,
-	                       dispatchGroup: DispatchGroup) {
-        
-		DispatchQueue.global(qos: .default).async(group: dispatchGroup) {
-			self.load(file: file, type: type)
-			Logger.debug("done mapping file \(file)")
-        }
-        
-    }
+//	private func loadAsync<T: Object>(file: GTFSFile,
+//	                       type: T.Type,
+//	                       dispatchGroup: DispatchGroup) {
+//        
+//		DispatchQueue.global(qos: .default).async(group: dispatchGroup) {
+//			self.load(file: file, type: type)
+//			Logger.debug("done mapping file \(file)")
+//        }
+//        
+//    }
 	
-	private func load<T: Object>(file: GTFSFile, type: T.Type) {
+    private func load<T: Object>(file: GTFSFile, type: T.Type, generator: @escaping () -> T) {
 		let quotationCharacterSet = CharacterSet(charactersIn: "\"")
 		
 		func lineComponents(from line: String) -> [String] {
 			return line.components(separatedBy: ",").map { $0.trimmingCharacters(in: quotationCharacterSet) }
 		}
+        
 		do {
 			let realm = try Realm()
 			
@@ -96,7 +108,7 @@ class GTFSFileLoader {
 			let realmObjects = lines[1..<lines.count].lazy
 				.filter { !$0.isEmpty }
 				.map { line -> T in
-					let result = T()
+					let result = generator()
                     let values = lineComponents(from: line)
                     let row = GTFSFileRow(names: columns, values: values)
 					(result as? GTFSFileEntry)?.apply(row: row)

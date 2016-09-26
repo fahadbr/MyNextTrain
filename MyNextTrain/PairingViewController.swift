@@ -27,21 +27,22 @@ class PairingViewController: UIViewController {
         return $0
     }(UIBezierPath())
     
-    private var fromStop: Stop
-    private var toStop: Stop
+    private var fromStop: Stop {
+        return pairing.startingStop
+    }
+    private var toStop: Stop {
+        return pairing.destinationStop
+    }
+    
+    private (set) var pairing: StopPairing
     
     let stationStack = UIStackView()
     let dividerPathLayer = CAShapeLayer()
     
-    var pairing: StopPairing {
-        return StopPairingDTO(startingStop: fromStop, destinationStop: toStop)
-    }
-    
     weak var delegate: PairingViewControllerDelegate?
     
     init(pairing: StopPairing) {
-        fromStop = pairing.startingStop
-        toStop = pairing.destinationStop
+        self.pairing = pairing
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -107,9 +108,7 @@ class PairingViewController: UIViewController {
     }
     
     @objc private func reversePairing() {
-        let temp = fromStop
-        fromStop = toStop
-        toStop = temp
+        pairing = StopPairingDTO(startingStop: toStop, destinationStop: fromStop)
         refreshViews()
         delegate?.pairingDidChange()
     }

@@ -12,6 +12,7 @@ class StopPairingImpl: Object, StopPairing {
 	
 	dynamic var _startingStop: StopImpl?
 	dynamic var _destinationStop: StopImpl?
+    let transferTripSummaries = List<TransferTripSummaryImpl>()
 	
 	var startingStop: Stop! { return _startingStop }
 	var destinationStop: Stop! { return _destinationStop }

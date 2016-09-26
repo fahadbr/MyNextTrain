@@ -15,8 +15,10 @@ class TripImpl: Object, Trip, GTFSFileEntry {
 	dynamic var routeId: Int = 0
 	dynamic var serviceId: String = ""
 	dynamic var headSign: String?
-	
+    dynamic var shortName: String?
+    dynamic var shapeId: String?
     let _directionId = RealmOptional<Int>()
+    
     var directionId: Int? {
         get {
             return _directionId.value
@@ -25,8 +27,12 @@ class TripImpl: Object, Trip, GTFSFileEntry {
         }
     }
     
-	dynamic var shortName: String?
-	dynamic var shapeId: String?
+	let stopTimes = List<StopTimeImpl>()
+    
+    override var hashValue: Int {
+        return id.hashValue
+    }
+    
 	
 	func apply(row: GTFSFileRow) {
 		row.bind(column: "trip_id", to: &id)

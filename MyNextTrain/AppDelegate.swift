@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     static let queryService: QueryService = RealmQueryService()
 	static let updateService: UpdateService = RealmUpdateService()
-    static let overrideReloadReference = (name: "OVERRIDE_RELOAD", value: 3)
+    static let overrideReloadReference = (name: "OVERRIDE_RELOAD", value: 6)
     static var overrideReload: Bool {
         return UserDefaults.standard.integer(forKey: overrideReloadReference.name) != overrideReloadReference.value
     }

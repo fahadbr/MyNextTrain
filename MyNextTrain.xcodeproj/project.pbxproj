@@ -49,6 +49,8 @@
 		0B87BC311D6A2245006E220B /* StopDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC301D6A2245006E220B /* StopDTO.swift */; };
 		0B87BC331D6A224B006E220B /* RouteDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC321D6A224B006E220B /* RouteDTO.swift */; };
 		0B87BC371D6A46D2006E220B /* GTFSFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC361D6A46D2006E220B /* GTFSFileEntry.swift */; };
+		0BF1EBED1D9615C1005697F5 /* TransferTripSummaryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1EBEC1D9615C1005697F5 /* TransferTripSummaryImpl.swift */; };
+		0BF1EBEF1D96180F005697F5 /* TransferStopTimeImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1EBEE1D96180F005697F5 /* TransferStopTimeImpl.swift */; };
 		105EF7BA1D627F09003356DC /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105EF7B91D627F09003356DC /* Route.swift */; };
 		105EF7BE1D62806B003356DC /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105EF7BD1D62806B003356DC /* Stop.swift */; };
 		105EF7C01D6280C9003356DC /* StopTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105EF7BF1D6280C9003356DC /* StopTime.swift */; };
@@ -168,6 +170,8 @@
 		0B87BC301D6A2245006E220B /* StopDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopDTO.swift; sourceTree = "<group>"; };
 		0B87BC321D6A224B006E220B /* RouteDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDTO.swift; sourceTree = "<group>"; };
 		0B87BC361D6A46D2006E220B /* GTFSFileEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTFSFileEntry.swift; sourceTree = "<group>"; };
+		0BF1EBEC1D9615C1005697F5 /* TransferTripSummaryImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferTripSummaryImpl.swift; sourceTree = "<group>"; };
+		0BF1EBEE1D96180F005697F5 /* TransferStopTimeImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferStopTimeImpl.swift; sourceTree = "<group>"; };
 		105EF7B91D627F09003356DC /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		105EF7BD1D62806B003356DC /* Stop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
 		105EF7BF1D6280C9003356DC /* StopTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopTime.swift; sourceTree = "<group>"; };
@@ -459,6 +463,8 @@
 				10EC9C3B1D6D148C00D29CE0 /* TripImpl.swift */,
 				10EC9C3D1D76320900D29CE0 /* CalendarDateImpl.swift */,
 				10FE081B1D7F770C00894D5C /* StopPairingImpl.swift */,
+				0BF1EBEC1D9615C1005697F5 /* TransferTripSummaryImpl.swift */,
+				0BF1EBEE1D96180F005697F5 /* TransferStopTimeImpl.swift */,
 			);
 			name = Realm;
 			sourceTree = "<group>";
@@ -767,6 +773,7 @@
 				0B8084BC1D7E16B200CAF56D /* InitializingTableViewCell.swift in Sources */,
 				105EF7C41D67BD0D003356DC /* CalendarDate.swift in Sources */,
 				105EF7C01D6280C9003356DC /* StopTime.swift in Sources */,
+				0BF1EBEF1D96180F005697F5 /* TransferStopTimeImpl.swift in Sources */,
 				10FE081F1D7F822C00894D5C /* UpdateService.swift in Sources */,
 				10FE081A1D7F768100894D5C /* StopPairing.swift in Sources */,
 				10B74B111D8A2B3F00303281 /* TransferTripSummaryDTO.swift in Sources */,
@@ -807,6 +814,7 @@
 				10EC9C311D6BBCE900D29CE0 /* StringExtension.swift in Sources */,
 				10EC9C421D7CFFF300D29CE0 /* RealmQueryService.swift in Sources */,
 				10B74B131D8A2C3A00303281 /* FromToPair.swift in Sources */,
+				0BF1EBED1D9615C1005697F5 /* TransferTripSummaryImpl.swift in Sources */,
 				0B8084BA1D7E14DA00CAF56D /* TripSummaryCell.swift in Sources */,
 				0B8084B31D7DE48D00CAF56D /* CollectionExtensions.swift in Sources */,
 				0B5C95F31D6010CF00F66B8F /* AppDelegate.swift in Sources */,
