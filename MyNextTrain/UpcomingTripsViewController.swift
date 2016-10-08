@@ -51,7 +51,7 @@ class UpcomingTripsViewController: UIViewController {
         addChildViewController(pairingVC)
         pairingVC.didMove(toParentViewController: self)
         
-        view.add(subView: tableView, with: .left, .right, .bottom)
+        view.add(subView: tableView, anchor: .left, .right, .bottom)
         tableView.topAnchor.constraint(equalTo: pairingVC.view.bottomAnchor).isActive = true
         
         tableView.dataSource = self

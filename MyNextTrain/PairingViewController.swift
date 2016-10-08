@@ -83,7 +83,7 @@ class PairingViewController: UIViewController {
         mainStack.axis = .horizontal
         mainStack.distribution = .fillProportionally
         
-        view.add(subView: mainStack, with: Anchor.standardAnchors)
+        view.add(subView: mainStack, anchor: Anchor.standardAnchors)
         view.backgroundColor = UIColor.white
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.darkGray.cgColor

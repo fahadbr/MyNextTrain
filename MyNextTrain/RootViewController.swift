@@ -20,7 +20,7 @@ class RootViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-        view.add(subView: navController.view, with: Anchor.standardAnchors)
+        view.add(subView: navController.view, anchor: Anchor.standardAnchors)
         addChildViewController(navController)
         navController.didMove(toParentViewController: self)
 		

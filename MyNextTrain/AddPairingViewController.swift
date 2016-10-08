@@ -35,7 +35,7 @@ class AddPairingViewController: UIViewController {
             }
         }
 		
-		view.add(subView: tableView, with: Anchor.standardAnchors)
+		view.add(subView: tableView, anchor: Anchor.standardAnchors)
 		tableView.dataSource = self
 		tableView.delegate = self
 		
