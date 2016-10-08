@@ -26,12 +26,12 @@ extension NSLayoutConstraint {
 extension UIView {
     
     @discardableResult
-    func add(subView:UIView, with anchors: Anchor...) -> [Anchor : NSLayoutConstraint] {
+    func add(subView:UIView, anchor anchors: Anchor...) -> [Anchor : NSLayoutConstraint] {
         return UIView.applyConstraintsToView(withAnchors: anchors, subView: subView, parentView: self)
     }
     
     @discardableResult
-    func add(subView:UIView, with anchors: [Anchor]) -> [Anchor : NSLayoutConstraint] {
+    func add(subView:UIView, anchor anchors: [Anchor]) -> [Anchor : NSLayoutConstraint] {
         return UIView.applyConstraintsToView(withAnchors: anchors, subView: subView, parentView: self)
     }
     

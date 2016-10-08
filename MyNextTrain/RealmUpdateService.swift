@@ -30,10 +30,10 @@ class RealmUpdateService: UpdateService {
         
 		
 		let realm = try Realm()
-        let transfers = findTransfers(from: startObj, to: destObj, realm: realm)
+//        let transfers = findTransfers(from: startObj, to: destObj, realm: realm)
 		
-        realmObj.transferTripSummaries.append(objectsIn: transfers)
-        
+//        realmObj.transferTripSummaries.append(objectsIn: transfers)
+		
 		try realm.write {
 			realm.add(realmObj)
 		}
@@ -55,11 +55,11 @@ class RealmUpdateService: UpdateService {
         
         try realm.write {
 //            if reversedPairing == nil{
-            realmObj.transferTripSummaries.forEach {
-                realm.delete($0.transferStopTime)
-            }
-            
-            realm.delete(realmObj.transferTripSummaries)
+//            realmObj.transferTripSummaries.forEach {
+//                realm.delete($0.transferStopTime)
+//            }
+//            
+//            realm.delete(realmObj.transferTripSummaries)
 //            }
             
             realm.delete(realmObj)
@@ -137,7 +137,8 @@ class RealmUpdateService: UpdateService {
         
         func findConnection(from fromDTO: TransferDTO, in toDTOs: [TransferDTO]) -> TransferTripSummaryImpl? {
             for toDTO in toDTOs {
-                guard fromDTO.sourceStopTime.departureTime < toDTO.sourceStopTime.arrivalTime else { continue }
+                guard fromDTO.trip.serviceId == toDTO.trip.serviceId,
+					fromDTO.sourceStopTime.departureTime < toDTO.sourceStopTime.arrivalTime else { continue }
                 
                 for fromStopTime in fromDTO.tripStopTimes {
                     guard fromStopTime.stopSequence > fromDTO.sourceStopTime.stopSequence,
@@ -145,6 +146,34 @@ class RealmUpdateService: UpdateService {
                         matchingStopTime.stopSequence < toDTO.sourceStopTime.stopSequence else {
                             continue
                     }
+					
+					
+//					if fromDTO.trip.serviceId != toDTO.trip.serviceId {
+//						let serviceIdPair = [fromDTO.trip.serviceId, toDTO.trip.serviceId]
+//						let calendarDates = realm.objects(CalendarDateImpl.self)
+//							.filter("serviceId IN %@",  serviceIdPair)
+//							.sorted(byProperty: "date")
+//						
+//						var currentDate: Date!
+//						var count = 0
+//						for calendarDate in calendarDates {
+//							if currentDate == nil || currentDate != calendarDate.date {
+//								currentDate = calendarDate.date
+//								count = 1
+//							} else {
+//								count = 2
+//								break
+//							}
+//						}
+//						
+//						guard count == 2 else {
+//							Logger.debug("calendar count is \(count)")
+//							continue
+//						}
+//					} else {
+//						Logger.debug("serviceIds are equal")
+//					}
+					
                     let transfer = TransferTripSummaryImpl()
                     transfer.fromStopTime = fromDTO.sourceStopTime
                     transfer.toStopTime = toDTO.sourceStopTime

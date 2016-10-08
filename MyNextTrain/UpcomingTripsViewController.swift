@@ -45,7 +45,7 @@ class UpcomingTripsViewController: UIViewController {
         reloadSourceData()
         
 		view.backgroundColor = UIColor.white
-        view.add(subView: pairingVC.view, with: .left, .right)
+        view.add(subView: pairingVC.view, anchor: .left, .right)
         pairingVC.view.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
         pairingVC.view.heightAnchor.constraint(equalToConstant: 90).isActive = true
         addChildViewController(pairingVC)

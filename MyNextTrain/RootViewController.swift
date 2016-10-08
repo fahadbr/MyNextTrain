@@ -11,7 +11,8 @@ import UIKit
 class RootViewController: UIViewController {
     
     static let instance = RootViewController()
-    
+	
+	
     
     lazy var favoritePairsVc:FavoritePairsViewController = FavoritePairsViewController()
     lazy var navController:UINavigationController = UINavigationController(rootViewController: self.favoritePairsVc)
@@ -22,8 +23,7 @@ class RootViewController: UIViewController {
         view.add(subView: navController.view, with: Anchor.standardAnchors)
         addChildViewController(navController)
         navController.didMove(toParentViewController: self)
-        
-        
+		
     }
 
     override func didReceiveMemoryWarning() {
