@@ -289,8 +289,8 @@ class RealmQueryService: QueryService {
 		
 		func findConnection(from fromDTO: TransferDTO, in toDTOs: [TransferDTO]) -> TransferTripSummaryDTO? {
 			for toDTO in toDTOs {
-				guard toDTO.trip.serviceId == fromDTO.trip.serviceId,
-					fromDTO.sourceStopTime.departureTime < toDTO.sourceStopTime.arrivalTime else { continue }
+//				guard toDTO.trip.serviceId == fromDTO.trip.serviceId,
+                guard fromDTO.sourceStopTime.departureTime < toDTO.sourceStopTime.arrivalTime else { continue }
 				
 				for fromStopTime in fromDTO.tripStopTimes {
 					guard fromStopTime.stopSequence > fromDTO.sourceStopTime.stopSequence,
