@@ -93,7 +93,12 @@ class RealmQueryService: QueryService {
             }
 			
             
-            let transfers = findTransfers(for: pairing, on: date, realm: realm)
+            let transfers = findTransfers(fromStop: startingStop,
+                                          fromTripIds: fromTripIds.subtracting(toTripIds),
+                                          toStop: destinationStop,
+                                          toTripIds: toTripIds.subtracting(fromTripIds),
+                                          on: date,
+                                          realm: realm)
             
             Logger.debug("FOUND \(transfers.count) TRANSFERS")
             summaries += transfers

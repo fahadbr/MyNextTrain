@@ -74,7 +74,8 @@ class PairingViewController: UIViewController {
             l.text = text
             return l
         }
-        
+
+
         let fromToStack = UIStackView(arrangedSubviews: [newLabel(text: "from"), newLabel(text: "to")])
         fromToStack.axis = .vertical
         fromToStack.distribution = .fillEqually
@@ -82,7 +83,6 @@ class PairingViewController: UIViewController {
         let mainStack = UIStackView(arrangedSubviews: [fromToStack, stationStack, reverseDirectionButton])
         mainStack.axis = .horizontal
         mainStack.distribution = .fillProportionally
-        
         view.add(subView: mainStack, anchor: Anchor.standardAnchors)
         view.backgroundColor = UIColor.white
         view.layer.borderWidth = 1
