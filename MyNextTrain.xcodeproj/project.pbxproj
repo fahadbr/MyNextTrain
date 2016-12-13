@@ -235,50 +235,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0B04355C1D6A06D600D46715 /* Logging */ = {
+		0B04355C1D6A06D600D46715 /* log */ = {
 			isa = PBXGroup;
 			children = (
 				105EF7C81D67C2BB003356DC /* Logger.swift */,
 			);
-			name = Logging;
+			path = log;
 			sourceTree = "<group>";
 		};
-		0B04355D1D6A06E600D46715 /* DataAccess */ = {
+		0B04355D1D6A06E600D46715 /* dao */ = {
 			isa = PBXGroup;
 			children = (
 				0B04355E1D6A06FC00D46715 /* QueryService.swift */,
 				10EC9C411D7CFFF300D29CE0 /* RealmQueryService.swift */,
-				10FE081E1D7F822C00894D5C /* UpdateService.swift */,
 				10FE08201D7F88DE00894D5C /* RealmUpdateService.swift */,
+				10FE081E1D7F822C00894D5C /* UpdateService.swift */,
 			);
-			name = DataAccess;
+			path = dao;
 			sourceTree = "<group>";
 		};
-		0B0435601D6A07C000D46715 /* Loader */ = {
+		0B0435601D6A07C000D46715 /* loader */ = {
 			isa = PBXGroup;
 			children = (
 				0B0435611D6A081100D46715 /* GTFSFileLoader.swift */,
 			);
-			name = Loader;
+			path = loader;
 			sourceTree = "<group>";
 		};
-		0B1D36051D84CAEE003CF04A /* Builder */ = {
+		0B1C487F1DFF94CA00E40324 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				105EF7C51D67C00F003356DC /* controller */,
+				105EF7B81D627EFD003356DC /* model */,
+				0B8084B41D7E049800CAF56D /* ui */,
+				0B5C95F21D6010CF00F66B8F /* AppDelegate.swift */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		0B1D36051D84CAEE003CF04A /* builder */ = {
 			isa = PBXGroup;
 			children = (
 				0B1D36031D84CAE6003CF04A /* AttributedStringBuilder.swift */,
 			);
-			name = Builder;
+			path = builder;
 			sourceTree = "<group>";
 		};
 		0B5C95E61D6010CE00F66B8F = {
 			isa = PBXGroup;
 			children = (
+				0B99DD3C1D6A6A9300366A12 /* Frameworks */,
 				0B5C95F11D6010CE00F66B8F /* MyNextTrain */,
 				0B5C96051D6010CF00F66B8F /* MyNextTrain WatchKit App */,
 				0B5C96141D6010CF00F66B8F /* MyNextTrain WatchKit Extension */,
-				0B5C95F01D6010CE00F66B8F /* Products */,
-				0B99DD3C1D6A6A9300366A12 /* Frameworks */,
 				D9BFE584C7B076435FA631AC /* Pods */,
+				0B5C95F01D6010CE00F66B8F /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -295,14 +306,8 @@
 		0B5C95F11D6010CE00F66B8F /* MyNextTrain */ = {
 			isa = PBXGroup;
 			children = (
-				105EF7C51D67C00F003356DC /* Controller */,
-				105EF7B81D627EFD003356DC /* Model */,
-				0B5C95F21D6010CF00F66B8F /* AppDelegate.swift */,
-				0B8084B41D7E049800CAF56D /* View */,
-				0B5C95F91D6010CF00F66B8F /* Assets.xcassets */,
-				0B5C962F1D60D14A00F66B8F /* Supporting Files */,
-				0B5C95FB1D6010CF00F66B8F /* LaunchScreen.storyboard */,
-				0B5C95FE1D6010CF00F66B8F /* Info.plist */,
+				0B5C962F1D60D14A00F66B8F /* resources */,
+				0B1C487F1DFF94CA00E40324 /* source */,
 			);
 			path = MyNextTrain;
 			sourceTree = "<group>";
@@ -310,9 +315,9 @@
 		0B5C96051D6010CF00F66B8F /* MyNextTrain WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
-				0B5C96061D6010CF00F66B8F /* Interface.storyboard */,
 				0B5C96091D6010CF00F66B8F /* Assets.xcassets */,
 				0B5C960B1D6010CF00F66B8F /* Info.plist */,
+				0B5C96061D6010CF00F66B8F /* Interface.storyboard */,
 			);
 			path = "MyNextTrain WatchKit App";
 			sourceTree = "<group>";
@@ -320,13 +325,13 @@
 		0B5C96141D6010CF00F66B8F /* MyNextTrain WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				0B5C96171D6010CF00F66B8F /* InterfaceController.swift */,
-				0B5C96191D6010CF00F66B8F /* ExtensionDelegate.swift */,
-				0B5C961B1D6010CF00F66B8F /* NotificationController.swift */,
-				0B5C961D1D6010CF00F66B8F /* ComplicationController.swift */,
-				0B5C961F1D6010CF00F66B8F /* Assets.xcassets */,
-				0B5C96211D6010CF00F66B8F /* Info.plist */,
 				0B5C96151D6010CF00F66B8F /* Supporting Files */,
+				0B5C961F1D6010CF00F66B8F /* Assets.xcassets */,
+				0B5C961D1D6010CF00F66B8F /* ComplicationController.swift */,
+				0B5C96191D6010CF00F66B8F /* ExtensionDelegate.swift */,
+				0B5C96211D6010CF00F66B8F /* Info.plist */,
+				0B5C96171D6010CF00F66B8F /* InterfaceController.swift */,
+				0B5C961B1D6010CF00F66B8F /* NotificationController.swift */,
 			);
 			path = "MyNextTrain WatchKit Extension";
 			sourceTree = "<group>";
@@ -336,18 +341,21 @@
 			children = (
 				0B5C96161D6010CF00F66B8F /* PushNotificationPayload.apns */,
 			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		0B5C962F1D60D14A00F66B8F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				0B5C96301D60DC1800F66B8F /* LIRR_transit */,
-			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0B5C96301D60DC1800F66B8F /* LIRR_transit */ = {
+		0B5C962F1D60D14A00F66B8F /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				0B5C96301D60DC1800F66B8F /* transit_files */,
+				0B5C95F91D6010CF00F66B8F /* Assets.xcassets */,
+				0B5C95FE1D6010CF00F66B8F /* Info.plist */,
+				0B5C95FB1D6010CF00F66B8F /* LaunchScreen.storyboard */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		0B5C96301D60DC1800F66B8F /* transit_files */ = {
 			isa = PBXGroup;
 			children = (
 				0B5C96311D60DC1800F66B8F /* agency.txt */,
@@ -359,45 +367,45 @@
 				0B5C96371D60DC1800F66B8F /* stops.txt */,
 				0B5C96381D60DC1800F66B8F /* trips.txt */,
 			);
-			path = LIRR_transit;
+			path = transit_files;
 			sourceTree = "<group>";
 		};
-		0B8084B41D7E049800CAF56D /* View */ = {
+		0B8084B41D7E049800CAF56D /* ui */ = {
 			isa = PBXGroup;
 			children = (
-				10FE081D1D7F789400894D5C /* TableViewCells */,
-				0B5C95F41D6010CF00F66B8F /* RootViewController.swift */,
-				10FE08171D7F754300894D5C /* FavoritePairsViewController.swift */,
-				0B8084B51D7E0A8A00CAF56D /* UpcomingTripsViewController.swift */,
+				10FE081D1D7F789400894D5C /* cells */,
 				10FE08221D7F8CD500894D5C /* AddPairingViewController.swift */,
+				10FE08171D7F754300894D5C /* FavoritePairsViewController.swift */,
 				0B1D35FD1D84AB07003CF04A /* PairingViewController.swift */,
+				0B5C95F41D6010CF00F66B8F /* RootViewController.swift */,
+				0B8084B51D7E0A8A00CAF56D /* UpcomingTripsViewController.swift */,
 			);
-			name = View;
+			path = ui;
 			sourceTree = "<group>";
 		};
-		0B87BC271D6A16AB006E220B /* GTFSFile */ = {
+		0B87BC271D6A16AB006E220B /* gtfs */ = {
 			isa = PBXGroup;
 			children = (
 				0B87BC1F1D6A117A006E220B /* GTFSFile.swift */,
 				0B87BC361D6A46D2006E220B /* GTFSFileEntry.swift */,
 				10EC9C371D6D092A00D29CE0 /* GTFSFileRow.swift */,
 			);
-			name = GTFSFile;
+			path = gtfs;
 			sourceTree = "<group>";
 		};
-		0B87BC291D6A21F4006E220B /* DTO */ = {
+		0B87BC291D6A21F4006E220B /* dto */ = {
 			isa = PBXGroup;
 			children = (
+				0B87BC2A1D6A222F006E220B /* CalendarDateDTO.swift */,
 				0B8084B01D7DE0E900CAF56D /* DirectTripSummaryDTO.swift */,
-				10B74B101D8A2B3F00303281 /* TransferTripSummaryDTO.swift */,
 				0B87BC321D6A224B006E220B /* RouteDTO.swift */,
 				0B87BC301D6A2245006E220B /* StopDTO.swift */,
-				0B87BC2E1D6A223E006E220B /* StopTimeDTO.swift */,
-				0B87BC2C1D6A2237006E220B /* TripDTO.swift */,
-				0B87BC2A1D6A222F006E220B /* CalendarDateDTO.swift */,
 				0B1D35FF1D84B3FF003CF04A /* StopPairingDTO.swift */,
+				0B87BC2E1D6A223E006E220B /* StopTimeDTO.swift */,
+				10B74B101D8A2B3F00303281 /* TransferTripSummaryDTO.swift */,
+				0B87BC2C1D6A2237006E220B /* TripDTO.swift */,
 			);
-			name = DTO;
+			path = dto;
 			sourceTree = "<group>";
 		};
 		0B99DD3C1D6A6A9300366A12 /* Frameworks */ = {
@@ -410,72 +418,72 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		105EF7B81D627EFD003356DC /* Model */ = {
+		105EF7B81D627EFD003356DC /* model */ = {
 			isa = PBXGroup;
 			children = (
+				0B1D36051D84CAEE003CF04A /* builder */,
+				0B87BC291D6A21F4006E220B /* dto */,
+				10EC9C2F1D6BBCDB00D29CE0 /* extension */,
+				0B87BC271D6A16AB006E220B /* gtfs */,
+				10EC9C321D6D006200D29CE0 /* realm */,
+				105EF7C31D67BD0D003356DC /* CalendarDate.swift */,
+				10B74B121D8A2C3A00303281 /* FromToPair.swift */,
 				105EF7B91D627F09003356DC /* Route.swift */,
 				105EF7BD1D62806B003356DC /* Stop.swift */,
 				10FE08191D7F768100894D5C /* StopPairing.swift */,
 				105EF7BF1D6280C9003356DC /* StopTime.swift */,
 				105EF7C11D652F3E003356DC /* Trip.swift */,
 				0B8084AE1D7DDD9300CAF56D /* TripSummary.swift */,
-				105EF7C31D67BD0D003356DC /* CalendarDate.swift */,
-				10EC9C321D6D006200D29CE0 /* Realm */,
-				10EC9C2F1D6BBCDB00D29CE0 /* Extensions */,
-				0B87BC291D6A21F4006E220B /* DTO */,
-				0B87BC271D6A16AB006E220B /* GTFSFile */,
-				0B1D36051D84CAEE003CF04A /* Builder */,
-				10B74B121D8A2C3A00303281 /* FromToPair.swift */,
 			);
-			name = Model;
+			path = model;
 			sourceTree = "<group>";
 		};
-		105EF7C51D67C00F003356DC /* Controller */ = {
+		105EF7C51D67C00F003356DC /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				0B04355D1D6A06E600D46715 /* DataAccess */,
-				0B04355C1D6A06D600D46715 /* Logging */,
-				0B0435601D6A07C000D46715 /* Loader */,
+				0B04355D1D6A06E600D46715 /* dao */,
+				0B0435601D6A07C000D46715 /* loader */,
+				0B04355C1D6A06D600D46715 /* log */,
 				0B1D36011D84B6DD003CF04A /* AppThemeController.swift */,
 			);
-			name = Controller;
+			path = controller;
 			sourceTree = "<group>";
 		};
-		10EC9C2F1D6BBCDB00D29CE0 /* Extensions */ = {
+		10EC9C2F1D6BBCDB00D29CE0 /* extension */ = {
 			isa = PBXGroup;
 			children = (
-				10EC9C301D6BBCE900D29CE0 /* StringExtension.swift */,
-				10EC9C3F1D76358300D29CE0 /* ErrorExtension.swift */,
 				0B8084B21D7DE48D00CAF56D /* CollectionExtensions.swift */,
-				0B8084B71D7E118C00CAF56D /* UIViewExtension.swift */,
-				0B7C6EDB1D7E37250022D794 /* DoubleExtension.swift */,
 				10B74B0E1D8A0D5800303281 /* DictionaryExtension.swift */,
+				0B7C6EDB1D7E37250022D794 /* DoubleExtension.swift */,
+				10EC9C3F1D76358300D29CE0 /* ErrorExtension.swift */,
+				10EC9C301D6BBCE900D29CE0 /* StringExtension.swift */,
+				0B8084B71D7E118C00CAF56D /* UIViewExtension.swift */,
 			);
-			name = Extensions;
+			path = extension;
 			sourceTree = "<group>";
 		};
-		10EC9C321D6D006200D29CE0 /* Realm */ = {
+		10EC9C321D6D006200D29CE0 /* realm */ = {
 			isa = PBXGroup;
 			children = (
+				10EC9C3D1D76320900D29CE0 /* CalendarDateImpl.swift */,
 				10EC9C331D6D009E00D29CE0 /* RouteImpl.swift */,
 				10EC9C351D6D071C00D29CE0 /* StopImpl.swift */,
-				10EC9C391D6D11A900D29CE0 /* StopTimeImpl.swift */,
-				10EC9C3B1D6D148C00D29CE0 /* TripImpl.swift */,
-				10EC9C3D1D76320900D29CE0 /* CalendarDateImpl.swift */,
 				10FE081B1D7F770C00894D5C /* StopPairingImpl.swift */,
-				0BF1EBEC1D9615C1005697F5 /* TransferTripSummaryImpl.swift */,
+				10EC9C391D6D11A900D29CE0 /* StopTimeImpl.swift */,
 				0BF1EBEE1D96180F005697F5 /* TransferStopTimeImpl.swift */,
+				0BF1EBEC1D9615C1005697F5 /* TransferTripSummaryImpl.swift */,
+				10EC9C3B1D6D148C00D29CE0 /* TripImpl.swift */,
 			);
-			name = Realm;
+			path = realm;
 			sourceTree = "<group>";
 		};
-		10FE081D1D7F789400894D5C /* TableViewCells */ = {
+		10FE081D1D7F789400894D5C /* cells */ = {
 			isa = PBXGroup;
 			children = (
-				0B8084B91D7E14D900CAF56D /* TripSummaryCell.swift */,
 				0B8084BB1D7E16B200CAF56D /* InitializingTableViewCell.swift */,
+				0B8084B91D7E14D900CAF56D /* TripSummaryCell.swift */,
 			);
-			name = TableViewCells;
+			path = cells;
 			sourceTree = "<group>";
 		};
 		D9BFE584C7B076435FA631AC /* Pods */ = {
@@ -854,6 +862,7 @@
 				0B5C95FC1D6010CF00F66B8F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		0B5C96061D6010CF00F66B8F /* Interface.storyboard */ = {
@@ -862,6 +871,7 @@
 				0B5C96071D6010CF00F66B8F /* Base */,
 			);
 			name = Interface.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1041,7 +1051,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = RBL3RYPXUS;
-				INFOPLIST_FILE = MyNextTrain/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MyNextTrain/resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -1059,7 +1069,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = RBL3RYPXUS;
-				INFOPLIST_FILE = MyNextTrain/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MyNextTrain/resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
