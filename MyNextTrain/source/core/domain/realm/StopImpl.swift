@@ -28,5 +28,15 @@ class StopImpl: Object, Stop, GTFSFileEntry {
 	override class func primaryKey() -> String? {
 		return "id"
 	}
+
+    static func copy(_ stop: Stop) -> StopImpl {
+        let s = StopImpl()
+        s.id          = stop.id
+        s.name        = stop.name
+        s.latitude    = stop.latitude
+        s.longitude   = stop.longitude
+        return s
+    }
 	
 }
+

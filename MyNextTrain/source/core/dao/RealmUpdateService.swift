@@ -12,24 +12,25 @@ class RealmUpdateService: UpdateService {
     
     lazy var queryService = AppDelegate.queryService
 	
-	func addFavoritePairing(from startingStop: Stop, to destinationStop: Stop) throws {
+	func addFavoritePairing(from fromStop: Stop, to toStop: Stop) throws {
 
 		
-		guard let startObj = startingStop as? StopImpl, let destObj = destinationStop as? StopImpl else {
-			throw ErrorDTO(description: "require type StopPairingImpl in order to persist")
-		}
+
         let startTime = CFAbsoluteTimeGetCurrent()
-        let desc = "[\(startObj.name) - \(destObj.name)]"
+
+        let desc = "\(fromStop.name) - \(toStop.name)"
         Logger.debug("starting to add pairing \(desc)")
-        
+
+        let realm = try Realm()
+
 		
 		let realmObj = StopPairingImpl()
-		realmObj._startingStop = startObj
-		realmObj._destinationStop = destObj
+		realmObj._startingStop = realm.objects(StopImpl.self).filter("id = %@", fromStop.id).first
+		realmObj._destinationStop = realm.objects(StopImpl.self).filter("id = %@", toStop.id).first
         
         
 		
-		let realm = try Realm()
+
 //        let transfers = findTransfers(from: startObj, to: destObj, realm: realm)
 		
 //        realmObj.transferTripSummaries.append(objectsIn: transfers)

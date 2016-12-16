@@ -34,6 +34,9 @@
 		0B5C963E1D60DC1800F66B8F /* stop_times.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C96361D60DC1800F66B8F /* stop_times.txt */; };
 		0B5C963F1D60DC1800F66B8F /* stops.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C96371D60DC1800F66B8F /* stops.txt */; };
 		0B5C96401D60DC1800F66B8F /* trips.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0B5C96381D60DC1800F66B8F /* trips.txt */; };
+		0B7B77DD1E037D4D0073F553 /* FavoritePairsVC_Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B77DC1E037D4D0073F553 /* FavoritePairsVC_Rx.swift */; };
+		0B7B77DF1E037F600073F553 /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B77DE1E037F600073F553 /* DateService.swift */; };
+		0B7B77E11E0383F00073F553 /* AppStateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B77E01E0383F00073F553 /* AppStateProvider.swift */; };
 		0B7C6EDC1D7E37250022D794 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7C6EDB1D7E37250022D794 /* DoubleExtension.swift */; };
 		0B8084AF1D7DDD9300CAF56D /* TripSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8084AE1D7DDD9300CAF56D /* TripSummary.swift */; };
 		0B8084B11D7DE0E900CAF56D /* DirectTripSummaryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8084B01D7DE0E900CAF56D /* DirectTripSummaryDTO.swift */; };
@@ -49,6 +52,7 @@
 		0B87BC311D6A2245006E220B /* StopDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC301D6A2245006E220B /* StopDTO.swift */; };
 		0B87BC331D6A224B006E220B /* RouteDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC321D6A224B006E220B /* RouteDTO.swift */; };
 		0B87BC371D6A46D2006E220B /* GTFSFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B87BC361D6A46D2006E220B /* GTFSFileEntry.swift */; };
+		0BD32F551E002E0F006FED52 /* FavoritePairsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD32F541E002E0F006FED52 /* FavoritePairsViewModel.swift */; };
 		0BF1EBED1D9615C1005697F5 /* TransferTripSummaryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1EBEC1D9615C1005697F5 /* TransferTripSummaryImpl.swift */; };
 		0BF1EBEF1D96180F005697F5 /* TransferStopTimeImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1EBEE1D96180F005697F5 /* TransferStopTimeImpl.swift */; };
 		105EF7BA1D627F09003356DC /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105EF7B91D627F09003356DC /* Route.swift */; };
@@ -127,7 +131,7 @@
 		0B0435611D6A081100D46715 /* GTFSFileLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTFSFileLoader.swift; sourceTree = "<group>"; };
 		0B1D35FD1D84AB07003CF04A /* PairingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PairingViewController.swift; sourceTree = "<group>"; };
 		0B1D35FF1D84B3FF003CF04A /* StopPairingDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopPairingDTO.swift; sourceTree = "<group>"; };
-		0B1D36011D84B6DD003CF04A /* AppThemeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppThemeController.swift; sourceTree = "<group>"; };
+		0B1D36011D84B6DD003CF04A /* AppThemeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppThemeController.swift; path = AppThemeController.swift; sourceTree = "<group>"; };
 		0B1D36031D84CAE6003CF04A /* AttributedStringBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedStringBuilder.swift; sourceTree = "<group>"; };
 		0B5C95EF1D6010CE00F66B8F /* MyNextTrain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyNextTrain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B5C95F21D6010CF00F66B8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -155,8 +159,11 @@
 		0B5C96361D60DC1800F66B8F /* stop_times.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stop_times.txt; sourceTree = "<group>"; };
 		0B5C96371D60DC1800F66B8F /* stops.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stops.txt; sourceTree = "<group>"; };
 		0B5C96381D60DC1800F66B8F /* trips.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trips.txt; sourceTree = "<group>"; };
+		0B7B77DC1E037D4D0073F553 /* FavoritePairsVC_Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritePairsVC_Rx.swift; sourceTree = "<group>"; };
+		0B7B77DE1E037F600073F553 /* DateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
+		0B7B77E01E0383F00073F553 /* AppStateProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStateProvider.swift; sourceTree = "<group>"; };
 		0B7C6EDB1D7E37250022D794 /* DoubleExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
-		0B8084AE1D7DDD9300CAF56D /* TripSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripSummary.swift; sourceTree = "<group>"; };
+		0B8084AE1D7DDD9300CAF56D /* TripSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripSummary.swift; path = TripSummary.swift; sourceTree = "<group>"; };
 		0B8084B01D7DE0E900CAF56D /* DirectTripSummaryDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectTripSummaryDTO.swift; sourceTree = "<group>"; };
 		0B8084B21D7DE48D00CAF56D /* CollectionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtensions.swift; sourceTree = "<group>"; };
 		0B8084B51D7E0A8A00CAF56D /* UpcomingTripsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingTripsViewController.swift; sourceTree = "<group>"; };
@@ -170,17 +177,18 @@
 		0B87BC301D6A2245006E220B /* StopDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopDTO.swift; sourceTree = "<group>"; };
 		0B87BC321D6A224B006E220B /* RouteDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDTO.swift; sourceTree = "<group>"; };
 		0B87BC361D6A46D2006E220B /* GTFSFileEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTFSFileEntry.swift; sourceTree = "<group>"; };
+		0BD32F541E002E0F006FED52 /* FavoritePairsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritePairsViewModel.swift; sourceTree = "<group>"; };
 		0BF1EBEC1D9615C1005697F5 /* TransferTripSummaryImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferTripSummaryImpl.swift; sourceTree = "<group>"; };
 		0BF1EBEE1D96180F005697F5 /* TransferStopTimeImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferStopTimeImpl.swift; sourceTree = "<group>"; };
-		105EF7B91D627F09003356DC /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
-		105EF7BD1D62806B003356DC /* Stop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
-		105EF7BF1D6280C9003356DC /* StopTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopTime.swift; sourceTree = "<group>"; };
-		105EF7C11D652F3E003356DC /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
-		105EF7C31D67BD0D003356DC /* CalendarDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDate.swift; sourceTree = "<group>"; };
+		105EF7B91D627F09003356DC /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Route.swift; path = Route.swift; sourceTree = "<group>"; };
+		105EF7BD1D62806B003356DC /* Stop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stop.swift; path = Stop.swift; sourceTree = "<group>"; };
+		105EF7BF1D6280C9003356DC /* StopTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StopTime.swift; path = StopTime.swift; sourceTree = "<group>"; };
+		105EF7C11D652F3E003356DC /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Trip.swift; path = Trip.swift; sourceTree = "<group>"; };
+		105EF7C31D67BD0D003356DC /* CalendarDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarDate.swift; path = CalendarDate.swift; sourceTree = "<group>"; };
 		105EF7C81D67C2BB003356DC /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		10B74B0E1D8A0D5800303281 /* DictionaryExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryExtension.swift; sourceTree = "<group>"; };
 		10B74B101D8A2B3F00303281 /* TransferTripSummaryDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferTripSummaryDTO.swift; sourceTree = "<group>"; };
-		10B74B121D8A2C3A00303281 /* FromToPair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromToPair.swift; sourceTree = "<group>"; };
+		10B74B121D8A2C3A00303281 /* FromToPair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FromToPair.swift; path = FromToPair.swift; sourceTree = "<group>"; };
 		10EC9C301D6BBCE900D29CE0 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		10EC9C331D6D009E00D29CE0 /* RouteImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteImpl.swift; sourceTree = "<group>"; };
 		10EC9C351D6D071C00D29CE0 /* StopImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopImpl.swift; sourceTree = "<group>"; };
@@ -191,7 +199,7 @@
 		10EC9C3F1D76358300D29CE0 /* ErrorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorExtension.swift; sourceTree = "<group>"; };
 		10EC9C411D7CFFF300D29CE0 /* RealmQueryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmQueryService.swift; sourceTree = "<group>"; };
 		10FE08171D7F754300894D5C /* FavoritePairsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritePairsViewController.swift; sourceTree = "<group>"; };
-		10FE08191D7F768100894D5C /* StopPairing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopPairing.swift; sourceTree = "<group>"; };
+		10FE08191D7F768100894D5C /* StopPairing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StopPairing.swift; path = StopPairing.swift; sourceTree = "<group>"; };
 		10FE081B1D7F770C00894D5C /* StopPairingImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopPairingImpl.swift; sourceTree = "<group>"; };
 		10FE081E1D7F822C00894D5C /* UpdateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateService.swift; sourceTree = "<group>"; };
 		10FE08201D7F88DE00894D5C /* RealmUpdateService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmUpdateService.swift; sourceTree = "<group>"; };
@@ -240,6 +248,7 @@
 			children = (
 				105EF7C81D67C2BB003356DC /* Logger.swift */,
 			);
+			name = log;
 			path = log;
 			sourceTree = "<group>";
 		};
@@ -251,6 +260,7 @@
 				10FE08201D7F88DE00894D5C /* RealmUpdateService.swift */,
 				10FE081E1D7F822C00894D5C /* UpdateService.swift */,
 			);
+			name = dao;
 			path = dao;
 			sourceTree = "<group>";
 		};
@@ -259,14 +269,14 @@
 			children = (
 				0B0435611D6A081100D46715 /* GTFSFileLoader.swift */,
 			);
+			name = loader;
 			path = loader;
 			sourceTree = "<group>";
 		};
 		0B1C487F1DFF94CA00E40324 /* source */ = {
 			isa = PBXGroup;
 			children = (
-				105EF7C51D67C00F003356DC /* controller */,
-				105EF7B81D627EFD003356DC /* model */,
+				105EF7B81D627EFD003356DC /* core */,
 				0B8084B41D7E049800CAF56D /* ui */,
 				0B5C95F21D6010CF00F66B8F /* AppDelegate.swift */,
 			);
@@ -374,8 +384,8 @@
 			isa = PBXGroup;
 			children = (
 				10FE081D1D7F789400894D5C /* cells */,
+				0BD32F531E002DEB006FED52 /* favorite */,
 				10FE08221D7F8CD500894D5C /* AddPairingViewController.swift */,
-				10FE08171D7F754300894D5C /* FavoritePairsViewController.swift */,
 				0B1D35FD1D84AB07003CF04A /* PairingViewController.swift */,
 				0B5C95F41D6010CF00F66B8F /* RootViewController.swift */,
 				0B8084B51D7E0A8A00CAF56D /* UpcomingTripsViewController.swift */,
@@ -393,19 +403,22 @@
 			path = gtfs;
 			sourceTree = "<group>";
 		};
-		0B87BC291D6A21F4006E220B /* dto */ = {
+		0B87BC291D6A21F4006E220B /* domain */ = {
 			isa = PBXGroup;
 			children = (
-				0B87BC2A1D6A222F006E220B /* CalendarDateDTO.swift */,
-				0B8084B01D7DE0E900CAF56D /* DirectTripSummaryDTO.swift */,
-				0B87BC321D6A224B006E220B /* RouteDTO.swift */,
-				0B87BC301D6A2245006E220B /* StopDTO.swift */,
-				0B1D35FF1D84B3FF003CF04A /* StopPairingDTO.swift */,
-				0B87BC2E1D6A223E006E220B /* StopTimeDTO.swift */,
-				10B74B101D8A2B3F00303281 /* TransferTripSummaryDTO.swift */,
-				0B87BC2C1D6A2237006E220B /* TripDTO.swift */,
+				0BD32F521E002CA7006FED52 /* dto */,
+				10EC9C321D6D006200D29CE0 /* realm */,
+				105EF7C31D67BD0D003356DC /* CalendarDate.swift */,
+				10B74B121D8A2C3A00303281 /* FromToPair.swift */,
+				105EF7B91D627F09003356DC /* Route.swift */,
+				105EF7BD1D62806B003356DC /* Stop.swift */,
+				10FE08191D7F768100894D5C /* StopPairing.swift */,
+				105EF7BF1D6280C9003356DC /* StopTime.swift */,
+				105EF7C11D652F3E003356DC /* Trip.swift */,
+				0B8084AE1D7DDD9300CAF56D /* TripSummary.swift */,
 			);
-			path = dto;
+			name = domain;
+			path = domain;
 			sourceTree = "<group>";
 		};
 		0B99DD3C1D6A6A9300366A12 /* Frameworks */ = {
@@ -418,35 +431,58 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		105EF7B81D627EFD003356DC /* model */ = {
+		0BD32F511E002C70006FED52 /* support */ = {
 			isa = PBXGroup;
 			children = (
 				0B1D36051D84CAEE003CF04A /* builder */,
-				0B87BC291D6A21F4006E220B /* dto */,
 				10EC9C2F1D6BBCDB00D29CE0 /* extension */,
-				0B87BC271D6A16AB006E220B /* gtfs */,
-				10EC9C321D6D006200D29CE0 /* realm */,
-				105EF7C31D67BD0D003356DC /* CalendarDate.swift */,
-				10B74B121D8A2C3A00303281 /* FromToPair.swift */,
-				105EF7B91D627F09003356DC /* Route.swift */,
-				105EF7BD1D62806B003356DC /* Stop.swift */,
-				10FE08191D7F768100894D5C /* StopPairing.swift */,
-				105EF7BF1D6280C9003356DC /* StopTime.swift */,
-				105EF7C11D652F3E003356DC /* Trip.swift */,
-				0B8084AE1D7DDD9300CAF56D /* TripSummary.swift */,
+				0B04355C1D6A06D600D46715 /* log */,
+				0B7B77E01E0383F00073F553 /* AppStateProvider.swift */,
+				0B1D36011D84B6DD003CF04A /* AppThemeController.swift */,
+				0B7B77DE1E037F600073F553 /* DateService.swift */,
 			);
-			path = model;
+			name = support;
+			path = support;
 			sourceTree = "<group>";
 		};
-		105EF7C51D67C00F003356DC /* controller */ = {
+		0BD32F521E002CA7006FED52 /* dto */ = {
+			isa = PBXGroup;
+			children = (
+				0B87BC2A1D6A222F006E220B /* CalendarDateDTO.swift */,
+				0B8084B01D7DE0E900CAF56D /* DirectTripSummaryDTO.swift */,
+				0B87BC321D6A224B006E220B /* RouteDTO.swift */,
+				0B87BC301D6A2245006E220B /* StopDTO.swift */,
+				0B1D35FF1D84B3FF003CF04A /* StopPairingDTO.swift */,
+				0B87BC2E1D6A223E006E220B /* StopTimeDTO.swift */,
+				10B74B101D8A2B3F00303281 /* TransferTripSummaryDTO.swift */,
+				0B87BC2C1D6A2237006E220B /* TripDTO.swift */,
+			);
+			name = dto;
+			path = dto;
+			sourceTree = "<group>";
+		};
+		0BD32F531E002DEB006FED52 /* favorite */ = {
+			isa = PBXGroup;
+			children = (
+				0B7B77DC1E037D4D0073F553 /* FavoritePairsVC_Rx.swift */,
+				10FE08171D7F754300894D5C /* FavoritePairsViewController.swift */,
+				0BD32F541E002E0F006FED52 /* FavoritePairsViewModel.swift */,
+			);
+			name = favorite;
+			path = favorite;
+			sourceTree = "<group>";
+		};
+		105EF7B81D627EFD003356DC /* core */ = {
 			isa = PBXGroup;
 			children = (
 				0B04355D1D6A06E600D46715 /* dao */,
+				0B87BC291D6A21F4006E220B /* domain */,
+				0B87BC271D6A16AB006E220B /* gtfs */,
 				0B0435601D6A07C000D46715 /* loader */,
-				0B04355C1D6A06D600D46715 /* log */,
-				0B1D36011D84B6DD003CF04A /* AppThemeController.swift */,
+				0BD32F511E002C70006FED52 /* support */,
 			);
-			path = controller;
+			name = core;
+			path = core;
 			sourceTree = "<group>";
 		};
 		10EC9C2F1D6BBCDB00D29CE0 /* extension */ = {
@@ -474,6 +510,7 @@
 				0BF1EBEC1D9615C1005697F5 /* TransferTripSummaryImpl.swift */,
 				10EC9C3B1D6D148C00D29CE0 /* TripImpl.swift */,
 			);
+			name = realm;
 			path = realm;
 			sourceTree = "<group>";
 		};
@@ -781,13 +818,16 @@
 				0B8084BC1D7E16B200CAF56D /* InitializingTableViewCell.swift in Sources */,
 				105EF7C41D67BD0D003356DC /* CalendarDate.swift in Sources */,
 				105EF7C01D6280C9003356DC /* StopTime.swift in Sources */,
+				0B7B77DD1E037D4D0073F553 /* FavoritePairsVC_Rx.swift in Sources */,
 				0BF1EBEF1D96180F005697F5 /* TransferStopTimeImpl.swift in Sources */,
 				10FE081F1D7F822C00894D5C /* UpdateService.swift in Sources */,
+				0B7B77E11E0383F00073F553 /* AppStateProvider.swift in Sources */,
 				10FE081A1D7F768100894D5C /* StopPairing.swift in Sources */,
 				10B74B111D8A2B3F00303281 /* TransferTripSummaryDTO.swift in Sources */,
 				0B1D36001D84B3FF003CF04A /* StopPairingDTO.swift in Sources */,
 				10EC9C401D76358300D29CE0 /* ErrorExtension.swift in Sources */,
 				105EF7BA1D627F09003356DC /* Route.swift in Sources */,
+				0BD32F551E002E0F006FED52 /* FavoritePairsViewModel.swift in Sources */,
 				10EC9C341D6D009E00D29CE0 /* RouteImpl.swift in Sources */,
 				0B0435621D6A081100D46715 /* GTFSFileLoader.swift in Sources */,
 				105EF7C91D67C2BB003356DC /* Logger.swift in Sources */,
@@ -814,6 +854,7 @@
 				0B87BC201D6A117A006E220B /* GTFSFile.swift in Sources */,
 				10EC9C3E1D76320900D29CE0 /* CalendarDateImpl.swift in Sources */,
 				0B87BC2B1D6A222F006E220B /* CalendarDateDTO.swift in Sources */,
+				0B7B77DF1E037F600073F553 /* DateService.swift in Sources */,
 				0B87BC311D6A2245006E220B /* StopDTO.swift in Sources */,
 				10EC9C3C1D6D148C00D29CE0 /* TripImpl.swift in Sources */,
 				10B74B0F1D8A0D5800303281 /* DictionaryExtension.swift in Sources */,

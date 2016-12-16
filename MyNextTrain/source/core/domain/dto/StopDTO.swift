@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct StopDTO {
+struct StopDTO: Stop {
 	
     let id: Int
 	let name: String
@@ -24,6 +24,13 @@ extension StopDTO {
         self.name = columnMap["stop_name"]!
         self.latitude = Double(columnMap["stop_lat"]!)!
         self.longitude = Double(columnMap["stop_lon"]!)!
+    }
+
+    init(stop: Stop) {
+        self.id          = stop.id
+        self.name        = stop.name
+        self.latitude    = stop.latitude
+        self.longitude   = stop.longitude
     }
     
     var lookupKey: AnyHashable {

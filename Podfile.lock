@@ -1,9 +1,9 @@
 PODS:
-  - Realm (1.1.0):
-    - Realm/Headers (= 1.1.0)
-  - Realm/Headers (1.1.0)
-  - RealmSwift (1.1.0):
-    - Realm (= 1.1.0)
+  - Realm (2.1.1):
+    - Realm/Headers (= 2.1.1)
+  - Realm/Headers (2.1.1)
+  - RealmSwift (2.1.1):
+    - Realm (= 2.1.1)
   - RxCocoa (3.0.1):
     - RxSwift (~> 3.0)
   - RxSwift (3.0.1)
@@ -15,8 +15,8 @@ DEPENDENCIES:
   - RxSwift (~> 3.0)
 
 SPEC CHECKSUMS:
-  Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
-  RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
+  Realm: a55959c0b171a5fe5267406d17f314fec3cefaae
+  RealmSwift: 749fd955bf8d6471c21d218b9389a47aaeccfe3f
   RxCocoa: 15a52fc590dcc700cb4a690a633b5c5184ce3a78
   RxSwift: af5680055c4ad04480189c52d28385b1029493a6
 
