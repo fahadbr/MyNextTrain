@@ -135,7 +135,7 @@
 		0B1D36011D84B6DD003CF04A /* AppThemeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppThemeController.swift; sourceTree = "<group>"; };
 		0B1D36031D84CAE6003CF04A /* AttributedStringBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedStringBuilder.swift; sourceTree = "<group>"; };
 		0B2783011E04B40B0043ADB9 /* FavoritePair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritePair.swift; sourceTree = "<group>"; };
-		0B4CA3701E06299E0052BD39 /* RxSubtitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RxSubtitleCell.swift; path = ../favorite/RxSubtitleCell.swift; sourceTree = "<group>"; };
+		0B4CA3701E06299E0052BD39 /* RxSubtitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RxSubtitleCell.swift; path = RxSubtitleCell.swift; sourceTree = "<group>"; };
 		0B4CA3721E0629CC0052BD39 /* RxCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCell.swift; sourceTree = "<group>"; };
 		0B4CA3741E0643630052BD39 /* StopService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopService.swift; sourceTree = "<group>"; };
 		0B5C95EF1D6010CE00F66B8F /* MyNextTrain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyNextTrain.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -260,8 +260,8 @@
 				0B04355E1D6A06FC00D46715 /* QueryService.swift */,
 				10EC9C411D7CFFF300D29CE0 /* RealmQueryService.swift */,
 				10FE08201D7F88DE00894D5C /* RealmUpdateService.swift */,
-				10FE081E1D7F822C00894D5C /* UpdateService.swift */,
 				0B4CA3741E0643630052BD39 /* StopService.swift */,
+				10FE081E1D7F822C00894D5C /* UpdateService.swift */,
 			);
 			path = dao;
 			sourceTree = "<group>";
@@ -437,6 +437,7 @@
 				10FE08221D7F8CD500894D5C /* AddPairingViewController.swift */,
 			);
 			name = add;
+			path = add;
 			sourceTree = "<group>";
 		};
 		0BD32F511E002C70006FED52 /* support */ = {
@@ -470,11 +471,11 @@
 		0BD32F531E002DEB006FED52 /* favorite */ = {
 			isa = PBXGroup;
 			children = (
+				0B2783011E04B40B0043ADB9 /* FavoritePair.swift */,
+				0BC3DE1A1E06056E007E4FBA /* FavoritePairCell.swift */,
 				0B7B77DC1E037D4D0073F553 /* FavoritePairsVC_Rx.swift */,
 				10FE08171D7F754300894D5C /* FavoritePairsViewController.swift */,
 				0BD32F541E002E0F006FED52 /* FavoritePairsViewModel.swift */,
-				0B2783011E04B40B0043ADB9 /* FavoritePair.swift */,
-				0BC3DE1A1E06056E007E4FBA /* FavoritePairCell.swift */,
 			);
 			path = favorite;
 			sourceTree = "<group>";
@@ -495,12 +496,12 @@
 			isa = PBXGroup;
 			children = (
 				0B8084B21D7DE48D00CAF56D /* Collection+App.swift */,
+				0BC3DE171E05F857007E4FBA /* Date+Ext.swift */,
 				10B74B0E1D8A0D5800303281 /* Dictionary+.App.swift */,
 				0B7C6EDB1D7E37250022D794 /* Double+App.swift */,
 				10EC9C3F1D76358300D29CE0 /* Error+App.swift */,
 				10EC9C301D6BBCE900D29CE0 /* String+App.swift */,
 				0B8084B71D7E118C00CAF56D /* UIView+App.swift */,
-				0BC3DE171E05F857007E4FBA /* Date+Ext.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -521,11 +522,11 @@
 		10FE081D1D7F789400894D5C /* common */ = {
 			isa = PBXGroup;
 			children = (
-				0B4CA3701E06299E0052BD39 /* RxSubtitleCell.swift */,
 				0B4CA3721E0629CC0052BD39 /* RxCell.swift */,
+				0B4CA3701E06299E0052BD39 /* RxSubtitleCell.swift */,
 			);
 			name = common;
-			path = cells;
+			path = common;
 			sourceTree = "<group>";
 		};
 		D9BFE584C7B076435FA631AC /* Pods */ = {
