@@ -10,21 +10,29 @@ import UIKit
 
 class TransferTripSummaryDTO: TripSummary {
 	
-	var departureTime: TimeInterval {
-		return stopTimes.from.departureTime
-	}
-	
-	var arrivalTime: TimeInterval {
-		return stopTimes.to.arrivalTime
-	}
+	var departureTime: TimeInterval
+	var arrivalTime: TimeInterval
 
-	var stopTimes: FromToPair<StopTime>!
-	var trips: FromToPair<Trip>!
-	var routes: FromToPair<Route>!
-//	var transferTime: Double = 0
-	var transferStop: Stop!
-	var transferStopTime: StopTime!
-	
+    var transferStopName: String
+    var transferTime: Pair<TimeInterval>
+    var fromRouteName: String
+    var fromRouteColor: UIColor
+
+    init(departureTime: TimeInterval,
+        arrivalTime: TimeInterval,
+        transferStopName: String,
+        transferTime: Pair<TimeInterval>,
+        fromRouteName: String,
+        fromRouteColor: UIColor) {
+
+        self.departureTime    = departureTime
+        self.arrivalTime      = arrivalTime
+        self.transferStopName = transferStopName
+        self.transferTime     = transferTime
+        self.fromRouteName    = fromRouteName
+        self.fromRouteColor   = fromRouteColor
+    }
+
 	func scheduleDescription(for date: Date) -> NSAttributedString {
 		let departing = departureTime
 		let arriving = arrivalTime
@@ -34,23 +42,23 @@ class TransferTripSummaryDTO: TripSummary {
 		return AttributedStringBuilder()
 			.append(text: "\(departing.timeRepresenation(from: date)) - \(arriving.timeRepresenation(from: date))")
 			.append(text: " • \(timeDiff.timeRepresentation)", font: smallFont, color: UIColor.altText)
-			.append(text: " • \(routes.from.longName) ", font: smallFont, color: routes.from.uiColor)
-			.append(text: " • \(transferStopTime.arrivalTime.timeRepresenation(from: date)) - \(transferStopTime.departureTime.timeRepresenation(from: date))", font:smallFont)
+			.append(text: " • \(fromRouteName) ", font: smallFont, color: fromRouteColor)
+			.append(text: " • \(transferTime.left.timeRepresenation(from: date)) - \(transferTime.right.timeRepresenation(from: date))", font:smallFont)
 			.build
 	}
 	
 	func upcomingEventDescription(for currentTime: TimeInterval) -> String {
 		func description() -> String {
 			switch currentTime {
-			case 0 ..< stopTimes.from.departureTime:
-				return "Departing in " + (stopTimes.from.departureTime - currentTime).timeRepresentation
-			case stopTimes.from.departureTime ..< (stopTimes.to.arrivalTime - 1):
-				return "Arriving in " + (stopTimes.to.arrivalTime - currentTime).timeRepresentation
+			case 0 ..< departureTime:
+				return "Departing in " + (departureTime - currentTime).timeRepresentation
+			case departureTime ..< (arrivalTime - 1):
+				return "Arriving in " + (arrivalTime - currentTime).timeRepresentation
 			default:
 				return "Arrived"
 			}
 		}
-		return description() + " • Transfer at \(transferStop.name)"
+		return description() + " • Transfer at \(transferStopName)"
 	}
 	
 }

@@ -9,6 +9,13 @@
 import Foundation
 
 struct StopPairingDTO: StopPairing {
-    let startingStop: Stop!
-    let destinationStop: Stop!
+    let fromStop: Stop
+    let toStop: Stop
+}
+extension StopPairingDTO {
+    
+    init(_ stopPairing: StopPairing) {
+        self.fromStop = StopDTO(stop: stopPairing.fromStop)
+        self.toStop   = StopDTO(stop: stopPairing.toStop)
+    }
 }

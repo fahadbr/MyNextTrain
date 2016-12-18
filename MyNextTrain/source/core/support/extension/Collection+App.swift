@@ -41,16 +41,5 @@ extension Collection {
         return set
     }
     
-//    func flatMapToSet<T:Hashable, C:Collection>(_ transform: (Element) -> C) -> Set<T> where C.Iterator.Element.Type == T.Type {
-//        var set = Set<T>()
-//        for e in self {
-//            for t in transform(e) {
-//                set.insert(t)
-//            }
-//        }
-//        return set
-//        
-//    }
-//    
     
 }

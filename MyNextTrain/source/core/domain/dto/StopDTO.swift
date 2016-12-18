@@ -19,22 +19,11 @@ struct StopDTO: Stop {
 
 extension StopDTO {
     
-    init(columnMap: [String : String]) {
-        self.id = Int(columnMap["stop_id"]!)!
-        self.name = columnMap["stop_name"]!
-        self.latitude = Double(columnMap["stop_lat"]!)!
-        self.longitude = Double(columnMap["stop_lon"]!)!
-    }
-
     init(stop: Stop) {
         self.id          = stop.id
         self.name        = stop.name
         self.latitude    = stop.latitude
         self.longitude   = stop.longitude
-    }
-    
-    var lookupKey: AnyHashable {
-        return AnyHashable(id)
     }
     
 }

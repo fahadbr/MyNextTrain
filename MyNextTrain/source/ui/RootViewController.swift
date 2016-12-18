@@ -14,8 +14,8 @@ class RootViewController: UIViewController {
 	
 	
     
-    lazy var favoritePairsVc:FavoritePairsViewController = FavoritePairsViewController()
-    lazy var navController:UINavigationController = UINavigationController(rootViewController: self.favoritePairsVc)
+    lazy var favoritePairsVc: FavoritePairVC = FavoritePairVC()
+    lazy var navController: UINavigationController = UINavigationController(rootViewController: self.favoritePairsVc)
 
     override func viewDidLoad() {
         super.viewDidLoad()

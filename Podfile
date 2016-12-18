@@ -9,6 +9,7 @@ target 'MyNextTrain' do
   pod 'RealmSwift', '>= 1.1.0'
   pod 'RxSwift',    '~> 3.0'
   pod 'RxCocoa',    '~> 3.0'
+  pod 'RxRealm'
   # Pods for MyNextTrain
 
 end

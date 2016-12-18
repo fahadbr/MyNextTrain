@@ -10,19 +10,19 @@ import Foundation
 
 protocol StopPairing: CustomStringConvertible {
 	
-	var startingStop: Stop! { get }
-	var destinationStop: Stop! { get }
+	var fromStop: Stop { get }
+	var toStop: Stop { get }
 	
 }
 
 extension StopPairing {
 	
 	var description: String {
-		return "\(startingStop.name) -> \(destinationStop.name)"
+		return "\(fromStop.name) -> \(toStop.name)"
 	}
     
     var directionId: Int {
-        return startingStop.longitude > destinationStop.longitude ? 1 : 0
+        return fromStop.longitude > toStop.longitude ? 1 : 0
     }
 	
 }

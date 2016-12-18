@@ -9,31 +9,24 @@
 import RxSwift
 
 class DateService {
-    static let instance = DateService(AppStateProvider.instance)
+    static let instance = DateService(AppState.instance)
 
     private typealias This = DateService
 
-    private static let formatter: DateFormatter = {
-        $0.dateFormat = "ddMMyy"
-        return $0
-    }(DateFormatter())
-
+    private static let formatter = DateFormatter(pattern: "ddMMyy")
 
     private let disposeBag = DisposeBag()
-    private let _currentDate: Variable<Date>
-
-    var currentDate: Observable<Date> {
-        return _currentDate
-            .asDriver()
-            .distinctUntilChanged()
-            .asObservable()
+    private (set) var currentDateStream: Variable<Date>
+    
+    var currentDate: Date {
+        return currentDateStream.value
     }
 
-    init(_ appStateProvider: AppStateProvider) {
-        _currentDate = Variable(This.getDate())
+    init(_ appState: AppState) {
+        currentDateStream = Variable(This.getDate())
 
-        appStateProvider.becameActive.drive(onNext: { [weak self] _ in
-            self?._currentDate.value = This.getDate()
+        appState.becameActive.subscribe(onNext: { [weak self] _ in
+            self?.currentDateStream.value = This.getDate()
         }).addDisposableTo(disposeBag)
 
     }

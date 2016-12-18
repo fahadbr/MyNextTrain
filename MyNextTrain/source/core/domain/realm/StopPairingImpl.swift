@@ -10,11 +10,10 @@ import RealmSwift
 
 class StopPairingImpl: Object, StopPairing {
 	
-	dynamic var _startingStop: StopImpl?
-	dynamic var _destinationStop: StopImpl?
-    let transferTripSummaries = List<TransferTripSummaryImpl>()
+	dynamic var _fromStop: StopImpl?
+	dynamic var _toStop: StopImpl?
 	
-	var startingStop: Stop! { return _startingStop }
-	var destinationStop: Stop! { return _destinationStop }
+	var fromStop: Stop { return _fromStop! }
+	var toStop: Stop { return _toStop! }
 	
 }

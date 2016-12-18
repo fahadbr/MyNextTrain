@@ -16,5 +16,17 @@ struct RouteDTO: Route {
 	let type: Int
 	let color: String?
 	let textColor: String?
-	
+}
+
+extension RouteDTO {
+
+    init(route: Route) {
+        id        = route.id
+        shortName = route.shortName
+        longName  = route.longName
+        type      = route.type
+        color     = route.color
+        textColor = route.textColor
+    }
+
 }

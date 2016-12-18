@@ -10,43 +10,39 @@ import UIKit
 
 class DirectTripSummaryDTO: TripSummary {
 	
-	let stopTimes: FromToPair<StopTime>
-	let trip: Trip
-	let route: Route
-	
-	var departureTime: TimeInterval {
-		return stopTimes.from.departureTime
-	}
-	
-	var arrivalTime: TimeInterval {
-		return stopTimes.to.arrivalTime
-	}
 
-	init(stopTimes: FromToPair<StopTime>, trip: Trip, route: Route) {
-		self.stopTimes = stopTimes
-		self.trip = trip
-		self.route = route
+    let departureTime: TimeInterval
+    let arrivalTime: TimeInterval
+    let routeName: String
+    let routeColor: UIColor
+
+
+	init(stopTimes: Pair<StopTime>, trip: Trip, route: Route) {
+        self.departureTime = stopTimes.left.departureTime
+        self.arrivalTime = stopTimes.right.arrivalTime
+        self.routeName = route.longName
+        self.routeColor = route.uiColor
 	}
 	
 	func scheduleDescription(for date: Date) -> NSAttributedString {
-		let departing = stopTimes.from.departureTime
-		let arriving = stopTimes.to.arrivalTime
+		let departing = departureTime
+		let arriving = arrivalTime
 		let smallFont = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
 		
 		let timeDiff = arriving - departing
 		return AttributedStringBuilder()
 			.append(text: "\(departing.timeRepresenation(from: date)) - \(arriving.timeRepresenation(from: date))")
 			.append(text: " • \(timeDiff.timeRepresentation) • ", font: smallFont, color: UIColor.altText)
-			.append(text: " \(route.longName) ", font: smallFont, color: route.uiColor)
+			.append(text: " \(routeName) ", font: smallFont, color: routeColor)
 			.build
 	}
 	
 	func upcomingEventDescription(for currentTime: TimeInterval) -> String {
 		switch currentTime {
-		case 0 ..< stopTimes.from.departureTime:
-			return "Departing in " + (stopTimes.from.departureTime - currentTime).timeRepresentation
-		case stopTimes.from.departureTime ..< (stopTimes.to.arrivalTime - 1):
-			return "Arriving in " + (stopTimes.to.arrivalTime - currentTime).timeRepresentation
+		case 0 ..< departureTime:
+			return "Departing in " + (departureTime - currentTime).timeRepresentation
+		case departureTime ..< (arrivalTime - 1):
+			return "Arriving in " + (arrivalTime - currentTime).timeRepresentation
 		default:
 			return "Arrived"
 		}

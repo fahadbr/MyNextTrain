@@ -13,14 +13,14 @@ class RealmQueryService: QueryService {
 	
 	private typealias This = RealmQueryService
 	
-    private lazy var routesById: [Int : RouteImpl] = self.loadRoutesById()
+    private lazy var routesById: [Int : Route] = self.loadRoutesById()
     private var serviceIdCache = [Date : [String]]()
     
 	var favoritePairings: [StopPairing] {
 		do {
 			let realm = try Realm()
 			let stopPairings: [StopPairing] = realm.objects(StopPairingImpl.self)
-				.map( {$0 as StopPairing })
+                .map( { StopPairingDTO($0) })
 			
 			return stopPairings
 		} catch let e {
@@ -34,7 +34,7 @@ class RealmQueryService: QueryService {
 			let realm = try Realm()
 			let stops: [Stop] = realm.objects(StopImpl.self)
 				.sorted(byProperty: "name")
-				.map( {$0 as Stop })
+                .map( { StopDTO(stop: $0) } )
 			
 			return stops
 		} catch let e {
@@ -45,10 +45,10 @@ class RealmQueryService: QueryService {
     
     
 	
-    private func loadRoutesById() -> [Int : RouteImpl] {
+    private func loadRoutesById() -> [Int : Route] {
         do {
             let realm = try Realm()
-            let routes = realm.objects( RouteImpl.self)
+            let routes = realm.objects( RouteImpl.self).map { RouteDTO(route: $0) }
             Logger.debug("loaded \(routes.count) routes")
             return routes.dictionary(keyExtractor: { $0.id })
         
@@ -59,24 +59,22 @@ class RealmQueryService: QueryService {
     }
 	
 	func tripSummaries(for pairing: StopPairing, on date: Date) -> [TripSummary] {
-		guard let startingStop = pairing.startingStop, let destinationStop = pairing.destinationStop else {
-            Logger.error("one of startingStop or destinationStop was nil in pairing")
-            return []
-		}
+        let fromStop = pairing.fromStop
+        let toStop = pairing.toStop
 		
 		do {
 			let realm = try Realm()
-			Logger.debug("searching using stops from \(startingStop.name) to \(destinationStop.name) for date \(date)")
+			Logger.debug("searching using stops from \(fromStop.name) to \(toStop.name) for date \(date)")
 			
             func stopTimes(forStop stop: Stop) -> [String : StopTimeImpl] {
                 return realm.objects( StopTimeImpl.self).filter("stopId == \(stop.id)").dictionary { $0.tripId }
             }
             
-			let startingStopTimes = stopTimes(forStop: startingStop)
-			let destinationStopTimes = stopTimes(forStop: destinationStop)
+			let fromStopTimes = stopTimes(forStop: fromStop)
+			let toStopTimes = stopTimes(forStop: toStop)
             
-            let fromTripIds = Set<String>(startingStopTimes.keys)
-            let toTripIds = Set<String>(destinationStopTimes.keys)
+            let fromTripIds = Set<String>(fromStopTimes.keys)
+            let toTripIds = Set<String>(toStopTimes.keys)
             
             let commonTripIds = fromTripIds.intersection(toTripIds)
             
@@ -86,16 +84,16 @@ class RealmQueryService: QueryService {
             
 			
 			var summaries: [TripSummary] = trips.map { trip -> DirectTripSummaryDTO in
-				let stopTimes = FromToPair<StopTime>(from: startingStopTimes[trip.id]!, to: destinationStopTimes[trip.id]!)
+				let stopTimes = Pair<StopTime>(fromStopTimes[trip.id]!, toStopTimes[trip.id]!)
 				return DirectTripSummaryDTO(stopTimes: stopTimes,
 				                            trip: trip,
 				                            route: self.routesById[trip.routeId]!)
             }
 			
             
-            let transfers = findTransfers(fromStop: startingStop,
+            let transfers = findTransfers(fromStop: fromStop,
                                           fromTripIds: fromTripIds.subtracting(toTripIds),
-                                          toStop: destinationStop,
+                                          toStop: toStop,
                                           toTripIds: toTripIds.subtracting(fromTripIds),
                                           on: date,
                                           realm: realm)
@@ -129,46 +127,45 @@ class RealmQueryService: QueryService {
 	}
     
     private func nextTripSummary(forPairing pairing: StopPairing, date: Date, timeInterval: TimeInterval) -> TripSummary? {
-        guard let startingStop = pairing.startingStop, let destinationStop = pairing.destinationStop else {
-            Logger.error("one of startingStop or destinationStop was nil in pairing")
-            return nil
-        }
+        let fromStop = pairing.fromStop
+        let toStop = pairing.toStop
+
         do {
             let realm = try Realm()
-            Logger.debug("searching for next trip from \(startingStop.name) to \(destinationStop.name) on \(date)")
+            Logger.debug("searching for next trip from \(fromStop.name) to \(toStop.name) on \(date)")
             
-            let startingStopTimes = realm.objects( StopTimeImpl.self)
-                .filter("stopId == %@ AND departureTime >= %@", startingStop.id, timeInterval)
+            let fromStopTimes = realm.objects( StopTimeImpl.self)
+                .filter("stopId == %@ AND departureTime >= %@", fromStop.id, timeInterval)
                 .sorted(byProperty: "departureTime")
             
-            let destinationStopTimes = realm.objects( StopTimeImpl.self)
-                .filter("stopId == %@ AND arrivalTime >= %@", destinationStop.id, timeInterval)
+            let toStopTimes = realm.objects( StopTimeImpl.self)
+                .filter("stopId == %@ AND arrivalTime >= %@", toStop.id, timeInterval)
                 .sorted(byProperty: "arrivalTime")
             
-            let commonTripIds = Set<String>(startingStopTimes.map { $0.tripId })
-                .intersection(Set<String>(destinationStopTimes.map { $0.tripId } ))
+            let commonTripIds = Set<String>(fromStopTimes.map { $0.tripId })
+                .intersection(Set<String>(toStopTimes.map { $0.tripId } ))
             
             let trips = findTrips(with: commonTripIds, on: date, directionId: pairing.directionId, realm: realm)
             
             let resultTripIds: [String] = trips.map { $0.id }
             
-            guard let startingStopTime =  startingStopTimes.filter("tripId IN %@", resultTripIds).first else {
+            guard let fromStopTime =  fromStopTimes.filter("tripId IN %@", resultTripIds).first else {
                 Logger.debug("no starting stop time for pairing \(pairing.description)")
                 return nil
             }
             
-            guard let destinationStopTime = destinationStopTimes.filter("tripId == %@ AND stopSequence > %@",
-                                                                        startingStopTime.tripId, startingStopTime.stopSequence).first else {
+            guard let toStopTime = toStopTimes.filter("tripId == %@ AND stopSequence > %@",
+                                                                        fromStopTime.tripId, fromStopTime.stopSequence).first else {
                 Logger.debug("no destination stop time found for pairing \(pairing.description)")
                 return nil
             }
             
-            guard let trip = trips.filter("id == %@", startingStopTime.tripId).first else {
+            guard let trip = trips.filter("id == %@", fromStopTime.tripId).first else {
                 Logger.error("why cant i find a trip what \(pairing.description)")
                 return nil
             }
 			
-			let stopTimes = FromToPair<StopTime>(from: startingStopTime, to: destinationStopTime)
+			let stopTimes = Pair<StopTime>(fromStopTime, toStopTime)
 			let summary = DirectTripSummaryDTO(stopTimes: stopTimes, trip: trip, route: routesById[trip.routeId]!)
             
             return summary
@@ -206,43 +203,14 @@ class RealmQueryService: QueryService {
 	}
 	
     private func findTransfers(for pairing: StopPairing, on date: Date, realm: Realm) -> [TripSummary] {
-		let serviceIds = findServiceIds(for: date, realm: realm)
-		
-        func toDTOs<T:RealmCollection>(_ transfers: T) -> [TripSummary] where T.Iterator.Element == TransferTripSummaryImpl{
-            var dtos = [TripSummary]()
-            for t in transfers {
-                guard serviceIds.contains(t.fromTrip.serviceId) && serviceIds.contains(t.toTrip.serviceId) else {
-                    continue
-                }
-                let dto = TransferTripSummaryDTO()
-                dto.stopTimes = FromToPair(from: t.fromStopTime, to: t.toStopTime)
-                dto.trips = FromToPair(from: t.fromTrip, to: t.toTrip)
-                dto.routes = FromToPair(from: t.fromRoute, to: t.toRoute)
-                dto.transferStopTime = t.transferStopTime
-                dto.transferStop = t.transferStop
-                dtos.append(dto)
-            }
-            return dtos
-        }
-        
-        
-//        if let linkedTransfers = (pairing as? StopPairingImpl)?.transferTripSummaries {
-//            return toDTOs(linkedTransfers)
-//        }
-//        
-//        let queriedTransfers = realm.objects(TransferTripSummaryImpl.self)
-//            .filter("fromStopId == %@ && toStopId == %@", pairing.startingStop.id, pairing.destinationStop.id)
-//        if !queriedTransfers.isEmpty {
-//            return toDTOs(queriedTransfers)
-//        }
-		
-        let fromTripIds: Set<String> = ((pairing.startingStop as? StopImpl)?.stopTimes.mapToSet { $0.tripId }) ?? []
-        let toTripIds: Set<String>  = ((pairing.destinationStop as? StopImpl)?.stopTimes.mapToSet { $0.tripId }) ?? []
+
+        let fromTripIds: Set<String> = ((pairing.fromStop as? StopImpl)?.stopTimes.mapToSet { $0.tripId }) ?? []
+        let toTripIds: Set<String>  = ((pairing.toStop as? StopImpl)?.stopTimes.mapToSet { $0.tripId }) ?? []
         
         return measure("find transfers non linked") {
-                findTransfers(fromStop: pairing.startingStop,
+                findTransfers(fromStop: pairing.fromStop,
                               fromTripIds: fromTripIds.subtracting(toTripIds),
-                              toStop: pairing.destinationStop,
+                              toStop: pairing.toStop,
                               toTripIds: toTripIds.subtracting(fromTripIds),
                               on: date,
                               realm: realm)
@@ -294,7 +262,6 @@ class RealmQueryService: QueryService {
 		
 		func findConnection(from fromDTO: TransferDTO, in toDTOs: [TransferDTO]) -> TransferTripSummaryDTO? {
 			for toDTO in toDTOs {
-//				guard toDTO.trip.serviceId == fromDTO.trip.serviceId,
                 guard fromDTO.sourceStopTime.departureTime < toDTO.sourceStopTime.arrivalTime else { continue }
 				
 				for fromStopTime in fromDTO.tripStopTimes {
@@ -303,16 +270,16 @@ class RealmQueryService: QueryService {
 						matchingStopTime.stopSequence < toDTO.sourceStopTime.stopSequence else {
 						continue
 					}
-					let transfer = TransferTripSummaryDTO()
-					transfer.stopTimes = FromToPair(from: fromDTO.sourceStopTime, to: toDTO.sourceStopTime)
-					transfer.trips = FromToPair(from: fromDTO.trip, to: toDTO.trip)
-					transfer.routes = FromToPair(from: routesById[fromDTO.trip.routeId]!, to: routesById[toDTO.trip.routeId]!)
-					transfer.transferStopTime = StopTimeDTO(tripId: "\(fromDTO.trip.id),\(toDTO.trip.id)",
-						arrivalTime: fromStopTime.arrivalTime,
-						departureTime: matchingStopTime.departureTime,
-						stopId: matchingStopTime.stopId,
-						stopSequence: fromStopTime.stopSequence)
-					transfer.transferStop = stopsById[matchingStopTime.stopId]
+                    let fromRoute = routesById[fromDTO.trip.routeId]!
+                    let transfer = TransferTripSummaryDTO(
+                        departureTime    : fromDTO.sourceStopTime.departureTime,
+                        arrivalTime      : toDTO.sourceStopTime.arrivalTime,
+                        transferStopName : stopsById[matchingStopTime.stopId]?.name ?? "unknown stop name",
+                        transferTime     : Pair(matchingStopTime.departureTime, fromStopTime.arrivalTime),
+                        fromRouteName    : fromRoute.longName,
+                        fromRouteColor   : fromRoute.uiColor
+                    )
+					
 					return transfer
 				}
 			}
@@ -336,7 +303,7 @@ class RealmQueryService: QueryService {
 
         }
 					
-		var transfers = [String : TransferTripSummaryDTO]()
+		var transfers = [TimeInterval : TransferTripSummaryDTO]()
 		
         measure("find connections non-linked") {
             for tripStop in fromTripStops {
@@ -345,14 +312,14 @@ class RealmQueryService: QueryService {
                 }
                 
                 
-                let toTripId = transfer.trips.to.id
+                let arrivalTime = transfer.arrivalTime
                 
                 //filter out trips which transfer to the same train another transfer but have a longer trip time
-                if let existingTransfer = transfers[toTripId], existingTransfer.tripTime < transfer.tripTime {
+                if let existingTransfer = transfers[arrivalTime], existingTransfer.tripTime < transfer.tripTime {
                     continue
                 }
                 
-                transfers[toTripId] = transfer
+                transfers[arrivalTime] = transfer
             }
         }
         

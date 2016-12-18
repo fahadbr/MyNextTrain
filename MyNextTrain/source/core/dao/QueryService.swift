@@ -8,10 +8,7 @@
 
 import Foundation
 
-fileprivate let formatter: DateFormatter = {
-    $0.dateFormat = "ddMMyy"
-    return $0
-}(DateFormatter())
+fileprivate let formatter = DateFormatter(pattern: "ddMMyy")
 
 protocol QueryService {
 	

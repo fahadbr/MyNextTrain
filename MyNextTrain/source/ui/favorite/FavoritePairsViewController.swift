@@ -109,7 +109,7 @@ extension FavoritePairsViewController: UITableViewDataSource {
 		
 		let favoritePairing = favoritePairings[indexPath.row]
 		let pairing = favoritePairing.stopPairing
-		cell.textLabel?.text = "\(pairing.startingStop.name) -> \(pairing.destinationStop.name)"
+		cell.textLabel?.text = "\(pairing.fromStop.name) -> \(pairing.toStop.name)"
 		
         func updateDetails(isForTomorrow: Bool, details: NSAttributedString) {
             cell.detailTextLabel?.attributedText = AttributedStringBuilder()

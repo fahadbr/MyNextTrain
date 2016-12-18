@@ -27,19 +27,3 @@ extension TripSummary {
 	}
 	
 }
-
-//protocol DirectTripSummary: TripSummary {
-//	
-//	var trip: Trip { get }
-//	var route: Route { get }
-//	
-//}
-//
-//protocol TransferTripSummary: TripSummary {
-//	var trips: FromToPair<Trip> { get }
-//	var routes: FromToPair<Route> { get }
-//	
-//}
-
-
-

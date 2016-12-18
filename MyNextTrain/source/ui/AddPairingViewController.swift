@@ -19,9 +19,10 @@ class AddPairingViewController: UIViewController {
     fileprivate var stops: [[Stop]] = []
     fileprivate var sectionNames = [String]()
 	
-	fileprivate var startingStop: Stop?
-	fileprivate var destinationStop: Stop?
-	
+	fileprivate var fromStop: Stop?
+	fileprivate var toStop: Stop?
+
+    var favoritePairs: FavoritePairsViewModel!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -47,13 +48,9 @@ class AddPairingViewController: UIViewController {
     }
 	
 	fileprivate func createNewPairing() {
-		assert(startingStop != nil, "startingStop was nil")
-		assert(destinationStop != nil, "destinationStop was nil")
-		do {
-			try updateService.addFavoritePairing(from: startingStop!, to: destinationStop!)
-		} catch let err {
-			Logger.error("could not add favorite pairing", error: err)
-		}
+		assert(fromStop != nil, "fromStop was nil")
+		assert(toStop != nil, "toStop was nil")
+        favoritePairs.addPairing(pairing: StopPairingDTO(fromStop: fromStop!, toStop: toStop!))
 		dismiss(animated: true, completion: nil)
 	}
 	
@@ -102,11 +99,11 @@ extension AddPairingViewController: UITableViewDelegate {
         
 		let selectedStop = stops[indexPath.section][indexPath.row]
 		
-		if startingStop == nil {
-			startingStop = selectedStop
+		if fromStop == nil {
+			fromStop = selectedStop
             title = "Select To Station (From \(selectedStop.name))"
-		} else if destinationStop == nil {
-			destinationStop = selectedStop
+		} else if toStop == nil {
+			toStop = selectedStop
 			createNewPairing()
 		}
 		

@@ -8,37 +8,65 @@
 
 import Foundation
 import RxSwift
+import RealmSwift
+import RxRealm
 
 class FavoritePairsViewModel {
 
+    lazy var stopService = AppDelegate.stopService
     lazy var queryService = AppDelegate.queryService
-    lazy var updateService = AppDelegate.updateService
 
-    let favoritePairs: Variable<[StopPairing]>
+    let favoritePairs: Variable<[FavoritePair]>
     private let disposeBag = DisposeBag()
 
     init() {
         favoritePairs = Variable([])
-//        DispatchQueue.global(qos: .background).async {
-            self.favoritePairs.value = self.queryService.favoritePairings
-//        }
+        let pairFunction = { (p: StopPairing) -> FavoritePair in
+            FavoritePair(pairing: StopPairingDTO(p),
+                         queryService: AppDelegate.queryService,
+                         dateService: DateService.instance,
+                         appState: AppState.instance)
+        }
+
+        stopService.favoritePairs.bindNext { [weak self] (pairings, changeset) in
+            guard let changes = changeset else {
+                if let vm = self {
+                    vm.favoritePairs.value = pairings.map(pairFunction)
+                }
+                return
+            }
+            if changes.inserted.count != 0 {
+                for i in changes.inserted {
+                    self?.favoritePairs.value.insert(pairFunction(pairings[i]), at: i)
+                }
+            }
+            if changes.deleted.count != 0 {
+                let deleted = changes.deleted.sorted(by: >)
+                for i in deleted {
+                    self?.favoritePairs.value.remove(at: i)
+                }
+            }
+        }.addDisposableTo(disposeBag)
+        
+
     }
 
     func addPairing(pairing: StopPairing) {
-//        DispatchQueue.global(qos: .background).async {
-            do {
-                try self.updateService.addFavoritePairing(from: pairing.startingStop, to: pairing.destinationStop)
-            } catch let error {
-                Logger.error("error updating pairing", error: error)
-            }
-            var pairs = self.favoritePairs.value
-            pairs.append(pairing)
-            self.favoritePairs.value = pairs
-//        }
+        do {
+            try self.stopService.addPair(from: pairing.fromStop, to: pairing.toStop)
+        } catch let error {
+            Logger.error("error updating pairing", error: error)
+        }
     }
 
-    func removePairing(pairing: StopPairing) {
-
+    func removePairing(at index: Int) {
+        stopService.favoritePairs.single().bindNext { (pairings, changeset) in
+            do {
+                try self.stopService.remove(pair: pairings[index])
+            } catch let error {
+                Logger.error("error removing pairing", error: error)
+            }
+        }.dispose()
     }
 
 

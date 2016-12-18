@@ -28,10 +28,10 @@ class PairingViewController: UIViewController {
     }(UIBezierPath())
     
     private var fromStop: Stop {
-        return pairing.startingStop
+        return pairing.fromStop
     }
     private var toStop: Stop {
-        return pairing.destinationStop
+        return pairing.toStop
     }
     
     private (set) var pairing: StopPairing
@@ -108,7 +108,7 @@ class PairingViewController: UIViewController {
     }
     
     @objc private func reversePairing() {
-        pairing = StopPairingDTO(startingStop: toStop, destinationStop: fromStop)
+        pairing = StopPairingDTO(fromStop: toStop, toStop: fromStop)
         refreshViews()
         delegate?.pairingDidChange()
     }

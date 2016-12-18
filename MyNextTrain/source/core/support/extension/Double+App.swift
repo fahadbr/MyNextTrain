@@ -8,14 +8,13 @@
 
 import Foundation
 
-let timeFormatter: DateFormatter = {
-	$0.dateFormat = "hh:mma"
-	return $0
-}(DateFormatter())
+let timeFormatter = DateFormatter(pattern: "hh:mma")
 
 extension Double {
     
-    //assuming the value represents seconds
+	/// Returns a string representation of self in the form of hours minutes and seconds
+    /// assuming self represents an absolute time interval of seconds
+    /// e.g. if self is 3661 this would return 1h 1m 1s
     var timeRepresentation: String {
         guard self != Double.nan && self != Double.infinity && self > 0 else {
             return "0s"
@@ -40,7 +39,13 @@ extension Double {
         
         return components.joined(separator: " ")
     }
-	
+
+
+	/// Returns self + date as a string representing the time of day assuming that self
+    /// represents an absolute time interval of seconds
+	///
+	/// - Parameter date: date
+	/// - Returns: string representation
 	func timeRepresenation(from date: Date) -> String {
 		var s = timeFormatter.string(from: date.addingTimeInterval(self))
         if s[s.startIndex] == "0" {

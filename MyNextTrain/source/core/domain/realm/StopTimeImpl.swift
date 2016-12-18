@@ -18,9 +18,6 @@ class StopTimeImpl: Object, StopTime, GTFSFileEntry {
 	dynamic var stopId: Int = 0
 	dynamic var stopSequence: Int = 0
     
-    let stop = LinkingObjects(fromType: StopImpl.self, property: "stopTimes")
-    let trip = LinkingObjects(fromType: TripImpl.self, property: "stopTimes")
-	
 	func apply(row: GTFSFileRow) {
 		row.bind(column: "trip_id", to: &tripId)
 		row.bind(column: "arrival_time", to: &arrivalTime)
