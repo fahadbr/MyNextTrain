@@ -10,7 +10,7 @@ import RealmSwift
 
 class RealmUpdateService: UpdateService {
     
-    lazy var queryService = AppDelegate.queryService
+    lazy var queryService = AppContainer.queryService
 	
 	func addFavoritePairing(from fromStop: Stop, to toStop: Stop) throws {
 
@@ -62,7 +62,7 @@ class RealmUpdateService: UpdateService {
     }
     
     func setUpObjectLinks() {
-        guard AppDelegate.overrideReload else {
+        guard AppContainer.overrideReload else {
             return
         }
         

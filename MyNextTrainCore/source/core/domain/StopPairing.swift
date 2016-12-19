@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol StopPairing: CustomStringConvertible {
+public protocol StopPairing: CustomStringConvertible {
 	
 	var fromStop: Stop { get }
 	var toStop: Stop { get }

@@ -42,6 +42,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0B44378A1E078F6B00DB4FB0"
+               BuildableName = "MyNextTrain CoreTests.xctest"
+               BlueprintName = "MyNextTrain CoreTests"
+               ReferencedContainer = "container:MyNextTrain.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
@@ -66,7 +76,7 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "8"
-      notificationPayloadFile = "MyNextTrain WatchKit Extension/PushNotificationPayload.apns">
+      notificationPayloadFile = "MyNextTrain WatchKit Extension/Supporting Files/PushNotificationPayload.apns">
       <RemoteRunnable
          runnableDebuggingMode = "2"
          BundleIdentifier = "com.apple.carousel"
@@ -98,7 +108,7 @@
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES"
       launchAutomaticallySubstyle = "8"
-      notificationPayloadFile = "MyNextTrain WatchKit Extension/PushNotificationPayload.apns">
+      notificationPayloadFile = "MyNextTrain WatchKit Extension/Supporting Files/PushNotificationPayload.apns">
       <RemoteRunnable
          runnableDebuggingMode = "2"
          BundleIdentifier = "com.apple.carousel"

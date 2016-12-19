@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Stop {
+public protocol Stop {
 	
     var id: Int { get }
 	var name: String { get }

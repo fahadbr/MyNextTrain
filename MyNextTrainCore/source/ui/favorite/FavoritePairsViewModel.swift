@@ -13,8 +13,8 @@ import RxRealm
 
 class FavoritePairsViewModel {
 
-    lazy var stopService = AppDelegate.stopService
-    lazy var queryService = AppDelegate.queryService
+    lazy var stopService = AppContainer.stopService
+    lazy var queryService = AppContainer.queryService
 
     let favoritePairs: Variable<[FavoritePair]>
     private let disposeBag = DisposeBag()
@@ -23,31 +23,24 @@ class FavoritePairsViewModel {
         favoritePairs = Variable([])
         let pairFunction = { (p: StopPairing) -> FavoritePair in
             FavoritePair(pairing: StopPairingDTO(p),
-                         queryService: AppDelegate.queryService,
+                         queryService: AppContainer.queryService,
                          dateService: DateService.instance,
                          appState: AppState.instance)
         }
 
         stopService.favoritePairs.bindNext { [weak self] (pairings, changeset) in
             guard let changes = changeset else {
-                if let vm = self {
-                    vm.favoritePairs.value = pairings.map(pairFunction)
-                }
+                self?.favoritePairs.value = pairings.map(pairFunction)
                 return
             }
-            if changes.inserted.count != 0 {
-                for i in changes.inserted {
-                    self?.favoritePairs.value.insert(pairFunction(pairings[i]), at: i)
-                }
+            for i in changes.inserted {
+                self?.favoritePairs.value.insert(pairFunction(pairings[i]), at: i)
             }
-            if changes.deleted.count != 0 {
-                let deleted = changes.deleted.sorted(by: >)
-                for i in deleted {
-                    self?.favoritePairs.value.remove(at: i)
-                }
+            for i in changes.deleted.sorted(by: >) {
+                self?.favoritePairs.value.remove(at: i)
             }
         }.addDisposableTo(disposeBag)
-        
+
 
     }
 

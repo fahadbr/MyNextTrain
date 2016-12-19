@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol UpdateService {
+public protocol UpdateService {
 	
 	func addFavoritePairing(from fromStop: Stop, to toStop: Stop) throws
     

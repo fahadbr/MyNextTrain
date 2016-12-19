@@ -8,16 +8,16 @@
 
 import UIKit
 
-class RootViewController: UIViewController {
+public class RootViewController: UIViewController {
     
-    static let instance = RootViewController()
+    public static let instance = RootViewController()
 	
 	
     
     lazy var favoritePairsVc: FavoritePairVC = FavoritePairVC()
     lazy var navController: UINavigationController = UINavigationController(rootViewController: self.favoritePairsVc)
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 		
         view.add(subView: navController.view, anchor: Anchor.standardAnchors)
@@ -26,7 +26,7 @@ class RootViewController: UIViewController {
 		
     }
 
-    override func didReceiveMemoryWarning() {
+    override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }

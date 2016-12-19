@@ -9,19 +9,19 @@
 import Foundation
 import RealmSwift
 
-class GTFSFileLoader {
+public class GTFSFileLoader {
     
-    static let instance = GTFSFileLoader()
+    public static let instance = GTFSFileLoader()
     static let doneLoadingFiles = Notification.Name("doneLoadingFiles")
     
     private typealias This = GTFSFileLoader
     private static let files: [GTFSFile] = [.routes, .stops, .trips, .calendar_dates, .stop_times]
-    lazy var updateService = AppDelegate.updateService
+    lazy var updateService = AppContainer.updateService
     
-    func loadAllFiles() {
+    public func loadAllFiles() {
 		let loadingGroup = DispatchGroup()
         
-        if AppDelegate.overrideReload, let realm = try? Realm(), !realm.isEmpty{
+        if AppContainer.overrideReload, let realm = try? Realm(), !realm.isEmpty{
             try? realm.write {
                 realm.deleteAll()
             }
@@ -59,7 +59,7 @@ class GTFSFileLoader {
             self.updateService.setUpObjectLinks()
             Logger.debug("done setting up object links")
             DispatchQueue.main.async {
-                let ref = AppDelegate.overrideReloadReference
+                let ref = AppContainer.overrideReloadReference
                 UserDefaults.standard.set(ref.value, forKey: ref.name)
                 
                 let notification = Notification(name: This.doneLoadingFiles, object: self, userInfo: nil)
@@ -91,7 +91,7 @@ class GTFSFileLoader {
 		do {
 			let realm = try Realm()
 			
-			guard realm.objects(type).isEmpty || AppDelegate.overrideReload else {
+			guard realm.objects(type).isEmpty || AppContainer.overrideReload else {
 				Logger.debug("file \(file) has already been loaded")
 				return
 			}

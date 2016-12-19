@@ -6,16 +6,22 @@
 	<dict>
 		<key>MyNextTrain WatchKit App (Complication).xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
 		<key>MyNextTrain WatchKit App (Notification).xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
 		<key>MyNextTrain WatchKit App.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
@@ -24,18 +30,38 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>MyNextTrainCore.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0B4437821E078F6B00DB4FB0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0B44378A1E078F6B00DB4FB0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0B4438271E07948C00DB4FB0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>0B5C95EE1D6010CE00F66B8F</key>
 		<dict>
 			<key>primary</key>
-			<true />
+			<true/>
 		</dict>
 		<key>0B5C96001D6010CF00F66B8F</key>
 		<dict>
 			<key>primary</key>
-			<true />
+			<true/>
 		</dict>
 	</dict>
 </dict>

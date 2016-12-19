@@ -17,7 +17,7 @@ protocol StopService {
 
     var stops: Observable<[Stop]> { get }
 
-    var favoritePairs: Observable<([StopPairing], RealmChangeset?)> { get }
+    var favoritePairs: Observable<([StopPairing], ChangeSet?)> { get }
 
     func addPair(from fromStop: Stop, to toStop: Stop) throws
     func remove(pair: StopPairing) throws
@@ -27,7 +27,7 @@ protocol StopService {
 class RealmStopService: StopService {
 
     let stops: Observable<[Stop]>
-    let favoritePairs: Observable<([StopPairing], RealmChangeset?)>
+    let favoritePairs: Observable<([StopPairing], ChangeSet?)>
 
     init?() {
         do {

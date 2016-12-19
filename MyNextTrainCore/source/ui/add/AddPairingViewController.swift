@@ -12,8 +12,7 @@ fileprivate let reuseIdentifier = "AddPairingViewController"
 
 class AddPairingViewController: UIViewController {
 	
-	lazy var queryService = AppDelegate.queryService
-	lazy var updateService = AppDelegate.updateService
+	lazy var queryService = AppContainer.queryService
 	
 	private let tableView = UITableView()
     fileprivate var stops: [[Stop]] = []

@@ -13,7 +13,7 @@ fileprivate let reuseIdentifier = "upcomingTripsId"
 class UpcomingTripsViewController: UIViewController {
 	
     
-    lazy var queryService = AppDelegate.queryService
+    lazy var queryService = AppContainer.queryService
 	
     private let pairingVC: PairingViewController
     fileprivate let tableView = UITableView()

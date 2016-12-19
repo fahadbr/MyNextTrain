@@ -12,8 +12,8 @@ fileprivate let reuseIdentifier = "FavoritePairsViewController"
 
 class FavoritePairsViewController: UIViewController {
 	
-	lazy var queryService = AppDelegate.queryService
-    lazy var updateService = AppDelegate.updateService
+	lazy var queryService = AppContainer.queryService
+    lazy var updateService = AppContainer.updateService
 	
 	private let tableView = UITableView()
 	private let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)

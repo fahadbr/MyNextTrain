@@ -8,23 +8,15 @@
 
 import UIKit
 import RealmSwift
+import MyNextTrainCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    static let queryService: QueryService = RealmQueryService()
-	static let updateService: UpdateService = RealmUpdateService()
-    static let stopService: StopService = RealmStopService()!
-    static let overrideReloadReference = (name: "OVERRIDE_RELOAD", value: 11)
-    static var overrideReload: Bool {
-        return UserDefaults.standard.integer(forKey: overrideReloadReference.name) != overrideReloadReference.value
-    }
-    
     var window: UIWindow?
-    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
-        AppDelegate.updateService.performMigrationIfNeeded()
+        AppContainer.updateService.performMigrationIfNeeded()
         
         GTFSFileLoader.instance.loadAllFiles()
         window = UIWindow(frame: UIScreen.main.bounds)

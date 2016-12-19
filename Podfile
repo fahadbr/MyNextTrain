@@ -14,6 +14,19 @@ target 'MyNextTrain' do
 
 end
 
+target 'MyNextTrainCore' do
+  # Comment this line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  pod 'Realm',      '>= 1.1.0'
+  pod 'RealmSwift', '>= 1.1.0'
+  pod 'RxSwift',    '~> 3.0'
+  pod 'RxCocoa',    '~> 3.0'
+  pod 'RxRealm'
+  # Pods for MyNextTrain
+
+end
+
 target 'MyNextTrain WatchKit App' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
