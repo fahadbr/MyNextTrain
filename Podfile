@@ -1,8 +1,7 @@
 # Uncomment this line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'MyNextTrain' do
-  # Comment this line if you're not using Swift and don't want to use dynamic frameworks
+abstract_target 'MyNextTrainRoot' do
   use_frameworks!
 
   pod 'Realm',      '>= 1.1.0'
@@ -10,35 +9,11 @@ target 'MyNextTrain' do
   pod 'RxSwift',    '~> 3.0'
   pod 'RxCocoa',    '~> 3.0'
   pod 'RxRealm'
-  # Pods for MyNextTrain
-
+  pod 'Dip'
+  
+  target 'MyNextTrain' 
+  target 'MyNextTrainCore' 
+  target 'Widget' 
 end
 
-target 'MyNextTrainCore' do
-  # Comment this line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
 
-  pod 'Realm',      '>= 1.1.0'
-  pod 'RealmSwift', '>= 1.1.0'
-  pod 'RxSwift',    '~> 3.0'
-  pod 'RxCocoa',    '~> 3.0'
-  pod 'RxRealm'
-  # Pods for MyNextTrain
-
-end
-
-target 'MyNextTrain WatchKit App' do
-  # Comment this line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for MyNextTrain WatchKit App
-
-end
-
-target 'MyNextTrain WatchKit Extension' do
-  # Comment this line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for MyNextTrain WatchKit Extension
-
-end

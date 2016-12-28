@@ -10,19 +10,19 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class RxCell: UITableViewCell {
+open class RxCell: UITableViewCell {
 
-    private (set) var reuseDisposeBag = DisposeBag()
+    private (set) public var reuseDisposeBag = DisposeBag()
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override public init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
-    override func prepareForReuse() {
+    open override func prepareForReuse() {
         super.prepareForReuse()
         reuseDisposeBag = DisposeBag()
     }

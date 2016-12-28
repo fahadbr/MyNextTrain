@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class Logger {
+public final class Logger {
     
     static let loggerQueue = DispatchQueue(label: "com.riaz.fahad.Logger")
     
@@ -29,19 +29,19 @@ final class Logger {
         return t
     }
     
-    static func debug(_ messageBlock: @autoclosure ()->String) {
+    public static func debug(_ messageBlock: @autoclosure ()->String) {
         guard debugEnabled else { return }
         
         let date = Date()
         let threadId = threadName
         let message = messageBlock()
-        loggerQueue.async {
+//        loggerQueue.async {
             let dateString = dateFormatter.string(from: date)
             print("\(dateString) DEBUG [\(threadId)]: \(message)")
-        }
+//        }
     }
     
-	static func error(_ message:String, error: Error? = nil) {
+	public static func error(_ message:String, error: Error? = nil) {
         let date = Date()
         let threadId = threadName
         loggerQueue.async {

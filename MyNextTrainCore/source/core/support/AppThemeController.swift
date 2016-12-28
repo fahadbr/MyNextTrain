@@ -8,20 +8,6 @@
 
 import UIKit
 
-class AppThemeController {
-    
-    static let instance = AppThemeController()
-    
-
-    
-    func setUpAppearanceDelegates() {
-        
-        
-        
-    }
-    
-    
-}
 
 fileprivate struct AppTheme {
     
@@ -36,7 +22,7 @@ fileprivate struct AppTheme {
 
 extension UIButton {
     
-    static func withDefaults() -> UIButton {
+    public static func withDefaults() -> UIButton {
         let b = UIButton()
         b.setTitleColor(UIColor.defaultText, for: .normal)
         b.setTitleColor(UIColor.defaultHighlightedText, for: .highlighted)
@@ -47,19 +33,19 @@ extension UIButton {
 
 extension UIColor {
     
-    static var defaultText: UIColor {
+    public static var defaultText: UIColor {
         return AppTheme.Color.defaultText
     }
     
-    static var defaultHighlightedText: UIColor {
+    public static var defaultHighlightedText: UIColor {
         return AppTheme.Color.defaultHighlightedText
     }
     
-    static var defaultBackground: UIColor {
+    public static var defaultBackground: UIColor {
         return AppTheme.Color.defaultBackground
     }
     
-    static var altText: UIColor {
+    public static var altText: UIColor {
         return AppTheme.Color.altText
     }
     

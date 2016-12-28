@@ -10,18 +10,18 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class RxSubtitleCell: RxCell {
+open class RxSubtitleCell: RxCell {
 
     private let disposeBag = DisposeBag()
-    
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+
+    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         self.detailTextLabel?.rx.observe(NSAttributedString.self, "attributedText").bindNext({[weak self] _ in
             self?.setNeedsLayout()
         }).addDisposableTo(disposeBag)
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

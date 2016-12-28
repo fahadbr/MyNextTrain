@@ -33,11 +33,26 @@
 		<key>MyNextTrainCore.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>13</integer>
+			<integer>4</integer>
+		</dict>
+		<key>MyNextTrainCoreTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>16</integer>
+		</dict>
+		<key>Widget.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0B1F73871E0C0E6C0017EDB2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>0B4437821E078F6B00DB4FB0</key>
 		<dict>
 			<key>primary</key>
@@ -49,6 +64,11 @@
 			<true/>
 		</dict>
 		<key>0B4438271E07948C00DB4FB0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0B4438B81E08121A00DB4FB0</key>
 		<dict>
 			<key>primary</key>
 			<true/>

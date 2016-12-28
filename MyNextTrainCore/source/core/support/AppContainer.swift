@@ -7,15 +7,22 @@
 //
 
 import Foundation
+import Dip
 
-public class AppContainer {
 
-    static let queryService: QueryService = RealmQueryService()
-	public static let updateService: UpdateService = RealmUpdateService()
-    static let stopService: StopService = RealmStopService()!
+class AppContainer {
 
-    static let overrideReloadReference = (name: "OVERRIDE_RELOAD", value: 11)
+    static let overrideReloadReference = (name: "OVERRIDE_RELOAD", value: 12)
     static var overrideReload: Bool {
         return UserDefaults.standard.integer(forKey: overrideReloadReference.name) != overrideReloadReference.value
     }
+
+}
+
+
+public func measure<T>(_ actionName:String, _ block: () -> T ) -> T{
+    let startTime = CFAbsoluteTimeGetCurrent()
+    let value = block()
+    Logger.debug("took \(CFAbsoluteTimeGetCurrent() - startTime) to perform \(actionName)")
+    return value
 }

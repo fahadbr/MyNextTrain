@@ -8,13 +8,20 @@
 
 import Foundation
 
-struct StopPairingDTO: StopPairing {
-    let fromStop: Stop
-    let toStop: Stop
+public struct StopPairingDTO: StopPairing {
+    public let fromStop: Stop
+    public let toStop: Stop
+
+    public init(fromStop: Stop, toStop: Stop) {
+        self.fromStop = fromStop
+        self.toStop = toStop
+    }
+
 }
+
 extension StopPairingDTO {
     
-    init(_ stopPairing: StopPairing) {
+    public init(_ stopPairing: StopPairing) {
         self.fromStop = StopDTO(stop: stopPairing.fromStop)
         self.toStop   = StopDTO(stop: stopPairing.toStop)
     }

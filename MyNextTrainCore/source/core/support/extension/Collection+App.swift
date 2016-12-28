@@ -12,7 +12,7 @@ extension Collection {
     
     typealias Element = Self.Iterator.Element
     
-    func dictionary<Key: Hashable>(keyExtractor: (Element) -> Key) -> [Key : Element] {
+    public func dictionary<Key: Hashable>(keyExtractor: (Element) -> Key) -> [Key : Element] {
     
         var dict = [Key : Element]()
         for element in self {
@@ -21,7 +21,7 @@ extension Collection {
         return dict
     }
     
-    func groupBy<Key: Hashable>(keyExtractor: (Element) -> Key) -> [Key : [Element]] {
+    public func groupBy<Key: Hashable>(keyExtractor: (Element) -> Key) -> [Key : [Element]] {
         var dict = [Key : [Element]]()
         
         for element in self {
@@ -33,7 +33,7 @@ extension Collection {
         return dict
     }
     
-    func mapToSet<T:Hashable>(_ transform: (Element) -> T) -> Set<T> {
+    public func mapToSet<T:Hashable>(_ transform: (Element) -> T) -> Set<T> {
         var set = Set<T>()
         for e in self {
             set.insert(transform(e))
@@ -42,4 +42,19 @@ extension Collection {
     }
     
     
+}
+
+extension Collection where Self.Iterator.Element == TripSummary {
+
+    public var next: TripSummary? {
+        let dateTime = Date()
+        return first(where: { $0.departureTime > dateTime })
+    }
+
+    public var indexOfNext: Self.Index? {
+        let dateTime = Date()
+        return index(where: { $0.departureTime > dateTime })
+    }
+
+
 }

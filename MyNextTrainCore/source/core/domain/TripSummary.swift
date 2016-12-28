@@ -8,19 +8,19 @@
 
 import UIKit
 
-protocol TripSummary {
+public protocol TripSummary {
 	
-	var departureTime: TimeInterval { get }
-	var arrivalTime: TimeInterval { get }
+	var departureTime: Date { get }
+	var arrivalTime: Date { get }
 	
 	var tripTime: TimeInterval { get }
 	
-	func scheduleDescription(for date: Date) -> NSAttributedString
-	func upcomingEventDescription(for currentTime: TimeInterval) -> String
+    var scheduleDescription: NSAttributedString { get }
+    var upcomingEventDescription: String { get }
 	
 }
 
-extension TripSummary {
+public extension TripSummary {
 	
 	var tripTime: TimeInterval {
 		return arrivalTime - departureTime

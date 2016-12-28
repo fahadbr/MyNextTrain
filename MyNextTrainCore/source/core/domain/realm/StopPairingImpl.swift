@@ -15,5 +15,11 @@ class StopPairingImpl: Object, StopPairing {
 	
 	var fromStop: Stop { return _fromStop! }
 	var toStop: Stop { return _toStop! }
+
+    convenience required init(fromStop: Stop, toStop: Stop) {
+        self.init()
+        _fromStop = fromStop as? StopImpl
+        _toStop = toStop as? StopImpl
+    }
 	
 }

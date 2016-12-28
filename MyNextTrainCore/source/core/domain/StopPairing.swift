@@ -12,17 +12,23 @@ public protocol StopPairing: CustomStringConvertible {
 	
 	var fromStop: Stop { get }
 	var toStop: Stop { get }
-	
+
+    init(fromStop: Stop, toStop: Stop)
+
 }
 
 extension StopPairing {
 	
-	var description: String {
+	public var description: String {
 		return "\(fromStop.name) -> \(toStop.name)"
 	}
     
-    var directionId: Int {
+    public var directionId: Int {
         return fromStop.longitude > toStop.longitude ? 1 : 0
+    }
+
+    public var switched: StopPairing {
+        return Self(fromStop: toStop, toStop: fromStop)
     }
 	
 }

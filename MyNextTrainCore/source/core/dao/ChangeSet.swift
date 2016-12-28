@@ -9,7 +9,7 @@
 import Foundation
 import RxRealm
 
-protocol ChangeSet {
+public protocol ChangeSet {
     /// the indexes in the collection that were deleted
     var deleted: [Int] { get }
     
@@ -20,4 +20,3 @@ protocol ChangeSet {
     var updated: [Int] { get }
 }
 
-extension RealmChangeset: ChangeSet {}

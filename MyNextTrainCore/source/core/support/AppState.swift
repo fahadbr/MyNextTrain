@@ -11,12 +11,14 @@ import RxSwift
 import UIKit
 import Foundation
 
-class AppState {
+/**
+ @dip.register AppState
+ @dip.constructor init()
+ */
+public class AppState {
 
-    private static let resignedActiveName = Notification.Name.UIApplicationWillResignActive
-    private static let becameActiveName = Notification.Name.UIApplicationDidBecomeActive
-
-    static let instance = AppState()
+    static let resignedActiveName = Notification.Name.UIApplicationWillResignActive
+    static let becameActiveName = Notification.Name.UIApplicationDidBecomeActive
 
     let resignedActive = NotificationCenter.default.rx.notification(resignedActiveName)
 

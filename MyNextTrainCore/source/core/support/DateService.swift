@@ -8,33 +8,36 @@
 
 import RxSwift
 
-class DateService {
-    static let instance = DateService(AppState.instance)
+/**
+ @dip.register
+ */
+public class DateService {
 
-    private typealias This = DateService
+    private typealias this = DateService
 
     private static let formatter = DateFormatter(pattern: "ddMMyy")
 
     private let disposeBag = DisposeBag()
     private (set) var currentDateStream: Variable<Date>
     
-    var currentDate: Date {
+    public var currentDate: Date {
         return currentDateStream.value
     }
 
-    init(_ appState: AppState) {
-        currentDateStream = Variable(This.getDate())
+    /**@dip.designated*/
+    init(appState: AppState) {
+        currentDateStream = Variable(this.getDate())
 
         appState.becameActive.subscribe(onNext: { [weak self] _ in
-            self?.currentDateStream.value = This.getDate()
+            self?.currentDateStream.value = this.getDate()
         }).addDisposableTo(disposeBag)
 
     }
 
 
     private static func getDate() -> Date {
-        guard let dateNoTime = This.formatter.date(from: This.formatter.string(from: Date())) else {
-            //		guard let dateNoTime = formatter.date(from: "020916") else {
+        guard let dateNoTime = this.formatter.date(from: this.formatter.string(from: Date())) else {
+//            		guard let dateNoTime = formatter.date(from: "241216") else {
             Logger.error("couldn't truncate time from current date object")
             return Date()
         }

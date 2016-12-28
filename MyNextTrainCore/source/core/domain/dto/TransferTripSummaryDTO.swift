@@ -10,20 +10,22 @@ import UIKit
 
 class TransferTripSummaryDTO: TripSummary {
 	
-	var departureTime: TimeInterval
-	var arrivalTime: TimeInterval
+	var departureTime: Date
+	var arrivalTime: Date
 
     var transferStopName: String
-    var transferTime: Pair<TimeInterval>
+    var transferTime: Pair<Date>
     var fromRouteName: String
     var fromRouteColor: UIColor
 
-    init(departureTime: TimeInterval,
-        arrivalTime: TimeInterval,
-        transferStopName: String,
-        transferTime: Pair<TimeInterval>,
-        fromRouteName: String,
-        fromRouteColor: UIColor) {
+    private(set) lazy var scheduleDescription: NSAttributedString = self._scheduleDescription()
+
+    init(departureTime: Date,
+         arrivalTime: Date,
+         transferStopName: String,
+         transferTime: Pair<Date>,
+         fromRouteName: String,
+         fromRouteColor: UIColor) {
 
         self.departureTime    = departureTime
         self.arrivalTime      = arrivalTime
@@ -33,24 +35,25 @@ class TransferTripSummaryDTO: TripSummary {
         self.fromRouteColor   = fromRouteColor
     }
 
-	func scheduleDescription(for date: Date) -> NSAttributedString {
-		let departing = departureTime
-		let arriving = arrivalTime
-		let smallFont = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-		
-		let timeDiff = arriving - departing
-		return AttributedStringBuilder()
-			.append(text: "\(departing.timeRepresenation(from: date)) - \(arriving.timeRepresenation(from: date))")
-			.append(text: " • \(timeDiff.timeRepresentation)", font: smallFont, color: UIColor.altText)
-			.append(text: " • \(fromRouteName) ", font: smallFont, color: fromRouteColor)
-			.append(text: " • \(transferTime.left.timeRepresenation(from: date)) - \(transferTime.right.timeRepresenation(from: date))", font:smallFont)
-			.build
-	}
+    private func _scheduleDescription() -> NSAttributedString {
+        let departing = departureTime
+        let arriving = arrivalTime
+        let smallFont = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+
+        let timeDiff = arriving - departing
+        return AttributedStringBuilder()
+            .append(text: "\(departing.timeRepresentation) - \(arriving.timeRepresentation)")
+            .append(text: " • \(timeDiff.timeRepresentation)", font: smallFont, color: UIColor.altText)
+            .append(text: " • \(fromRouteName) ", font: smallFont, color: fromRouteColor)
+            .append(text: " • \(transferTime.left.timeRepresentation) - \(transferTime.right.timeRepresentation)", font:smallFont)
+            .build
+    }
 	
-	func upcomingEventDescription(for currentTime: TimeInterval) -> String {
+    var upcomingEventDescription: String {
+        let currentTime = Date()
 		func description() -> String {
 			switch currentTime {
-			case 0 ..< departureTime:
+			case Date.distantPast ..< departureTime:
 				return "Departing in " + (departureTime - currentTime).timeRepresentation
 			case departureTime ..< (arrivalTime - 1):
 				return "Arriving in " + (arrivalTime - currentTime).timeRepresentation
@@ -60,5 +63,7 @@ class TransferTripSummaryDTO: TripSummary {
 		}
 		return description() + " • Transfer at \(transferStopName)"
 	}
+
+
 	
 }

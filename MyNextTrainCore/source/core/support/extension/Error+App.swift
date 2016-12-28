@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Error {
+public extension Error {
 	
 	var description: String {
 		return (self as? CustomStringConvertible)?.description ?? "\(self)"
@@ -16,8 +16,6 @@ extension Error {
 	
 }
 
-struct ErrorDTO: Error, CustomStringConvertible {
-	
-	let description: String
-	
-}
+
+
+

@@ -8,18 +8,20 @@
 
 import UIKit
 
-class AttributedStringBuilder {
+public class AttributedStringBuilder {
     
     private var components: [NSAttributedString] = []
     
-    var build: NSAttributedString {
+    public var build: NSAttributedString {
         let s = NSMutableAttributedString()
         components.forEach { s.append($0) }
         return s
     }
+
+    public init() {}
     
     @discardableResult
-    func append(text: String, font: UIFont? = nil, color: UIColor? = nil) -> AttributedStringBuilder {
+    public func append(text: String, font: UIFont? = nil, color: UIColor? = nil) -> AttributedStringBuilder {
         
         var attributes: [String : Any] = [:]
         if let c = color {
@@ -34,7 +36,7 @@ class AttributedStringBuilder {
     }
     
     @discardableResult
-    func append(_ attributedString: NSAttributedString) -> AttributedStringBuilder {
+    public func append(_ attributedString: NSAttributedString) -> AttributedStringBuilder {
         components.append(attributedString)
         return self
     }

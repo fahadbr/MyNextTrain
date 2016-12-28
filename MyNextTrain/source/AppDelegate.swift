@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import MyNextTrainCore
+import Dip
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,11 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
-        AppContainer.updateService.performMigrationIfNeeded()
-        
-        GTFSFileLoader.instance.loadAllFiles()
+
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = RootViewController.instance
+        window?.rootViewController = try! AppContainerConfig.configureAll()
         window?.makeKeyAndVisible()
         return true
     }
