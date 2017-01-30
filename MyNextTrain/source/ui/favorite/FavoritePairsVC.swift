@@ -23,7 +23,7 @@ class FavoritePairsVC : UIViewController {
     private static let reuseIdentifier = "FavoritePairsVCReuseId"
 
     private let tableView = UITableView()
-    private let disposeBag = DisposeBag()
+    private var disposeBag: DisposeBag?
 
     /**@dip.inject*/
     var favoritePairContainer: FavoritePairContainer!
@@ -31,6 +31,8 @@ class FavoritePairsVC : UIViewController {
     var favoritePairDetailsVCFactory: FavoritePairDetailsVCFactory!
     /**@dip.inject*/
     var addPairVCFactory: AddPairVCFactory!
+    /**@dip.inject*/
+    var dateService: DateService!
 
 
     override func viewDidLoad() {
@@ -40,15 +42,23 @@ class FavoritePairsVC : UIViewController {
 
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
         navigationItem.rightBarButtonItem = addButton
-        
-        addButton.rx.tap.asDriver().drive(onNext: { [weak self, factory = addPairVCFactory!] _ in
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        guard self.disposeBag == nil else { return }
+
+        let disposeBag = DisposeBag()
+        navigationItem.rightBarButtonItem?.rx.tap.asDriver().drive(onNext: { [weak self, factory = addPairVCFactory!] _ in
             let vc = factory.addPairVC()
 
             self?.present(UINavigationController(rootViewController: vc),
                           animated: true,
                           completion: nil)
         }).addDisposableTo(disposeBag)
-        
+
         tableView.rowHeight = 60
         tableView.register(FavoritePairCell.self, forCellReuseIdentifier: this.reuseIdentifier)
 
@@ -58,7 +68,7 @@ class FavoritePairsVC : UIViewController {
             favoritePair.tripDetailsText
                 .drive(cell.detailTextLabel!.rx.attributedText)
                 .addDisposableTo(cell.reuseDisposeBag)
-        }.addDisposableTo(disposeBag)
+            }.addDisposableTo(disposeBag)
 
         tableView.rx.itemSelected.subscribe(onNext: { [weak self] indexPath in
             self?.tableView.deselectRow(at: indexPath, animated: true)
@@ -71,8 +81,19 @@ class FavoritePairsVC : UIViewController {
 
         tableView.rx.itemDeleted.bindNext { [weak self] (indexPath) in
             self?.favoritePairContainer.removePairing(at: indexPath.row)
-        }.addDisposableTo(disposeBag)
+            }.addDisposableTo(disposeBag)
+
+        dateService.makeTimer(interval: 60)
+            .drive(onNext:{[tableView = self.tableView] _ in tableView.reloadData() })
+            .addDisposableTo(disposeBag)
+
+        self.disposeBag = disposeBag
+
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        disposeBag = nil
+    }
 
 }

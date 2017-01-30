@@ -21,6 +21,7 @@ let vcContainer = DependencyContainer { container in
             resolved.favoritePairContainer = try container.resolve()
             resolved.favoritePairDetailsVCFactory = try container.resolve()
             resolved.addPairVCFactory = try container.resolve()
+            resolved.dateService = try container.resolve()
     }
     
     container.register(factory: { 
@@ -31,7 +32,7 @@ let vcContainer = DependencyContainer { container in
     }
     
     container.register(.unique, factory: { favoritePairTrips in
-        FavoritePairDetailsVC.init(favoritePairTrips: favoritePairTrips)
+        try FavoritePairDetailsVC.init(favoritePairTrips: favoritePairTrips, dateService: container.resolve())
     })
     
     container.register(.unique, factory: { 

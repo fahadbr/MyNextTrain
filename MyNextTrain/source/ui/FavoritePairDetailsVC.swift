@@ -25,17 +25,19 @@ class FavoritePairDetailsVC: UIViewController {
     private let tableView = UITableView()
 
     private let favoritePairDetails: FavoritePairDetails
-    private let disposeBag = DisposeBag()
+    private let dateService: DateService
+    private var disposeBag: DisposeBag?
 
 
     /**
      @dip.designated
      @dip.arguments favoritePairTrips
      */
-    init(favoritePairTrips: FavoritePairTrips) {
-        self.favoritePairDetails = FavoritePairDetails(favoritePairTrips: favoritePairTrips)
-		self.pairingVC = PairingViewController(favoritePairDetails: favoritePairDetails)
-		super.init(nibName: nil, bundle: nil)
+    init(favoritePairTrips: FavoritePairTrips, dateService: DateService) {
+        self.dateService = dateService
+        self.favoritePairDetails = FavoritePairDetails(favoritePairTrips: favoritePairTrips, currentTimeStream: dateService.currentTimeStream)
+        self.pairingVC = PairingViewController(favoritePairDetails: favoritePairDetails)
+        super.init(nibName: nil, bundle: nil)
         
 	}
 	
@@ -57,29 +59,47 @@ class FavoritePairDetailsVC: UIViewController {
         tableView.topAnchor.constraint(equalTo: pairingVC.view.bottomAnchor).isActive = true
         tableView.rowHeight = 60
         tableView.register(RxSubtitleCell.self, forCellReuseIdentifier: reuseIdentifier)
-        
+
+    }
+
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        guard self.disposeBag == nil else { return }
+
+        let disposeBag = DisposeBag()
+
         favoritePairDetails.tripSummaries
             .drive(tableView.rx.items(cellIdentifier: reuseIdentifier, cellType: RxSubtitleCell.self)) {
                 (index, model, cell) in
-                cell.textLabel?.attributedText = model.scheduleDescription
-                cell.detailTextLabel?.text = model.upcomingEventDescription
-                cell.detailTextLabel?.textColor = UIColor.black
-        }.addDisposableTo(disposeBag)
+                cell.textLabel?.attributedText = model.title
+                cell.detailTextLabel?.text = model.details
+                cell.detailTextLabel?.textColor = model.isNext ? UIColor.blue : UIColor.black
+            }.addDisposableTo(disposeBag)
 
 
-        
+
         favoritePairDetails.indexOfNext
             .drive(onNext: { [tableView = self.tableView] _index in
                 guard let index = _index else { return }
 
                 let indexPath = IndexPath(row: index, section: 0)
                 tableView.scrollToRow(at: indexPath, at: .top, animated: false)
-                tableView.cellForRow(at: indexPath)?.detailTextLabel?.textColor = UIColor.blue
             }).addDisposableTo(disposeBag)
 
-        
+        dateService.currentTimeStream
+            .drive(onNext: { [tableView = self.tableView] _ in
+                tableView.reloadData()
+            }).addDisposableTo(disposeBag)
+
+        self.disposeBag = disposeBag
     }
-    
+
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        disposeBag = nil
+    }
 
 
 }

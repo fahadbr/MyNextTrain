@@ -12,7 +12,7 @@ import Dip
 
 class AppContainer {
 
-    static let overrideReloadReference = (name: "OVERRIDE_RELOAD", value: 12)
+    static let overrideReloadReference = (name: "OVERRIDE_RELOAD", value: 13)
     static var overrideReload: Bool {
         return UserDefaults.standard.integer(forKey: overrideReloadReference.name) != overrideReloadReference.value
     }

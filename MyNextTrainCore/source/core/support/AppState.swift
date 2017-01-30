@@ -20,8 +20,8 @@ public class AppState {
     static let resignedActiveName = Notification.Name.UIApplicationWillResignActive
     static let becameActiveName = Notification.Name.UIApplicationDidBecomeActive
 
-    let resignedActive = NotificationCenter.default.rx.notification(resignedActiveName)
+    public let resignedActive = NotificationCenter.default.rx.notification(resignedActiveName)
 
-    let becameActive = NotificationCenter.default.rx.notification(becameActiveName)
+    public let becameActive = NotificationCenter.default.rx.notification(becameActiveName)
     
 }

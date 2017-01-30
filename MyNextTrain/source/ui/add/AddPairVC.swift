@@ -8,6 +8,8 @@
 
 import UIKit
 import MyNextTrainCore
+import RxCocoa
+import RxSwift
 
 fileprivate let reuseIdentifier = "AddPairVC"
 
@@ -32,6 +34,8 @@ class AddPairVC: UIViewController {
     var favoritePairs: FavoritePairContainer!
     /**@dip.inject*/
     var stopService: StopService!
+
+    private let disposeBag = DisposeBag()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -46,11 +50,13 @@ class AddPairVC: UIViewController {
                     self.sectionNames.append(String(c))
                 }
             }
+            self.tableView.reloadData()
         }
 
         stopService.stops
             .asDriver(onErrorJustReturn: [])
-            .drive(onNext: makeStops).dispose()
+            .drive(onNext: makeStops)
+            .addDisposableTo(disposeBag)
 
 		
 		view.add(subView: tableView, anchor: Anchor.standardAnchors)

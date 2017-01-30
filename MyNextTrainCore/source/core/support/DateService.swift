@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import RxCocoa
 
 /**
  @dip.register
@@ -17,20 +18,37 @@ public class DateService {
 
     private static let formatter = DateFormatter(pattern: "ddMMyy")
 
+    private let appState: AppState
     private let disposeBag = DisposeBag()
-    private (set) var currentDateStream: Variable<Date>
-    
+
+    public let currentDateStream = Variable<Date>(this.getDate())
+    public private(set) lazy var currentTimeStream: Driver<Date> = self.makeTimer(interval: 1)
+
     public var currentDate: Date {
         return currentDateStream.value
     }
 
     /**@dip.designated*/
     init(appState: AppState) {
-        currentDateStream = Variable(this.getDate())
-
+        self.appState = appState
         appState.becameActive.subscribe(onNext: { [weak self] _ in
             self?.currentDateStream.value = this.getDate()
         }).addDisposableTo(disposeBag)
+    }
+
+    public func makeTimer(interval: RxTimeInterval) -> Driver<Date> {
+        let initial = Notification(name: Notification.Name.UIApplicationDidBecomeActive)
+        return Observable.of(appState.becameActive, appState.resignedActive).merge()
+            .asDriver(onErrorJustReturn: initial)
+            .startWith(initial)
+            .flatMapLatest { (noti) -> Driver<Date> in
+                switch noti.name {
+                case Notification.Name.UIApplicationDidBecomeActive:
+                    return Driver<Int>.interval(interval).map { _ in Date() }
+                default:
+                    return Driver.never()
+                }
+        }
 
     }
 

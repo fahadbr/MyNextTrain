@@ -51,7 +51,7 @@ class PairingViewController: UIViewController {
         reverseDirectionButton.setTitle("↑↓", for: .normal)
         reverseDirectionButton.rx.controlEvent(.touchUpInside).bindNext { [weak self] in
             self?.favoritePairDetails.switch()
-        }
+        }.addDisposableTo(disposeBag)
         
         stationStack.addArrangedSubview(fromStationButton)
         stationStack.addArrangedSubview(toStationButton)

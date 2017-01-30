@@ -15,6 +15,7 @@ import MyNextTrainCore
 class FavoritePairSummary {
 
     let favoritePairTrips: FavoritePairTrips
+    private let nextDayTrips: FavoritePairTrips
 
     let pairingNameText: String
     private (set) var tripDetailsText: Driver<NSAttributedString>
@@ -37,10 +38,11 @@ class FavoritePairSummary {
                                                  date: currentDate,
                                                  tripService: tripService,
                                                  appState: appState)
+        nextDayTrips = favoritePairTrips.next
 
 
         let defaultText = NSAttributedString(string: " loading..")
-        tripDetailsText = favoritePairTrips.nextTrip.catchError({ [currentDayTrips = self.favoritePairTrips] _ in currentDayTrips.next.nextTrip })
+        tripDetailsText = favoritePairTrips.nextTrip.catchError({ [nextDayTrips = self.nextDayTrips] _ in nextDayTrips.nextTrip })
             .map { (date, trip) -> NSAttributedString in
                 let isCurrentDay = date == dateService.currentDate
                 let details = trip.scheduleDescription

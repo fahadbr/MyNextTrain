@@ -59,16 +59,13 @@ public class FavoritePairTrips {
         let vTrips = ReplaySubject<[TripSummary]>.create(bufferSize: 1)
 
         tripService.tripSummaries(for: stopPairing, on: date)
-            .debug("trips refresh for date \(date)", trimOutput: true)
             .subscribe(vTrips).addDisposableTo(disposeBag)
         return vTrips
     }
 
     private func createNextTripObservable() -> Observable<(Date, TripSummary)> {
         let becameActive = Notification(name: AppState.becameActiveName)
-        return trips
-            .asObservable()
-            .takeLast(1)
+        return trips.asObservable().takeLast(1)
             .flatMapLatest({ [appState = self.appState, date = self.date] (trips) -> Observable<(Date, TripSummary)> in
                 return appState.becameActive.startWith(becameActive).map({ (notification) -> (Date, TripSummary) in
                     guard let next = trips.next else {
@@ -76,7 +73,7 @@ public class FavoritePairTrips {
                     }
                     return (date, next)
                 })
-            }).debug("next trip refresh", trimOutput: true)
+            })
 
     }
 

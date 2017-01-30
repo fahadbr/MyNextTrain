@@ -16,6 +16,7 @@ class AppContainerConfig {
     static func configureAll() throws -> RootVC {
 
         let coreContainer = CoreContainerProxy.container
+        GTFSFileLoader.instance.loadAllFiles()
 
         viewModelContainer.collaborate(with: coreContainer, vcContainer, dipFactoryContainer)
         vcContainer.collaborate(with: coreContainer, viewModelContainer, dipFactoryContainer)
